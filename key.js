@@ -11,8 +11,6 @@ subscriptionButton.addEventListener('click', () => {
 
 // 加载密钥列表
 const codeList = document.getElementById('codeList');
-
-// 模拟加载动画
 codeList.innerHTML = '<p>正在加载密钥...</p>';
 
 fetch('codes.txt')
@@ -25,9 +23,9 @@ fetch('codes.txt')
         codeList.innerHTML = ''; // 清空加载提示
 
         lines.forEach(line => {
-            if (line.startsWith('ss://')) { // 仅处理 ss:// 开头的行
-                const [code, remark] = line.split('#'); // 提取代码和备注部分
-                const remarkText = remark ? decodeURIComponent(remark.trim()) : '无备注'; // 解码备注
+            if (line.startsWith('ss://')) {
+                const [code, remark] = line.split('#');
+                const remarkText = remark ? decodeURIComponent(remark.trim()) : '无备注';
 
                 const codeBlock = document.createElement('div');
                 codeBlock.classList.add('code-block');
