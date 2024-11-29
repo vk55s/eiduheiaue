@@ -1,6 +1,6 @@
 // 密码设置
-const correctPassword = "4586"; // 原密码保持一致
-const redirectURL = "miyao.html"; // 保持原功能跳转链接
+const correctPassword = "4586"; // 替换为您希望设置的密码
+const redirectURL = "miyao.html"; // 替换为密钥页面链接
 
 // 表单提交事件
 document.getElementById("password-form").addEventListener("submit", function (e) {
