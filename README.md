@@ -1,1 +1,1 @@
-hi
+<meta http-equiv="refresh" content="0; url=https://vk55s.github.io/login.html" />
