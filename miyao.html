@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Outline密钥</title>
-    <link rel="stylesheet" href="styles.css"> <!-- 引入外部 CSS 文件 -->
+    <link rel="stylesheet" href="miyao.css"> <!-- 引入外部 CSS 文件 -->
 </head>
 <body>
     <div class="container">
         <h1>Outline密钥</h1>
-
-        <!-- 点击复制订阅按钮 -->
         <div class="subscription-block">
             <p>订阅地址:</p>
             <pre id="subscription">https://raw.githubusercontent.com/vk55s/subscribe/refs/heads/main/chui</pre>
@@ -19,21 +17,14 @@
 
         <hr>
 
-        <!-- 密钥列表 -->
         <div id="codeList">正在加载...</div>
 
-        <hr>
-
-        <!-- 二维码区域 -->
-        <div class="qrcode-section">
-            <h2>密钥二维码</h2>
-            <p>点击以下按钮生成对应密钥的二维码：</p>
-            <div id="qrcodeContainer" class="qrcode-container"></div>
+        <div class="button-container">
+            <button id="copyKey">复制密钥</button>
         </div>
     </div>
     <footer>&copy; 2024 - Outline 锤锤</footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script> <!-- 引入二维码生成库 -->
     <script>
         // 订阅地址复制功能
         const subscriptionButton = document.getElementById('copySubscription');
@@ -73,32 +64,18 @@
                         const pre = document.createElement('pre');
                         pre.textContent = code;
 
-                        // 复制密钥按钮
-                        const copyButton = document.createElement('button');
-                        copyButton.textContent = '复制密钥';
-                        copyButton.addEventListener('click', () => {
+                        const button = document.createElement('button');
+                        button.textContent = '复制密钥';
+                        button.addEventListener('click', () => {
                             navigator.clipboard.writeText(code).then(() => {
-                                copyButton.textContent = '复制成功！';
-                                setTimeout(() => (copyButton.textContent = '复制密钥'), 2000);
-                            });
-                        });
-
-                        // 生成二维码按钮
-                        const qrButton = document.createElement('button');
-                        qrButton.textContent = '生成二维码';
-                        qrButton.addEventListener('click', () => {
-                            const qrcodeContainer = document.getElementById('qrcodeContainer');
-                            qrcodeContainer.innerHTML = ''; // 清空之前的二维码
-                            QRCode.toCanvas(qrcodeContainer, code, { width: 200 }, (error) => {
-                                if (error) console.error(error);
-                                console.log('二维码生成成功');
+                                button.textContent = '复制成功！';
+                                setTimeout(() => (button.textContent = '复制密钥'), 2000);
                             });
                         });
 
                         codeBlock.appendChild(codeHeader);
                         codeBlock.appendChild(pre);
-                        codeBlock.appendChild(copyButton);
-                        codeBlock.appendChild(qrButton);
+                        codeBlock.appendChild(button);
                         codeList.appendChild(codeBlock);
                     }
                 });
