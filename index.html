@@ -4,93 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Outline密钥</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9fc;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 24px;
-            color: #333;
-        }
-        .code-block {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            background: #f8f8fd;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        .code-header {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #555;
-        }
-        pre {
-            margin: 0;
-            padding: 10px;
-            background: #f4f4f9;
-            border-radius: 5px;
-            overflow-x: auto;
-            font-family: "Courier New", Courier, monospace;
-            font-size: 14px;
-        }
-        button {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 14px;
-            color: #777;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css"> <!-- 引入外部 CSS 文件 -->
 </head>
 <body>
     <div class="container">
         <h1>Outline密钥</h1>
+        <!-- 点击复制订阅按钮 -->
+        <div class="subscription-block">
+            <p>订阅地址:</p>
+            <pre id="subscription">https://raw.githubusercontent.com/vk55s/subscribe/refs/heads/main/chui</pre>
+            <button id="copySubscription">复制订阅</button>
+        </div>
+
+        <hr>
+
+        <!-- 密钥列表 -->
         <div id="codeList">正在加载...</div>
     </div>
-    <footer>&copy; 2024 - Outline密钥</footer>
+    <footer>&copy; 2024 - Outline 密钥管理工具</footer>
 
     <script>
-        // 获取代码列表容器
+        // 订阅地址复制功能
+        const subscriptionButton = document.getElementById('copySubscription');
+        const subscriptionText = document.getElementById('subscription').textContent;
+
+        subscriptionButton.addEventListener('click', () => {
+            navigator.clipboard.writeText(subscriptionText).then(() => {
+                subscriptionButton.textContent = '复制成功！';
+                setTimeout(() => (subscriptionButton.textContent = '复制订阅'), 2000);
+            });
+        });
+
+        // 加载密钥列表
         const codeList = document.getElementById('codeList');
 
-        // 从 codes.txt 文件加载内容
         fetch('codes.txt')
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('无法加载 codes.txt 文件');
-                }
+                if (!response.ok) throw new Error('无法加载 codes.txt 文件');
                 return response.text();
             })
             .then(data => {
@@ -102,20 +52,16 @@
                         const [code, remark] = line.split('#'); // 提取代码和备注部分
                         const remarkText = remark ? decodeURIComponent(remark.trim()) : '无备注'; // 解码备注（包括表情）
 
-                        // 创建代码块容器
                         const codeBlock = document.createElement('div');
                         codeBlock.classList.add('code-block');
 
-                        // 显示备注
                         const codeHeader = document.createElement('div');
                         codeHeader.classList.add('code-header');
-                        codeHeader.textContent = `节点: ${remarkText}`;
+                        codeHeader.textContent = `备注: ${remarkText}`;
 
-                        // 显示代码
                         const pre = document.createElement('pre');
                         pre.textContent = code;
 
-                        // 复制按钮
                         const button = document.createElement('button');
                         button.textContent = '复制密钥';
                         button.addEventListener('click', () => {
@@ -125,7 +71,6 @@
                             });
                         });
 
-                        // 组合元素
                         codeBlock.appendChild(codeHeader);
                         codeBlock.appendChild(pre);
                         codeBlock.appendChild(button);
