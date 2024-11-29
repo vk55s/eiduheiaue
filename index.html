@@ -20,16 +20,24 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        pre {
-            background: #f4f4f9;
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .code-block {
+            margin-bottom: 20px;
+            padding: 15px;
             border: 1px solid #ddd;
-            padding: 10px;
-            overflow-x: auto;
             border-radius: 5px;
+            background: #f4f4f9;
+        }
+        .code-header {
+            font-weight: bold;
+            margin-bottom: 10px;
         }
         button {
             display: inline-block;
-            margin: 10px 0;
+            margin-top: 10px;
             padding: 10px 15px;
             background-color: #007bff;
             color: white;
@@ -40,49 +48,73 @@
         button:hover {
             background-color: #0056b3;
         }
-        .code-block {
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Outline密钥</h1>
-        <div id="codeList"></div>
+        <div id="codeList">正在加载...</div>
     </div>
 
     <script>
-        // 动态加载代码段
+        // 获取代码列表容器
+        const codeList = document.getElementById('codeList');
+
+        // 从 codes.txt 文件加载内容
         fetch('codes.txt')
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('无法加载 codes.txt 文件');
+                }
+                return response.text();
+            })
             .then(data => {
-                const codeList = document.getElementById('codeList');
-                const codes = data.split('\n').filter(line => line.trim() !== ''); // 过滤空行
+                const lines = data.trim().split('\n');
+                codeList.innerHTML = ''; // 清空加载提示
 
-                codes.forEach((code, index) => {
-                    // 创建代码块和复制按钮
-                    const codeBlock = document.createElement('div');
-                    codeBlock.classList.add('code-block');
+                lines.forEach(line => {
+                    if (line.startsWith('ss://')) { // 仅处理 ss:// 开头的行
+                        const [code, remark] = line.split('#'); // 提取代码和备注部分
+                        const remarkText = remark ? decodeURIComponent(remark.trim()) : '无备注'; // 解码备注（包括表情）
 
-                    const pre = document.createElement('pre');
-                    pre.textContent = code;
+                        // 创建代码块容器
+                        const codeBlock = document.createElement('div');
+                        codeBlock.classList.add('code-block');
 
-                    const button = document.createElement('button');
-                    button.textContent = '复制代码';
-                    button.addEventListener('click', () => {
-                        navigator.clipboard.writeText(code).then(() => {
-                            button.textContent = '复制成功！';
-                            setTimeout(() => (button.textContent = '复制代码'), 2000);
+                        // 显示备注
+                        const codeHeader = document.createElement('div');
+                        codeHeader.classList.add('code-header');
+                        codeHeader.textContent = `备注: ${remarkText}`;
+
+                        // 显示代码
+                        const pre = document.createElement('pre');
+                        pre.textContent = code;
+
+                        // 复制按钮
+                        const button = document.createElement('button');
+                        button.textContent = '复制密钥';
+                        button.addEventListener('click', () => {
+                            navigator.clipboard.writeText(code).then(() => {
+                                button.textContent = '复制成功！';
+                                setTimeout(() => (button.textContent = '复制密钥'), 2000);
+                            });
                         });
-                    });
 
-                    codeBlock.appendChild(pre);
-                    codeBlock.appendChild(button);
-                    codeList.appendChild(codeBlock);
+                        // 组合元素
+                        codeBlock.appendChild(codeHeader);
+                        codeBlock.appendChild(pre);
+                        codeBlock.appendChild(button);
+                        codeList.appendChild(codeBlock);
+                    }
                 });
+
+                if (codeList.innerHTML === '') {
+                    codeList.textContent = '未找到有效的密钥。';
+                }
             })
             .catch(error => {
-                console.error('无法加载代码文件:', error);
+                codeList.textContent = '加载失败，请检查 codes.txt 文件是否存在。';
+                console.error(error);
             });
     </script>
 </body>
