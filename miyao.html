@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Outline密钥</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css"> <!-- 引入外部 CSS 文件 -->
 </head>
-<body id="key-page">
+<body>
     <div class="container">
         <h1>Outline密钥</h1>
-        <!-- 订阅地址 -->
+
+        <!-- 点击复制订阅按钮 -->
         <div class="subscription-block">
             <p>订阅地址:</p>
             <pre id="subscription">https://raw.githubusercontent.com/vk55s/subscribe/refs/heads/main/chui</pre>
@@ -19,9 +20,97 @@
         <hr>
 
         <!-- 密钥列表 -->
-        <div id="codeList">正在加载密钥...</div>
+        <div id="codeList">正在加载...</div>
+
+        <hr>
+
+        <!-- 二维码区域 -->
+        <div class="qrcode-section">
+            <h2>密钥二维码</h2>
+            <p>点击以下按钮生成对应密钥的二维码：</p>
+            <div id="qrcodeContainer" class="qrcode-container"></div>
+        </div>
     </div>
     <footer>&copy; 2024 - Outline 锤锤</footer>
-    <script src="key.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script> <!-- 引入二维码生成库 -->
+    <script>
+        // 订阅地址复制功能
+        const subscriptionButton = document.getElementById('copySubscription');
+        const subscriptionText = document.getElementById('subscription').textContent;
+
+        subscriptionButton.addEventListener('click', () => {
+            navigator.clipboard.writeText(subscriptionText).then(() => {
+                subscriptionButton.textContent = '复制成功！';
+                setTimeout(() => (subscriptionButton.textContent = '复制订阅'), 2000);
+            });
+        });
+
+        // 加载密钥列表
+        const codeList = document.getElementById('codeList');
+
+        fetch('codes.txt')
+            .then(response => {
+                if (!response.ok) throw new Error('无法加载 codes.txt 文件');
+                return response.text();
+            })
+            .then(data => {
+                const lines = data.trim().split('\n');
+                codeList.innerHTML = ''; // 清空加载提示
+
+                lines.forEach(line => {
+                    if (line.startsWith('ss://')) { // 仅处理 ss:// 开头的行
+                        const [code, remark] = line.split('#'); // 提取代码和备注部分
+                        const remarkText = remark ? decodeURIComponent(remark.trim()) : '无备注'; // 解码备注（包括表情）
+
+                        const codeBlock = document.createElement('div');
+                        codeBlock.classList.add('code-block');
+
+                        const codeHeader = document.createElement('div');
+                        codeHeader.classList.add('code-header');
+                        codeHeader.textContent = `备注: ${remarkText}`;
+
+                        const pre = document.createElement('pre');
+                        pre.textContent = code;
+
+                        // 复制密钥按钮
+                        const copyButton = document.createElement('button');
+                        copyButton.textContent = '复制密钥';
+                        copyButton.addEventListener('click', () => {
+                            navigator.clipboard.writeText(code).then(() => {
+                                copyButton.textContent = '复制成功！';
+                                setTimeout(() => (copyButton.textContent = '复制密钥'), 2000);
+                            });
+                        });
+
+                        // 生成二维码按钮
+                        const qrButton = document.createElement('button');
+                        qrButton.textContent = '生成二维码';
+                        qrButton.addEventListener('click', () => {
+                            const qrcodeContainer = document.getElementById('qrcodeContainer');
+                            qrcodeContainer.innerHTML = ''; // 清空之前的二维码
+                            QRCode.toCanvas(qrcodeContainer, code, { width: 200 }, (error) => {
+                                if (error) console.error(error);
+                                console.log('二维码生成成功');
+                            });
+                        });
+
+                        codeBlock.appendChild(codeHeader);
+                        codeBlock.appendChild(pre);
+                        codeBlock.appendChild(copyButton);
+                        codeBlock.appendChild(qrButton);
+                        codeList.appendChild(codeBlock);
+                    }
+                });
+
+                if (codeList.innerHTML === '') {
+                    codeList.textContent = '未找到有效的密钥。';
+                }
+            })
+            .catch(error => {
+                codeList.textContent = '加载失败，请检查 codes.txt 文件是否存在。';
+                console.error(error);
+            });
+    </script>
 </body>
 </html>
