@@ -1,63 +1,42 @@
-/* 一般样式 */
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background-color: #f4f5f7;
-    margin: 0;
-    padding: 0;
-    color: #333;
-    line-height: 1.8;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.container {
-    max-width: 960px;
-    margin: 40px auto;
-    padding: 20px 25px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
-
-/* 头部 */
-h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 28px;
-    color: #222;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* 订阅框 */
-.subscription-block {
-    margin-bottom: 25px;
-    padding: 20px;
-    border: 1px solid #dcdfe6;
-    border-radius: 10px;
-    background: #f8faff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-    transition: box-shadow 0.3s;
-}
-
-.subscription-block:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
-}
-
-.subscription-block p {
-    margin: 0;
+/* 按钮样式 */
+button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 20px;
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
     font-weight: bold;
-    font-size: 16px;
-    color: #444;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-/* 密钥代码框 */
+/* 增加按钮间距 */
+button + button {
+    margin-top: 20px; /* 增加按钮之间的垂直间距 */
+}
+
+button:hover {
+    background-color: var(--button-hover-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Code block styles */
 .code-block {
     margin-bottom: 25px;
     padding: 20px;
-    border: 1px solid #dcdfe6;
+    border: 1px solid var(--border-color);
     border-radius: 10px;
-    background: #f9fbfd;
+    background: var(--code-bg);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s, box-shadow 0.3s;
 }
@@ -71,59 +50,86 @@ h1 {
     font-weight: bold;
     font-size: 15px;
     margin-bottom: 8px;
-    color: #444;
+    color: var(--text-color);
     text-transform: capitalize;
 }
 
-/* 按钮样式 */
-button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 12px 20px;
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
+/* 订阅块样式 */
+.subscription-block {
+    margin-bottom: 25px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--code-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s;
+}
+
+.subscription-block:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.subscription-block p {
+    margin: 0;
     font-weight: bold;
-    letter-spacing: 0.5px;
-    transition: background-color 0.3s, transform 0.2s;
+    font-size: 16px;
+    color: var(--text-color);
 }
 
-button:hover {
-    background-color: #357abd;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+/* 页面布局样式 */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.8;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-button:active {
-    transform: translateY(0);
-    box-shadow: none;
+.container {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 20px 25px;
+    background: var(--container-bg);
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-/* 二维码区域样式 */
-.qrcode-section {
-    margin-top: 30px;
+h1 {
     text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-.qrcode-container {
-    margin-top: 20px;
-    display: inline-block;
-    background: #f3f4f6;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* 页脚样式 */
+/* 页面底部样式 */
 footer {
     text-align: center;
     margin-top: 30px;
     font-size: 14px;
-    color: #777;
+    color: var(--text-color);
     padding: 20px 0;
-    background: #f8f8f8;
-    border-top: 1px solid #eaecef;
+    background: var(--container-bg);
+    border-top: 1px solid var(--border-color);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px 20px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    button {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
 }
