@@ -8,17 +8,20 @@
 </head>
 <body>
     <div class="container">
-<body>
-    <div class="container">
         <h1>微信群内获取密码</h1>
         <p>请输入密码以访问密钥页面：</p>
         <form id="password-form">
-            <input type="password" id="password-input" placeholder="请输入密码" required>
+            <div style="position: relative;">
+                <input type="password" id="password-input" placeholder="请输入密码" required>
+                <button type="button" id="toggle-password" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                    👁
+                </button>
+            </div>
             <button type="submit">提交</button>
         </form>
         <p id="error-message" class="error-message"></p>
     </div>
 
-    <script src="script.js"></script>
+    <script src="login.js"></script>
 </body>
 </html>
