@@ -1,128 +1,132 @@
 :root {
-    --bg-color: #f4f6f9;
+    --bg-color: #f4f5f7;
     --text-color: #333;
     --container-bg: #fff;
-    --button-bg: #007bff;
-    --button-hover-bg: #0056b3;
-    --input-bg: #f8f9fa;
-    --input-border: #ced4da;
-    --input-focus: #007bff;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    --button-bg: #4a90e2;
+    --button-hover-bg: #357abd;
+    --border-color: #dcdfe6;
+    --input-bg: #fff;
+    --input-border: #ccc;
+    --code-bg: #f3f4f6;
 }
 
+.dark-theme {
+    --bg-color: #1e1e2f;
+    --text-color: #eee;
+    --container-bg: #2a2a40;
+    --button-bg: #6272a4;
+    --button-hover-bg: #44475a;
+    --border-color: #444;
+    --input-bg: #2a2a40;
+    --input-border: #555;
+    --code-bg: #2d2d3a;
+}
+
+/* 全局基础样式 */
 body {
-    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    transition: all 0.3s;
+    line-height: 1.8;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
-    background-color: var(--container-bg);
-    padding: 30px;
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 20px 25px;
+    background: var(--container-bg);
     border-radius: 10px;
-    box-shadow: 0 10px 20px var(--shadow-color);
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-    transition: box-shadow 0.3s ease, transform 0.2s ease;
-}
-
-.container:hover {
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
     color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-p {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 20px;
+/* 针对登录页面（#login-page）样式 */
+#login-page .container {
+    max-width: 400px;
+    text-align: center;
 }
 
-input {
+#login-page input {
     width: 100%;
-    padding: 12px;
+    padding: 10px 15px;
+    margin-bottom: 15px;
     font-size: 16px;
-    color: var(--text-color);
     background-color: var(--input-bg);
     border: 1px solid var(--input-border);
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
+    border-radius: 5px;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-input:focus {
-    border-color: var(--input-focus);
-    box-shadow: 0 0 8px var(--input-focus);
+#login-page input:focus {
+    border-color: var(--button-bg);
+    box-shadow: 0 0 5px var(--button-bg);
     outline: none;
 }
 
-button {
+#login-page button {
     width: 100%;
-    padding: 12px;
+    padding: 12px 0;
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 5px;
     font-size: 16px;
     font-weight: bold;
-    color: #fff;
-    background-color: var(--button-bg);
-    border: none;
-    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
 }
 
-button:hover {
+#login-page button:hover {
     background-color: var(--button-hover-bg);
-    transform: scale(1.02);
+    transform: translateY(-2px);
 }
 
-footer {
-    margin-top: 20px;
-    font-size: 12px;
-    color: #aaa;
-}
-
-/* 添加加载动画 */
-.loading {
-    color: #666;
+/* 针对密钥页面（#key-page）样式 */
+#key-page pre {
+    padding: 15px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "Courier New", Courier, monospace;
     font-size: 14px;
-    animation: blink 1.5s infinite;
+    border: 1px solid var(--border-color);
 }
 
-@keyframes blink {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
+#key-page button {
+    padding: 8px 15px;
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#key-page button:hover {
+    background-color: var(--button-hover-bg);
 }
 
 /* 响应式设计 */
-@media (max-width: 576px) {
+@media (max-width: 768px) {
     .container {
-        padding: 20px;
+        padding: 15px 20px;
     }
 
     h1 {
-        font-size: 20px;
-    }
-
-    input, button {
-        font-size: 14px;
-        padding: 10px;
+        font-size: 22px;
     }
 }
