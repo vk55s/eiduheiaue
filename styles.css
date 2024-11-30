@@ -1,103 +1,75 @@
 /* 根变量 */
 :root {
-    --bg-color: #f4f5f7;
+    --bg-color: linear-gradient(135deg, #f4f5f7, #e0e3e8);
     --text-color: #333;
-    --container-bg: #fff;
+    --container-bg: rgba(255, 255, 255, 0.8);
     --button-bg: #4a90e2;
     --button-hover-bg: #357abd;
-    --border-color: #dcdfe6;
-    --code-bg: #f3f4f6;
+    --border-color: rgba(220, 223, 230, 0.8);
+    --code-bg: rgba(243, 244, 246, 0.9);
     --shadow-light: rgba(0, 0, 0, 0.1);
     --shadow-hover: rgba(0, 0, 0, 0.2);
 }
 
-/* 主体样式 */
+/* 全局背景动态渐变 */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    background-color: var(--bg-color);
+    background: var(--bg-color);
     color: var(--text-color);
     margin: 0;
     padding: 0;
     line-height: 1.8;
     overflow-x: hidden;
-    transition: background-color 0.3s, color 0.3s;
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
 }
 
-.container {
-    max-width: 960px;
-    margin: 40px auto;
-    padding: 25px 30px;
-    background: var(--container-bg);
-    border-radius: 16px;
-    box-shadow: 0 6px 20px var(--shadow-light);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-.container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px var(--shadow-hover);
-}
-
-/* 标题样式 */
-h1 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 32px;
-    color: var(--text-color);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    position: relative;
-}
-
-h1::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 3px;
-    background: var(--button-bg);
-    margin: 10px auto 0;
-    border-radius: 1.5px;
-}
-
-/* 代码块样式 */
+/* 卡片动态光影效果 */
 .code-block {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s;
     margin-bottom: 25px;
     padding: 20px;
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 16px;
     background: var(--code-bg);
+    backdrop-filter: blur(10px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
-.code-block.visible {
+.code-block:hover {
+    transform: scale(1.03) translateY(-5px);
+    box-shadow: 0 10px 30px var(--shadow-hover);
+}
+
+/* 动态光点 */
+.code-block::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.6s, transform 0.6s;
+}
+
+.code-block:hover::before {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1.2);
 }
 
-.code-header {
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 12px;
-    color: var(--text-color);
-}
-
-pre {
-    margin: 10px 0;
-    padding: 15px;
-    background: var(--code-bg);
-    border-radius: 8px;
-    overflow-x: auto;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 14px;
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-}
-
-/* 按钮样式 */
+/* 波纹按钮效果 */
 button {
     display: inline-block;
     margin-top: 10px;
@@ -111,6 +83,8 @@ button {
     font-weight: bold;
     letter-spacing: 0.5px;
     transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
 }
 
 button:hover {
@@ -119,75 +93,32 @@ button:hover {
     box-shadow: 0 6px 12px var(--shadow-hover);
 }
 
-button:active {
-    transform: scale(0.97);
-    box-shadow: none;
-}
-
-/* 按钮成功动画 */
-button.copy-success {
-    animation: pulse 0.4s ease-in-out;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* 加载动画 */
-.loader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    margin: 20px 0;
-}
-
-.loader span {
-    width: 12px;
-    height: 12px;
-    margin: 0 6px;
-    background-color: var(--button-bg);
+button:after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: 50%;
+    left: 50%;
+    background: rgba(255, 255, 255, 0.4);
     border-radius: 50%;
-    animation: bounce 1.2s infinite ease-in-out;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease-out;
 }
 
-.loader span:nth-child(2) {
-    animation-delay: 0.2s;
+button:active:after {
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.3s ease-out;
 }
 
-.loader span:nth-child(3) {
-    animation-delay: 0.4s;
+/* 滚动加载动画 */
+[data-aos] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-@keyframes bounce {
-    0%, 80%, 100% {
-        transform: scale(0);
-    }
-    40% {
-        transform: scale(1);
-    }
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .container {
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 24px;
-    }
-
-    button {
-        font-size: 14px;
-        padding: 10px 16px;
-    }
+[data-aos].aos-animate {
+    opacity: 1;
+    transform: translateY(0);
 }
