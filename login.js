@@ -3,7 +3,7 @@ const passwordInput = document.getElementById('password-input');
 const errorMessage = document.getElementById('error-message');
 const container = document.querySelector('.container');
 
-const correctPassword = 'dcb78c6ce5f1f6d215d6270157f1b160';
+const correctPassword = '4586';
 
 passwordForm.addEventListener('submit', (e) => {
     e.preventDefault();
