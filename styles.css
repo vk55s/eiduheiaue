@@ -6,21 +6,11 @@
     --button-hover-bg: #357abd;
     --border-color: #dcdfe6;
     --code-bg: #f3f4f6;
-    --transition-base: 0.3s ease-in-out;
+    --transition-base: 0.4s ease-in-out;
     --box-shadow-base: 0 6px 15px rgba(0, 0, 0, 0.1);
-    --box-shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.15);
-}
-
-.dark-theme {
-    --bg-color: #1e1e2f;
-    --text-color: #eee;
-    --container-bg: #2a2a40;
-    --button-bg: #6272a4;
-    --button-hover-bg: #44475a;
-    --border-color: #444;
-    --code-bg: #2d2d3a;
-    --box-shadow-base: 0 6px 15px rgba(0, 0, 0, 0.3);
-    --box-shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.4);
+    --box-shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.2);
+    --parallax-speed: 0.3s;
+    --scale-factor: 1.05;
 }
 
 body {
@@ -31,6 +21,7 @@ body {
     padding: 0;
     line-height: 1.8;
     transition: background-color var(--transition-base), color var(--transition-base);
+    overflow-x: hidden;
 }
 
 .container {
@@ -41,11 +32,13 @@ body {
     border-radius: 10px;
     box-shadow: var(--box-shadow-base);
     overflow: hidden;
-    transition: background-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+    transition: background-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+    position: relative;
+    animation: slide-up var(--transition-base) ease-out;
 }
 
 .container:hover {
-    transform: scale(1.02);
+    transform: scale(var(--scale-factor));
     box-shadow: var(--box-shadow-hover);
 }
 
@@ -56,71 +49,10 @@ h1 {
     color: var(--text-color);
     text-transform: uppercase;
     letter-spacing: 2px;
-    animation: fade-in var(--transition-base);
+    animation: fade-in 1s ease-out;
 }
 
-/* Subscription block */
-.subscription-block {
-    margin-bottom: 25px;
-    padding: 20px;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    background: var(--code-bg);
-    box-shadow: var(--box-shadow-base);
-    transition: box-shadow var(--transition-base), transform var(--transition-base);
-    transform: translateY(0);
-}
-
-.subscription-block:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--box-shadow-hover);
-}
-
-.subscription-block p {
-    margin: 0;
-    font-weight: bold;
-    font-size: 16px;
-    color: var(--text-color);
-}
-
-/* Code block styles */
-pre {
-    margin: 10px 0;
-    padding: 15px;
-    background: var(--code-bg);
-    border-radius: 8px;
-    overflow-x: auto;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 14px;
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    animation: slide-in var(--transition-base);
-}
-
-.code-block {
-    margin-bottom: 25px;
-    padding: 20px;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    background: var(--code-bg);
-    box-shadow: var(--box-shadow-base);
-    transition: transform var(--transition-base), box-shadow var(--transition-base);
-}
-
-.code-block:hover {
-    transform: scale(1.02);
-    box-shadow: var(--box-shadow-hover);
-}
-
-.code-header {
-    font-weight: bold;
-    font-size: 15px;
-    margin-bottom: 8px;
-    color: var(--text-color);
-    text-transform: capitalize;
-}
-
-/* Buttons */
+/* Enhanced Buttons */
 button {
     display: inline-block;
     margin-top: 10px;
@@ -139,7 +71,7 @@ button {
 
 button:hover {
     background-color: var(--button-hover-bg);
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.05);
     box-shadow: var(--box-shadow-hover);
 }
 
@@ -148,6 +80,53 @@ button:active {
     box-shadow: none;
 }
 
+/* Parallax Effect */
+.parallax {
+    position: relative;
+    background: var(--code-bg);
+    overflow: hidden;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: parallax-fade-in 1s ease-out;
+}
+
+.parallax::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://via.placeholder.com/1920x1080') center/cover no-repeat;
+    transform: scale(1.2);
+    z-index: -1;
+    transition: transform var(--parallax-speed) ease-out;
+}
+
+.parallax:hover::after {
+    transform: scale(1.1);
+}
+
+/* Scroll-triggered animations */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Footer */
 footer {
     text-align: center;
     margin-top: 30px;
@@ -156,22 +135,7 @@ footer {
     padding: 20px 0;
     background: var(--container-bg);
     border-top: 1px solid var(--border-color);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .container {
-        padding: 15px 20px;
-    }
-
-    h1 {
-        font-size: 22px;
-    }
-
-    button {
-        padding: 10px 15px;
-        font-size: 13px;
-    }
+    animation: slide-up var(--transition-base) ease-out;
 }
 
 /* Animations */
@@ -186,13 +150,44 @@ footer {
     }
 }
 
-@keyframes slide-in {
+@keyframes slide-up {
     from {
         opacity: 0;
-        transform: translateX(-10px);
+        transform: translateY(50px);
     }
     to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0);
+    }
+}
+
+@keyframes parallax-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(1.4);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 22px;
+    }
+
+    .container {
+        padding: 15px 20px;
+    }
+
+    button {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+
+    .parallax {
+        font-size: 18px;
     }
 }
