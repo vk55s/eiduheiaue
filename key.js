@@ -1,9 +1,6 @@
 // 引入 AOS 动画库初始化
 document.addEventListener("DOMContentLoaded", () => {
-    AOS.init({
-        duration: 800,
-        once: true,
-    });
+    AOS.init({ duration: 800, once: true });
 });
 
 // 订阅地址复制功能
@@ -23,13 +20,7 @@ subscriptionButton.addEventListener('click', () => {
 
 // 加载密钥列表
 const codeList = document.getElementById('codeList');
-codeList.innerHTML = `
-    <div class="loader">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-`;
+codeList.innerHTML = `<div class="loader"><span></span><span></span><span></span></div>`;
 
 fetch('codes.txt')
     .then(response => {
@@ -55,7 +46,7 @@ fetch('codes.txt')
 
                 const pre = document.createElement('pre');
                 pre.textContent = code;
-                pre.title = code; // 鼠标悬停显示完整内容
+                pre.title = code;
 
                 const button = document.createElement('button');
                 button.textContent = '复制密钥';
