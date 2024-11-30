@@ -1,3 +1,28 @@
+const passwordForm = document.getElementById('password-form');
+const passwordInput = document.getElementById('password-input');
+const errorMessage = document.getElementById('error-message');
+const container = document.querySelector('.container');
+
+const correctPassword = '4586';
+
+passwordForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const enteredPassword = passwordInput.value.trim();
+
+    if (enteredPassword === correctPassword) {
+        window.location.href = 'miyao.html';
+    } else {
+        errorMessage.style.display = 'block';
+        container.classList.add('shake');
+
+        setTimeout(() => {
+            errorMessage.style.display = 'none';
+            container.classList.remove('shake');
+        }, 1500);
+    }
+});
+
 /* 通用样式 */
 * {
     margin: 0;
@@ -26,39 +51,64 @@ body {
     overflow: hidden; /* 防止内容溢出 */
 }
 
-/* 输入框和按钮样式 */
-.input-group {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
+/* 标题样式 */
+h1 {
+    font-size: 2.8rem; /* 适中字体大小 */
+    text-align: center;
+    margin-bottom: 50px; /* 增大标题间距 */
+    color: #3a66db; /* 蓝色强调 */
+    font-weight: bold;
+    text-transform: uppercase; /* 全大写 */
+    letter-spacing: 1.2px; /* 增加字母间距 */
 }
 
-#password-input {
-    width: 100%;
-    padding: 10px 50px 10px 10px; /* 右侧留出空间给眼睛按钮 */
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+/* 分隔线 */
+.divider {
+    height: 1px;
+    background-color: #e9ecef;
+    margin: 40px 0;
 }
 
-.eye-button {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    color: #007bff;
-    font-size: 20px; /* 调整图标大小 */
+/* 模块标题（备注文字） */
+.code-header {
+    font-size: 1.3rem; /* 略大字体 */
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-bottom: 10px; /* 标题与内容的间距 */
+    text-align: left;
+    word-wrap: break-word; /* 自动换行 */
 }
 
-/* 错误提示 */
-.error-message {
-    color: red;
-    display: none;
+/* 密钥内容（代码块样式） */
+pre {
+    background: #f7f9fc; /* 浅灰背景 */
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1rem; /* 适中字体大小 */
+    font-family: 'Courier New', Courier, monospace;
+    white-space: nowrap; /* 单行显示 */
+    overflow-x: auto; /* 水平滚动 */
+    border: 1px solid #dee2e6;
+    margin-bottom: 30px; /* 增加模块间距 */
+    word-wrap: normal; /* 禁止文字换行 */
+    transition: background-color 0.3s ease;
+}
+
+pre:hover {
+    background-color: #edf4ff; /* 鼠标悬停时背景变浅 */
+    box-shadow: inset 0 0 6px rgba(58, 102, 219, 0.2);
+}
+
+/* 滚动条样式 */
+pre::-webkit-scrollbar {
+    height: 6px;
+}
+pre::-webkit-scrollbar-thumb {
+    background: #3a66db;
+    border-radius: 3px;
+}
+pre::-webkit-scrollbar-track {
+    background: #e9ecef;
 }
 
 /* 按钮样式 */
@@ -74,7 +124,7 @@ button {
     font-weight: bold;
     text-align: center;
     width: 100%; /* 占满模块宽度 */
-    margin-top: 20px; /* 增加与输入框之间的间距 */
+    margin-bottom: 20px; /* 块与按钮之间的间距 */
     transition: all 0.3s ease-in-out;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -101,7 +151,44 @@ button:active {
         font-size: 2.4rem; /* 小屏适配标题 */
     }
 
+    pre {
+        font-size: 0.9rem; /* 缩小字体防止溢出 */
+    }
+
     button {
         font-size: 1rem; /* 按钮文字适配小屏 */
+    }
+}
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+}
+
+.loader span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background: #3a66db;
+    border-radius: 50%;
+    animation: loader-animation 1.5s infinite ease-in-out;
+}
+
+.loader span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.loader span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes loader-animation {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
     }
 }
