@@ -22,7 +22,6 @@
     --code-bg: #2d2d3a;
 }
 
-/* 全局基础样式 */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     background-color: var(--bg-color);
@@ -30,6 +29,10 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     transition: background-color 0.3s, color 0.3s;
 }
 
@@ -53,20 +56,30 @@ h1 {
     letter-spacing: 2px;
 }
 
-/* 针对登录页面（#login-page）样式 */
+/* 登录页面样式 */
 #login-page .container {
     max-width: 400px;
     text-align: center;
+    background-color: var(--container-bg);
+    border-radius: 10px;
+    padding: 20px 25px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out, transform 0.2s;
+}
+
+#login-page .container:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
 }
 
 #login-page input {
     width: 100%;
-    padding: 10px 15px;
-    margin-bottom: 15px;
+    padding: 12px 15px;
+    margin-bottom: 20px;
     font-size: 16px;
     background-color: var(--input-bg);
     border: 1px solid var(--input-border);
-    border-radius: 5px;
+    border-radius: 8px;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s, box-shadow 0.3s;
 }
@@ -95,7 +108,7 @@ h1 {
     transform: translateY(-2px);
 }
 
-/* 针对密钥页面（#key-page）样式 */
+/* 密钥页面样式 */
 #key-page pre {
     padding: 15px;
     background: var(--code-bg);
@@ -119,6 +132,13 @@ h1 {
 
 #key-page button:hover {
     background-color: var(--button-hover-bg);
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #aaa;
 }
 
 /* 响应式设计 */
