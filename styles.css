@@ -22,6 +22,7 @@
     --code-bg: #2d2d3a;
 }
 
+/* 全局基础样式 */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     background-color: var(--bg-color);
@@ -30,65 +31,52 @@ body {
     padding: 0;
     line-height: 1.8;
     transition: background-color 0.3s, color 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
 .container {
-    max-width: 400px;
-    width: 100%;
+    max-width: 960px;
+    margin: 40px auto;
     padding: 20px 25px;
     background: var(--container-bg);
     border-radius: 10px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    overflow: hidden;
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
     color: var(--text-color);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 
-p {
-    margin-bottom: 15px;
-    color: var(--text-color);
-    font-size: 16px;
+/* 针对登录页面（#login-page）样式 */
+#login-page .container {
+    max-width: 400px;
+    text-align: center;
 }
 
-/* 表单样式 */
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.input {
+#login-page input {
     width: 100%;
     padding: 10px 15px;
     margin-bottom: 15px;
     font-size: 16px;
-    color: var(--text-color);
     background-color: var(--input-bg);
     border: 1px solid var(--input-border);
     border-radius: 5px;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.input:focus {
+#login-page input:focus {
     border-color: var(--button-bg);
     box-shadow: 0 0 5px var(--button-bg);
     outline: none;
 }
 
-/* 按钮样式 */
-.button {
+#login-page button {
     width: 100%;
     padding: 12px 0;
     background-color: var(--button-bg);
@@ -101,19 +89,35 @@ form {
     transition: background-color 0.3s, transform 0.2s;
 }
 
-.button:hover {
+#login-page button:hover {
     background-color: var(--button-hover-bg);
     transform: translateY(-2px);
 }
 
-.button:active {
-    transform: translateY(0);
+/* 针对密钥页面（#key-page）样式 */
+#key-page pre {
+    padding: 15px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    border: 1px solid var(--border-color);
 }
 
-.error-message {
-    margin-top: 10px;
-    color: red;
+#key-page button {
+    padding: 8px 15px;
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 5px;
     font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#key-page button:hover {
+    background-color: var(--button-hover-bg);
 }
 
 /* 响应式设计 */
@@ -123,14 +127,6 @@ form {
     }
 
     h1 {
-        font-size: 20px;
-    }
-
-    .input {
-        font-size: 14px;
-    }
-
-    .button {
-        font-size: 14px;
+        font-size: 22px;
     }
 }
