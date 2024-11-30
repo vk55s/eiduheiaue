@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #e8f0fe, #f9fbfc); /* 柔和渐变背景 */
+    background: linear-gradient(135deg, #f0f4f9, #ffffff); /* 柔和背景渐变 */
     color: #333;
     line-height: 1.6;
     margin: 0;
@@ -17,132 +17,121 @@ body {
 /* 容器 */
 .container {
     width: 90%;
-    max-width: 800px;
+    max-width: 900px;
     margin: 50px auto;
     padding: 25px;
     background-color: #ffffff;
-    border-radius: 16px; /* 更柔和的圆角 */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); /* 更深的阴影 */
-    animation: slideIn 0.8s ease-in-out;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    animation: fadeIn 0.8s ease-in-out;
 }
 
 /* 页面加载动画 */
-@keyframes slideIn {
+@keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(50px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
-/* 标题 */
+/* 标题样式 */
 h1 {
-    font-size: 2.6rem;
+    font-size: 2.4rem;
     text-align: center;
+    margin-bottom: 40px;
+    color: #3a66db;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* 各块样式 */
+.block {
     margin-bottom: 30px;
-    color: #3a66db; /* 深蓝色标题 */
+    padding: 20px;
+    background: #f9fafb; /* 浅灰背景 */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.block:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(58, 102, 219, 0.15);
+}
+
+/* 每个区块标题 */
+.block-title {
+    font-size: 1.5rem;
     font-weight: bold;
+    color: #3a66db;
+    margin-bottom: 15px;
 }
 
-/* 分隔线 */
-.divider {
-    height: 1px;
-    background-color: #e9ecef;
-    margin: 20px 0;
-}
-
-/* 备注文字 */
-.code-header {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #555; /* 更柔和的文字色调 */
-}
-
-/* 密钥内容 */
-pre {
-    background: #f7f9fc; /* 更柔和的浅灰背景 */
+/* 密钥文本部分 */
+.block-content pre {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
     padding: 15px;
     border-radius: 8px;
     font-size: 1rem;
     font-family: 'Courier New', Courier, monospace;
-    white-space: nowrap; /* 单行显示 */
+    white-space: nowrap;
     overflow-x: auto;
-    border: 1px solid #dee2e6;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    color: #4a4a4a;
+    transition: background-color 0.3s ease;
 }
 
-pre:hover {
-    background-color: #edf4ff; /* 鼠标悬停效果 */
-    box-shadow: inset 0 0 6px rgba(58, 102, 219, 0.3);
+.block-content pre:hover {
+    background-color: #edf4ff;
+    box-shadow: inset 0 0 5px rgba(58, 102, 219, 0.2);
 }
 
 /* 滚动条样式 */
-pre::-webkit-scrollbar {
+.block-content pre::-webkit-scrollbar {
     height: 6px;
 }
-pre::-webkit-scrollbar-thumb {
+.block-content pre::-webkit-scrollbar-thumb {
     background: #3a66db;
     border-radius: 3px;
 }
-pre::-webkit-scrollbar-track {
+.block-content pre::-webkit-scrollbar-track {
     background: #e9ecef;
 }
 
-/* 按钮 */
-button {
-    background: linear-gradient(90deg, #3a66db, #4a7eea); /* 按钮渐变色 */
+/* 按钮样式 */
+.block-content button {
+    margin-top: 15px;
+    display: inline-block;
+    background: linear-gradient(90deg, #3a66db, #4a7eea);
     color: white;
-    padding: 12px;
+    padding: 12px 20px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
-    width: 100%;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 微弱的阴影 */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-button:hover {
+.block-content button:hover {
     background: linear-gradient(90deg, #4a7eea, #5b92f5);
-    transform: translateY(-2px); /* 微微上升动画 */
-    box-shadow: 0 6px 15px rgba(58, 102, 219, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(58, 102, 219, 0.2);
 }
 
-button:active {
-    transform: translateY(1px);
-}
-
-/* 代码块 */
-.code-block {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); /* 柔和的阴影 */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.code-block:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(58, 102, 219, 0.2); /* 鼠标悬停更深的阴影 */
-}
-
-/* 页脚 */
+/* 页脚样式 */
 footer {
     text-align: center;
     font-size: 0.9rem;
     color: #666;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
-/* 响应式布局 */
+/* 响应式设计 */
 @media (max-width: 768px) {
     .container {
         width: 95%;
@@ -151,10 +140,14 @@ footer {
     }
 
     h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
 
-    pre {
-        font-size: 0.95rem;
+    .block-title {
+        font-size: 1.3rem;
+    }
+
+    .block-content pre {
+        font-size: 0.9rem;
     }
 }
