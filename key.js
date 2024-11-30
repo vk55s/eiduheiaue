@@ -5,10 +5,10 @@ const subscriptionText = document.getElementById('subscription').textContent;
 subscriptionButton.addEventListener('click', () => {
     navigator.clipboard.writeText(subscriptionText).then(() => {
         subscriptionButton.textContent = '复制成功！';
-        subscriptionButton.classList.add('copy-success'); // 添加动画效果
+        subscriptionButton.classList.add('copy-success');
         setTimeout(() => {
             subscriptionButton.textContent = '复制订阅';
-            subscriptionButton.classList.remove('copy-success'); // 恢复原始状态
+            subscriptionButton.classList.remove('copy-success');
         }, 2000);
     });
 });
@@ -65,8 +65,8 @@ fetch('codes.txt')
                 codeBlock.appendChild(button);
                 codeList.appendChild(codeBlock);
 
-                // 动态渐入效果
-                setTimeout(() => codeBlock.classList.add('visible'), 100 * index);
+                // 延迟显示卡片（动画效果）
+                setTimeout(() => codeBlock.classList.add('visible'), 150 * index);
             }
         });
 
@@ -75,8 +75,6 @@ fetch('codes.txt')
         }
     })
     .catch(error => {
-        codeList.innerHTML = `
-            <p class="error-message">加载失败，请检查 codes.txt 文件是否存在。</p>
-        `;
+        codeList.innerHTML = '<p class="error-message">加载失败，请检查 codes.txt 文件是否存在。</p>';
         console.error(error);
     });
