@@ -21,15 +21,15 @@ body {
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.6s ease-in-out; /* 页面加载淡入效果 */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.8s ease-in-out; /* 页面加载的上移淡入效果 */
 }
 
 /* 页面加载动画 */
-@keyframes fadeIn {
+@keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -41,16 +41,18 @@ h1 {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 20px;
-    color: #007bff;
-    animation: pulse 1.5s infinite; /* 标题轻微呼吸效果 */
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: gradientMove 3s linear infinite; /* 标题渐变动态效果 */
 }
 
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
+@keyframes gradientMove {
+    0% {
+        background-position: 0%;
     }
-    50% {
-        transform: scale(1.05);
+    100% {
+        background-position: 200%;
     }
 }
 
@@ -74,8 +76,18 @@ input[type="password"] {
 
 input[type="password"]:focus {
     border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
     outline: none;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* 焦点状态光晕效果 */
+    animation: pulseBorder 1.5s infinite; /* 输入框动态边框呼吸效果 */
+}
+
+@keyframes pulseBorder {
+    0%, 100% {
+        border-color: #007bff;
+    }
+    50% {
+        border-color: #80bdff;
+    }
 }
 
 button {
@@ -86,18 +98,19 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: all 0.4s ease;
+    overflow: hidden;
     position: relative;
-    overflow: hidden; /* 为波纹效果准备 */
 }
 
 button:hover {
     background-color: #0056b3;
-    transform: translateY(-2px); /* 悬停状态轻微浮动 */
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 91, 187, 0.4);
 }
 
 button:active {
-    transform: scale(0.98); /* 点击时缩小效果 */
+    transform: scale(0.95);
 }
 
 button::after {
@@ -105,13 +118,12 @@ button::after {
     position: absolute;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
     width: 0;
     height: 0;
-    background: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.4s, height 0.4s, opacity 0.8s;
-    z-index: 0;
+    transition: all 0.4s ease;
 }
 
 button:active::after {
@@ -127,11 +139,11 @@ button:active::after {
     margin-top: 20px;
     text-align: center;
     display: none;
-    animation: shake 0.3s ease-in-out;
 }
 
 .error-message.show {
     display: block;
+    animation: shake 0.4s ease-in-out;
 }
 
 /* 抖动动画 */
@@ -140,17 +152,17 @@ button:active::after {
         transform: translateX(0);
     }
     25% {
-        transform: translateX(-10px);
+        transform: translateX(-8px);
     }
     50% {
-        transform: translateX(10px);
+        transform: translateX(8px);
     }
     75% {
-        transform: translateX(-10px);
+        transform: translateX(-8px);
     }
 }
 
-/* 密钥展示 */
+/* 密钥展示部分 */
 .subscription-block {
     display: flex;
     flex-direction: column;
@@ -167,11 +179,19 @@ button:active::after {
     background-color: #f1f1f1;
     padding: 10px;
     border-radius: 8px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    width: 100%;
     font-size: 1rem;
     font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    overflow: hidden; /* 超出隐藏 */
+    white-space: nowrap; /* 不换行 */
+    text-overflow: ellipsis; /* 添加省略号 */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#subscription:hover {
+    background-color: #e8f4ff;
+    box-shadow: inset 0 0 10px rgba(0, 123, 255, 0.2);
 }
 
 #copySubscription {
@@ -181,14 +201,16 @@ button:active::after {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: all 0.3s ease;
     margin-top: 10px;
     width: 100%;
+    position: relative;
     overflow: hidden;
 }
 
 #copySubscription:hover {
     background-color: #0056b3;
+    box-shadow: 0 4px 15px rgba(0, 91, 187, 0.4);
     transform: translateY(-2px);
 }
 
@@ -217,7 +239,7 @@ button:active::after {
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, background-color 0.3s;
     overflow: hidden;
 }
@@ -227,58 +249,21 @@ button:active::after {
     background-color: #f1f7ff;
 }
 
-.code-header {
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #007bff;
-}
-
 pre {
     background-color: #e9ecef;
     padding: 15px;
     border-radius: 8px;
     font-size: 1rem;
     font-family: 'Courier New', Courier, monospace;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: pre-wrap;
-    width: 100%;
-    margin-bottom: 15px;
-    transition: background-color 0.3s;
+    overflow: hidden;
+    white-space: nowrap; /* 强制单行 */
+    text-overflow: ellipsis; /* 超出显示省略号 */
+    transition: background-color 0.3s ease;
+    cursor: pointer;
 }
 
 pre:hover {
     background-color: #dfe9f7;
-    cursor: pointer;
-}
-
-/* 加载动画 */
-.loader {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    margin-bottom: 20px;
-}
-
-.loader span {
-    width: 10px;
-    height: 10px;
-    background-color: #007bff;
-    border-radius: 50%;
-    animation: loader-animation 1.2s infinite ease-in-out;
-}
-
-@keyframes loader-animation {
-    0% {
-        transform: scale(0);
-    }
-    50% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(0);
-    }
 }
 
 /* 页脚 */
@@ -287,29 +272,4 @@ footer {
     font-size: 0.9rem;
     color: #666;
     margin-top: 30px;
-}
-
-/* 响应式布局 */
-@media (max-width: 768px) {
-    .container {
-        width: 95%;
-        margin: 20px auto;
-        padding: 15px;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    input[type="password"], button {
-        width: 100%;
-    }
-
-    #subscription {
-        font-size: 0.9rem;
-    }
-
-    pre {
-        font-size: 0.9rem;
-    }
 }
