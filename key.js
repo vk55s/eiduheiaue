@@ -40,7 +40,7 @@ fetch('codes.txt')
         const lines = data.trim().split('\n');
         codeList.innerHTML = ''; // 清空加载提示
 
-        lines.forEach((line, index) => {
+        lines.forEach((line) => {
             if (line.startsWith('ss://')) {
                 const [code, remark] = line.split('#');
                 const remarkText = remark ? decodeURIComponent(remark.trim()) : '无备注';
