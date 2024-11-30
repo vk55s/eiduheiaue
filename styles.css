@@ -10,6 +10,8 @@ body {
     background-color: #f8f9fa;
     color: #333;
     line-height: 1.6;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
@@ -20,15 +22,135 @@ body {
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.6s ease-in-out; /* 页面加载淡入效果 */
+}
+
+/* 页面加载动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 h1 {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 20px;
+    color: #007bff;
+    animation: pulse 1.5s infinite; /* 标题轻微呼吸效果 */
 }
 
-/* 订阅地址 */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* 表单输入框和按钮 */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+input[type="password"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="password"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* 焦点状态光晕效果 */
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    position: relative;
+    overflow: hidden; /* 为波纹效果准备 */
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px); /* 悬停状态轻微浮动 */
+}
+
+button:active {
+    transform: scale(0.98); /* 点击时缩小效果 */
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s, opacity 0.8s;
+    z-index: 0;
+}
+
+button:active::after {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+}
+
+/* 错误消息 */
+.error-message {
+    color: #dc3545;
+    font-size: 1rem;
+    margin-top: 20px;
+    text-align: center;
+    display: none;
+    animation: shake 0.3s ease-in-out;
+}
+
+.error-message.show {
+    display: block;
+}
+
+/* 抖动动画 */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+    75% {
+        transform: translateX(-10px);
+    }
+}
+
+/* 密钥展示 */
 .subscription-block {
     display: flex;
     flex-direction: column;
@@ -46,6 +168,7 @@ h1 {
     padding: 10px;
     border-radius: 8px;
     word-wrap: break-word;
+    overflow-wrap: break-word;
     width: 100%;
     font-size: 1rem;
     font-family: 'Courier New', Courier, monospace;
@@ -58,17 +181,26 @@ h1 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
     margin-top: 10px;
     width: 100%;
+    overflow: hidden;
 }
 
 #copySubscription:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
 }
 
 .copy-success {
     background-color: #28a745 !important;
+    animation: blink 0.6s 2; /* 成功复制时闪烁提示 */
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.5;
+    }
 }
 
 /* 密钥列表 */
@@ -86,19 +218,20 @@ h1 {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    overflow-x: auto; /* 允许横向滚动 */
-    -webkit-overflow-scrolling: touch; /* 优化移动设备滚动体验 */
+    transition: transform 0.3s ease, background-color 0.3s;
+    overflow: hidden;
 }
 
 .code-block:hover {
     transform: translateY(-5px);
+    background-color: #f1f7ff;
 }
 
 .code-header {
     font-size: 1.1rem;
     font-weight: bold;
     margin-bottom: 10px;
+    color: #007bff;
 }
 
 pre {
@@ -107,33 +240,17 @@ pre {
     border-radius: 8px;
     font-size: 1rem;
     font-family: 'Courier New', Courier, monospace;
-    white-space: nowrap; /* 强制文本单行显示 */
-    overflow: hidden; /* 隐藏溢出部分 */
-    text-overflow: ellipsis; /* 添加省略号 */
-    cursor: pointer; /* 鼓励用户交互 */
-}
-
-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
     width: 100%;
+    margin-bottom: 15px;
     transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #0056b3;
-}
-
-/* 错误消息 */
-.error-message {
-    color: #dc3545;
-    font-size: 1rem;
-    margin-top: 20px;
-    text-align: center;
+pre:hover {
+    background-color: #dfe9f7;
+    cursor: pointer;
 }
 
 /* 加载动画 */
@@ -164,9 +281,35 @@ button:hover {
     }
 }
 
+/* 页脚 */
 footer {
     text-align: center;
     font-size: 0.9rem;
     color: #666;
     margin-top: 30px;
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    input[type="password"], button {
+        width: 100%;
+    }
+
+    #subscription {
+        font-size: 0.9rem;
+    }
+
+    pre {
+        font-size: 0.9rem;
+    }
 }
