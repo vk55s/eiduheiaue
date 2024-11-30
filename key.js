@@ -1,124 +1,86 @@
-/* 根变量 */
-:root {
-    --bg-color: linear-gradient(135deg, #f4f5f7, #e0e3e8);
-    --text-color: #333;
-    --container-bg: rgba(255, 255, 255, 0.8);
-    --button-bg: #4a90e2;
-    --button-hover-bg: #357abd;
-    --border-color: rgba(220, 223, 230, 0.8);
-    --code-bg: rgba(243, 244, 246, 0.9);
-    --shadow-light: rgba(0, 0, 0, 0.1);
-    --shadow-hover: rgba(0, 0, 0, 0.2);
-}
+// 引入 AOS 动画库初始化
+document.addEventListener("DOMContentLoaded", () => {
+    AOS.init({
+        duration: 800,
+        once: true,
+    });
+});
 
-/* 全局背景动态渐变 */
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: var(--bg-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    line-height: 1.8;
-    overflow-x: hidden;
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-}
+// 订阅地址复制功能
+const subscriptionButton = document.getElementById('copySubscription');
+const subscriptionText = document.getElementById('subscription').textContent;
 
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+subscriptionButton.addEventListener('click', () => {
+    navigator.clipboard.writeText(subscriptionText).then(() => {
+        subscriptionButton.textContent = '复制成功！';
+        subscriptionButton.classList.add('copy-success');
+        setTimeout(() => {
+            subscriptionButton.textContent = '复制订阅';
+            subscriptionButton.classList.remove('copy-success');
+        }, 2000);
+    });
+});
 
-/* 卡片动态光影效果 */
-.code-block {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s;
-    margin-bottom: 25px;
-    padding: 20px;
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    background: var(--code-bg);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
+// 加载密钥列表
+const codeList = document.getElementById('codeList');
+codeList.innerHTML = `
+    <div class="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+`;
 
-.code-block:hover {
-    transform: scale(1.03) translateY(-5px);
-    box-shadow: 0 10px 30px var(--shadow-hover);
-}
+fetch('codes.txt')
+    .then(response => {
+        if (!response.ok) throw new Error('无法加载 codes.txt 文件');
+        return response.text();
+    })
+    .then(data => {
+        const lines = data.trim().split('\n');
+        codeList.innerHTML = ''; // 清空加载提示
 
-/* 动态光点 */
-.code-block::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    width: 100%;
-    height: 100%;
-    border-radius: 16px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 60%);
-    opacity: 0;
-    transition: opacity 0.6s, transform 0.6s;
-}
+        lines.forEach((line, index) => {
+            if (line.startsWith('ss://')) {
+                const [code, remark] = line.split('#');
+                const remarkText = remark ? decodeURIComponent(remark.trim()) : '无备注';
 
-.code-block:hover::before {
-    opacity: 1;
-    transform: scale(1.2);
-}
+                const codeBlock = document.createElement('div');
+                codeBlock.classList.add('code-block');
+                codeBlock.setAttribute("data-aos", "fade-up");
 
-/* 波纹按钮效果 */
-button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 12px 20px;
-    background-color: var(--button-bg);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-    position: relative;
-    overflow: hidden;
-}
+                const codeHeader = document.createElement('div');
+                codeHeader.classList.add('code-header');
+                codeHeader.textContent = `备注: ${remarkText}`;
 
-button:hover {
-    background-color: var(--button-hover-bg);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px var(--shadow-hover);
-}
+                const pre = document.createElement('pre');
+                pre.textContent = code;
 
-button:after {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    top: 50%;
-    left: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    transition: transform 0.5s ease-out;
-}
+                const button = document.createElement('button');
+                button.textContent = '复制密钥';
+                button.addEventListener('click', () => {
+                    navigator.clipboard.writeText(code).then(() => {
+                        button.textContent = '复制成功！';
+                        button.classList.add('copy-success');
+                        setTimeout(() => {
+                            button.textContent = '复制密钥';
+                            button.classList.remove('copy-success');
+                        }, 2000);
+                    });
+                });
 
-button:active:after {
-    transform: translate(-50%, -50%) scale(1);
-    transition: transform 0.3s ease-out;
-}
+                codeBlock.appendChild(codeHeader);
+                codeBlock.appendChild(pre);
+                codeBlock.appendChild(button);
+                codeList.appendChild(codeBlock);
+            }
+        });
 
-/* 滚动加载动画 */
-[data-aos] {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-[data-aos].aos-animate {
-    opacity: 1;
-    transform: translateY(0);
-}
+        if (codeList.innerHTML === '') {
+            codeList.innerHTML = '<p>未找到有效的密钥。</p>';
+        }
+    })
+    .catch(error => {
+        codeList.innerHTML = '<p class="error-message">加载失败，请检查 codes.txt 文件是否存在。</p>';
+        console.error(error);
+    });
