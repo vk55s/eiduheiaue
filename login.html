@@ -10,12 +10,19 @@
     <div class="container">
         <h1>微信群内获取密码</h1>
         <p>请输入密码以访问密钥页面：</p>
-        <form id="password-form" class="form">
-            <input type="password" id="password-input" placeholder="请输入密码" class="input" required>
+        <form id="password-form">
+            <input 
+                type="password" 
+                id="password-input" 
+                placeholder="请输入密码" 
+                class="input" 
+                required 
+                aria-label="密码输入框">
             <button type="submit" class="button">提交</button>
         </form>
         <p id="error-message" class="error-message" style="display: none;">密码错误，请重试！</p>
     </div>
+    <footer>&copy; 2024 密钥保护页</footer>
     <script src="login.js"></script>
 </body>
 </html>
