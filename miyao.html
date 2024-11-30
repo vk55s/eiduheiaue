@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OUTLINE密钥</title>
+    <title>Outline密钥</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body id="key-page">
     <div class="container">
-        <h1>OUTLINE密钥</h1>
+        <h1>Outline密钥</h1>
+        <!-- 订阅地址 -->
         <div class="subscription-block">
-            <p>订阅地址：</p>
-            <pre id="subscription" aria-label="订阅地址">
-                https://raw.githubusercontent.com/vk55s/subscribe/refs/heads/main/chui
-            </pre>
-            <button id="copySubscription" class="button">复制订阅</button>
+            <p>订阅地址:</p>
+            <pre id="subscription">https://raw.githubusercontent.com/vk55s/subscribe/refs/heads/main/chui</pre>
+            <button id="copySubscription">复制订阅</button>
         </div>
+
         <hr>
-        <div id="codeList" aria-live="polite">正在加载密钥...</div>
+
+        <!-- 密钥列表 -->
+        <div id="codeList">正在加载密钥...</div>
     </div>
     <footer>&copy; 2024 - Outline 锤锤</footer>
     <script src="key.js"></script>
