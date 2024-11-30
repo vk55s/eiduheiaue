@@ -6,6 +6,9 @@
     --button-hover-bg: #357abd;
     --border-color: #dcdfe6;
     --code-bg: #f3f4f6;
+    --transition-base: 0.3s ease-in-out;
+    --box-shadow-base: 0 6px 15px rgba(0, 0, 0, 0.1);
+    --box-shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .dark-theme {
@@ -16,6 +19,8 @@
     --button-hover-bg: #44475a;
     --border-color: #444;
     --code-bg: #2d2d3a;
+    --box-shadow-base: 0 6px 15px rgba(0, 0, 0, 0.3);
+    --box-shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
 body {
@@ -25,7 +30,7 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.8;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color var(--transition-base), color var(--transition-base);
 }
 
 .container {
@@ -34,9 +39,14 @@ body {
     padding: 20px 25px;
     background: var(--container-bg);
     border-radius: 10px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow-base);
     overflow: hidden;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.container:hover {
+    transform: scale(1.02);
+    box-shadow: var(--box-shadow-hover);
 }
 
 h1 {
@@ -46,6 +56,7 @@ h1 {
     color: var(--text-color);
     text-transform: uppercase;
     letter-spacing: 2px;
+    animation: fade-in var(--transition-base);
 }
 
 /* Subscription block */
@@ -55,12 +66,14 @@ h1 {
     border: 1px solid var(--border-color);
     border-radius: 10px;
     background: var(--code-bg);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-    transition: box-shadow 0.3s;
+    box-shadow: var(--box-shadow-base);
+    transition: box-shadow var(--transition-base), transform var(--transition-base);
+    transform: translateY(0);
 }
 
 .subscription-block:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
 }
 
 .subscription-block p {
@@ -81,6 +94,7 @@ pre {
     font-size: 14px;
     color: var(--text-color);
     border: 1px solid var(--border-color);
+    animation: slide-in var(--transition-base);
 }
 
 .code-block {
@@ -89,13 +103,13 @@ pre {
     border: 1px solid var(--border-color);
     border-radius: 10px;
     background: var(--code-bg);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s, box-shadow 0.3s;
+    box-shadow: var(--box-shadow-base);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .code-block:hover {
     transform: scale(1.02);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow-hover);
 }
 
 .code-header {
@@ -119,13 +133,14 @@ button {
     font-size: 14px;
     font-weight: bold;
     letter-spacing: 0.5px;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color var(--transition-base), transform 0.2s, box-shadow var(--transition-base);
+    box-shadow: var(--box-shadow-base);
 }
 
 button:hover {
     background-color: var(--button-hover-bg);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--box-shadow-hover);
 }
 
 button:active {
@@ -156,5 +171,28 @@ footer {
     button {
         padding: 10px 15px;
         font-size: 13px;
+    }
+}
+
+/* Animations */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
