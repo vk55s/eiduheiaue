@@ -11,7 +11,7 @@ const correctPassword = '4586';
 togglePasswordButton.addEventListener('click', () => {
     const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
     passwordInput.setAttribute('type', type);
-    togglePasswordButton.textContent = type === 'password' ? '显示' : '隐藏';
+    togglePasswordButton.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
 });
 
 passwordForm.addEventListener('submit', (e) => {
