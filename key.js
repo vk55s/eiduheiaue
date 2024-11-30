@@ -5,13 +5,23 @@ const subscriptionText = document.getElementById('subscription').textContent;
 subscriptionButton.addEventListener('click', () => {
     navigator.clipboard.writeText(subscriptionText).then(() => {
         subscriptionButton.textContent = '复制成功！';
-        setTimeout(() => (subscriptionButton.textContent = '复制订阅'), 2000);
+        subscriptionButton.classList.add('copy-success'); // 添加动画效果
+        setTimeout(() => {
+            subscriptionButton.textContent = '复制订阅';
+            subscriptionButton.classList.remove('copy-success'); // 恢复原始状态
+        }, 2000);
     });
 });
 
 // 加载密钥列表
 const codeList = document.getElementById('codeList');
-codeList.innerHTML = '<p>正在加载密钥...</p>';
+codeList.innerHTML = `
+    <div class="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+`;
 
 fetch('codes.txt')
     .then(response => {
@@ -22,7 +32,7 @@ fetch('codes.txt')
         const lines = data.trim().split('\n');
         codeList.innerHTML = ''; // 清空加载提示
 
-        lines.forEach(line => {
+        lines.forEach((line, index) => {
             if (line.startsWith('ss://')) {
                 const [code, remark] = line.split('#');
                 const remarkText = remark ? decodeURIComponent(remark.trim()) : '无备注';
@@ -42,7 +52,11 @@ fetch('codes.txt')
                 button.addEventListener('click', () => {
                     navigator.clipboard.writeText(code).then(() => {
                         button.textContent = '复制成功！';
-                        setTimeout(() => (button.textContent = '复制密钥'), 2000);
+                        button.classList.add('copy-success');
+                        setTimeout(() => {
+                            button.textContent = '复制密钥';
+                            button.classList.remove('copy-success');
+                        }, 2000);
                     });
                 });
 
@@ -50,6 +64,9 @@ fetch('codes.txt')
                 codeBlock.appendChild(pre);
                 codeBlock.appendChild(button);
                 codeList.appendChild(codeBlock);
+
+                // 动态渐入效果
+                setTimeout(() => codeBlock.classList.add('visible'), 100 * index);
             }
         });
 
@@ -58,6 +75,8 @@ fetch('codes.txt')
         }
     })
     .catch(error => {
-        codeList.innerHTML = '<p>加载失败，请检查 codes.txt 文件是否存在。</p>';
+        codeList.innerHTML = `
+            <p class="error-message">加载失败，请检查 codes.txt 文件是否存在。</p>
+        `;
         console.error(error);
     });
