@@ -10,8 +10,6 @@ body {
     background-color: #f8f9fa;
     color: #333;
     line-height: 1.6;
-    margin: 0;
-    padding: 0;
 }
 
 .container {
@@ -30,79 +28,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* 表单输入框和按钮 */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-}
-
-input[type="password"] {
-    width: 100%;
-    max-width: 300px;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: border-color 0.3s;
-}
-
-input[type="password"]:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-/* 错误消息 */
-.error-message {
-    color: #dc3545;
-    font-size: 1rem;
-    margin-top: 20px;
-    text-align: center;
-    display: none;
-}
-
-/* 错误消息显示的样式 */
-.error-message.show {
-    display: block;
-}
-
-/* 摇晃动画 */
-@keyframes shake {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    25% {
-        transform: translateX(-10px);
-    }
-    50% {
-        transform: translateX(10px);
-    }
-    75% {
-        transform: translateX(-10px);
-    }
-}
-
-.shake {
-    animation: shake 0.3s ease-in-out;
-}
-
-/* 订阅地址块 */
+/* 订阅地址 */
 .subscription-block {
     display: flex;
     flex-direction: column;
@@ -120,7 +46,6 @@ button:hover {
     padding: 10px;
     border-radius: 8px;
     word-wrap: break-word;
-    overflow-wrap: break-word;
     width: 100%;
     font-size: 1rem;
     font-family: 'Courier New', Courier, monospace;
@@ -162,6 +87,8 @@ button:hover {
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    overflow-x: auto; /* 允许横向滚动 */
+    -webkit-overflow-scrolling: touch; /* 优化移动设备滚动体验 */
 }
 
 .code-block:hover {
@@ -180,11 +107,33 @@ pre {
     border-radius: 8px;
     font-size: 1rem;
     font-family: 'Courier New', Courier, monospace;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: pre-wrap;
+    white-space: nowrap; /* 强制文本单行显示 */
+    overflow: hidden; /* 隐藏溢出部分 */
+    text-overflow: ellipsis; /* 添加省略号 */
+    cursor: pointer; /* 鼓励用户交互 */
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
     width: 100%;
-    margin-bottom: 15px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* 错误消息 */
+.error-message {
+    color: #dc3545;
+    font-size: 1rem;
+    margin-top: 20px;
+    text-align: center;
 }
 
 /* 加载动画 */
@@ -215,35 +164,9 @@ pre {
     }
 }
 
-/* 页脚 */
 footer {
     text-align: center;
     font-size: 0.9rem;
     color: #666;
     margin-top: 30px;
-}
-
-/* 响应式布局 */
-@media (max-width: 768px) {
-    .container {
-        width: 95%;
-        margin: 20px auto;
-        padding: 15px;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    input[type="password"], button {
-        width: 100%;
-    }
-
-    #subscription {
-        font-size: 0.9rem;
-    }
-
-    pre {
-        font-size: 0.9rem;
-    }
 }
