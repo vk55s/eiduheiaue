@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>密钥展示页面</title>
+    <title>锤子加速</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
 </head>
 <body id="key-page">
-    <div class="container">
+    <!-- 非法访问提示 -->
+    <div id="error" class="container" style="display: none;">
+        <h1 style="color: red;">拒绝访问</h1>
+        <p>您未通过正确途径访问此页面，请返回主页。</p>
+    </div>
+
+    <!-- 密钥展示页面内容 -->
+    <div id="content" class="container" style="display: none;">
         <h1>锤子加速</h1>
         <div class="subscription-block" data-aos="fade-up">
             <p>订阅地址:</p>
@@ -18,6 +25,7 @@
         <hr>
         <div id="codeList" class="code-list">正在加载密钥...</div>
     </div>
+
     <footer>&copy; 2024 - Outline 锤锤</footer>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="key.js"></script>
