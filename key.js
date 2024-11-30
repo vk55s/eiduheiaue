@@ -55,6 +55,7 @@ fetch('codes.txt')
 
                 const pre = document.createElement('pre');
                 pre.textContent = code;
+                pre.title = code; // 鼠标悬停显示完整内容
 
                 const button = document.createElement('button');
                 button.textContent = '复制密钥';
