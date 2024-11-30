@@ -1,112 +1,43 @@
 :root {
-    --bg-color: #f4f6f9;
-    --text-color: #333;
-    --container-bg: #fff;
-    --button-bg: #007bff;
-    --button-hover-bg: #0056b3;
-    --input-bg: #f8f9fa;
-    --input-border: #ced4da;
-    --input-focus: #007bff;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    --bg-gradient: linear-gradient(135deg, #f0f8ff, #e6f7ff);
+    --footer-bg: #f9f9f9;
 }
 
 body {
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
+    background: var(--bg-gradient);
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+.subscription-block {
+    text-align: left;
+}
+
+.subscription-content {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    height: 100vh;
-    transition: all 0.3s;
+    gap: 10px;
 }
 
-.container {
-    background-color: var(--container-bg);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px var(--shadow-color);
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-    transition: box-shadow 0.3s ease, transform 0.2s ease;
-}
-
-.container:hover {
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-}
-
-h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: var(--text-color);
-}
-
-p {
+.key-list {
+    text-align: left;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
     font-size: 14px;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-input {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    color: var(--text-color);
-    background-color: var(--input-bg);
-    border: 1px solid var(--input-border);
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-input:focus {
-    border-color: var(--input-focus);
-    box-shadow: 0 0 8px var(--input-focus);
-    outline: none;
-}
-
-button {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    background-color: var(--button-bg);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-button:hover {
-    background-color: var(--button-hover-bg);
-    transform: scale(1.02);
 }
 
 footer {
     margin-top: 20px;
+    background: var(--footer-bg);
+    padding: 10px;
     font-size: 12px;
     color: #aaa;
 }
-
-/* 响应式设计 */
-@media (max-width: 576px) {
-    .container {
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 20px;
-    }
-
-    input, button {
-        font-size: 14px;
-        padding: 10px;
-    }
+footer a {
+    color: var(--button-bg);
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
 }
