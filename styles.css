@@ -12,8 +12,10 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 
+/* 容器样式 */
 .container {
     width: 90%;
     max-width: 800px;
@@ -22,7 +24,7 @@ body {
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    animation: fadeInUp 0.8s ease-in-out; /* 页面加载的上移淡入效果 */
+    animation: fadeInUp 0.8s ease-in-out;
 }
 
 /* 页面加载动画 */
@@ -37,201 +39,72 @@ body {
     }
 }
 
+/* 标题样式 */
 h1 {
-    font-size: 2.5rem;
+    font-size: 2.5rem; /* 加大标题字体 */
     text-align: center;
     margin-bottom: 20px;
-    background: linear-gradient(90deg, #007bff, #0056b3);
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: gradientMove 3s linear infinite; /* 标题渐变动态效果 */
+    color: #007bff;
+    font-weight: bold;
 }
 
-@keyframes gradientMove {
-    0% {
-        background-position: 0%;
-    }
-    100% {
-        background-position: 200%;
-    }
+/* 备注样式 */
+.code-header {
+    font-size: 1.2rem; /* 增大备注字体 */
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
 }
 
-/* 表单输入框和按钮 */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-}
-
-input[type="password"] {
+/* 密钥内容 */
+pre {
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 0.95rem; /* 密钥字体稍小 */
+    font-family: 'Courier New', Courier, monospace;
+    white-space: nowrap; /* 单行显示，超出部分可滑动 */
+    overflow-x: auto;
     width: 100%;
-    max-width: 300px;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 15px;
 }
 
-input[type="password"]:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
-    outline: none;
-    animation: pulseBorder 1.5s infinite; /* 输入框动态边框呼吸效果 */
+/* 滑动条样式 */
+pre::-webkit-scrollbar {
+    height: 6px;
+}
+pre::-webkit-scrollbar-thumb {
+    background: #007bff;
+    border-radius: 3px;
+}
+pre::-webkit-scrollbar-track {
+    background: #e9ecef;
 }
 
-@keyframes pulseBorder {
-    0%, 100% {
-        border-color: #007bff;
-    }
-    50% {
-        border-color: #80bdff;
-    }
-}
-
+/* 按钮样式 */
 button {
     background-color: #007bff;
     color: white;
-    padding: 10px 15px;
-    font-size: 1rem;
-    border: none;
+    padding: 10px;
     border-radius: 5px;
+    border: none;
     cursor: pointer;
-    transition: all 0.4s ease;
-    overflow: hidden;
-    position: relative;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s;
 }
 
 button:hover {
     background-color: #0056b3;
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(0, 91, 187, 0.4);
 }
 
-button:active {
-    transform: scale(0.95);
-}
-
-button::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 0;
-    height: 0;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    transition: all 0.4s ease;
-}
-
-button:active::after {
-    width: 300px;
-    height: 300px;
-    opacity: 0;
-}
-
-/* 错误消息 */
-.error-message {
-    color: #dc3545;
-    font-size: 1rem;
-    margin-top: 20px;
-    text-align: center;
-    display: none;
-}
-
-.error-message.show {
-    display: block;
-    animation: shake 0.4s ease-in-out;
-}
-
-/* 抖动动画 */
-@keyframes shake {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    25% {
-        transform: translateX(-8px);
-    }
-    50% {
-        transform: translateX(8px);
-    }
-    75% {
-        transform: translateX(-8px);
-    }
-}
-
-/* 密钥展示部分 */
-.subscription-block {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
-
-.subscription-block p {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-}
-
-#subscription {
-    background-color: #f1f1f1;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-family: 'Courier New', Courier, monospace;
-    width: 100%;
-    overflow: hidden; /* 超出隐藏 */
-    white-space: nowrap; /* 不换行 */
-    text-overflow: ellipsis; /* 添加省略号 */
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-#subscription:hover {
-    background-color: #e8f4ff;
-    box-shadow: inset 0 0 10px rgba(0, 123, 255, 0.2);
-}
-
-#copySubscription {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 10px;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-#copySubscription:hover {
-    background-color: #0056b3;
-    box-shadow: 0 4px 15px rgba(0, 91, 187, 0.4);
-    transform: translateY(-2px);
-}
-
-.copy-success {
+button.copy-success {
     background-color: #28a745 !important;
-    animation: blink 0.6s 2; /* 成功复制时闪烁提示 */
+    transform: scale(1.05); /* 动态缩放效果 */
 }
 
-@keyframes blink {
-    50% {
-        opacity: 0.5;
-    }
-}
-
-/* 密钥列表 */
-.code-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
+/* 动态效果 */
 .code-block {
     display: flex;
     flex-direction: column;
@@ -239,37 +112,28 @@ button:active::after {
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, background-color 0.3s;
-    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .code-block:hover {
     transform: translateY(-5px);
-    background-color: #f1f7ff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-pre {
-    background-color: #e9ecef;
-    padding: 15px;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-family: 'Courier New', Courier, monospace;
-    overflow: hidden;
-    white-space: nowrap; /* 强制单行 */
-    text-overflow: ellipsis; /* 超出显示省略号 */
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-}
+/* 响应式布局 */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        margin: 20px auto;
+        padding: 15px;
+    }
 
-pre:hover {
-    background-color: #dfe9f7;
-}
+    h1 {
+        font-size: 2rem; /* 小屏标题稍微调小 */
+    }
 
-/* 页脚 */
-footer {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #666;
-    margin-top: 30px;
+    pre {
+        font-size: 0.9rem; /* 小屏密钥字体略小 */
+    }
 }
