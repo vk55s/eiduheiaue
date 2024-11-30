@@ -1,21 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outline密钥</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
 <body id="key-page">
     <div class="container">
-        <h1>Outline 密钥</h1>
+        <h1>Outline密钥</h1>
         <!-- 订阅地址 -->
         <div class="subscription-block">
             <p>订阅地址:</p>
-            <div class="subscription-content">
-                <pre id="subscription">https://raw.githubusercontent.com/vk55s/subscribe/refs/heads/main/chui</pre>
-                <button id="copySubscription">复制订阅</button>
-            </div>
-            <small class="info">点击复制以快速使用。</small>
+            <pre id="subscription">https://raw.githubusercontent.com/vk55s/subscribe/refs/heads/main/chui</pre>
+            <button id="copySubscription">复制订阅</button>
         </div>
 
         <hr>
 
         <!-- 密钥列表 -->
-        <div id="codeList" class="key-list">正在加载密钥...</div>
+        <div id="codeList" class="loading">正在加载密钥...</div>
     </div>
-    <footer>&copy; 2024 - Outline 锤锤 | <a href="#">隐私政策</a></footer>
+    <footer>&copy; 2024 - Outline 锤锤</footer>
     <script src="key.js"></script>
 </body>
+</html>
