@@ -16,11 +16,11 @@ passwordForm.addEventListener('submit', (e) => {
         window.location.href = 'miyao.html';
     } else {
         // 密码错误，显示错误提示并震动容器
-        errorMessage.classList.add('show');
+        errorMessage.style.display = 'block';  // 显示错误信息
         container.classList.add('shake');
 
         setTimeout(() => {
-            errorMessage.classList.remove('show');
+            errorMessage.style.display = 'none';  // 隐藏错误信息
             container.classList.remove('shake');
         }, 1500);
     }
