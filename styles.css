@@ -33,12 +33,14 @@ body {
     color: var(--color-text-primary);
     line-height: 1.6;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden; /* 隐藏水平方向滚动条，防止整体页面出现横向溢出 */
 }
 
 .container {
     width: 100%;
-    max-width: 950px;
-    margin: 5vh auto;
+    max-width: 100%; /* 根据实际情况可调整最大宽度值，确保不会过宽 */
+    margin: 0 auto; /* 水平居中 */
+    box-sizing: border-box; /* 让宽度计算包含边框和内边距 */
     padding: 6vh 5vw;
     background: white;
     border-radius: var(--border-radius-large);
@@ -47,7 +49,8 @@ body {
         0 4px 10px rgba(0, 0, 0, 0.1),
         0 8px 20px rgba(0, 0, 0, 0.15);
     position: relative;
-    overflow: hidden;
+    overflow-y: auto; /* 如果容器内部内容在垂直方向可能超出，出现垂直滚动条 */
+    overflow-x: hidden; /* 隐藏水平方向滚动条，防止内部内容横向溢出 */
     transition: 
         transform var(--transition-smooth),
         box-shadow var(--transition-quick);
@@ -274,21 +277,21 @@ button:active::before, button:focus::before {
     animation-delay: 0s;
     left: 0;
     top: 0;
-    animation: pulse1 1.5s infinite ease-in-out;
+    animation: pulse1 5s infinite ease-in-out;
 }
 
 .loader span:nth-child(2) {
-    animation-delay: 0.3s;
+    animation-delay: 1s;
     left: 10px;
     top: -10px;
-    animation: pulse2 1.5s infinite ease-in-out;
+    animation: pulse2 5s infinite ease-in-out;
 }
 
 .loader span:nth-child(3) {
-    animation-delay: 0.6s;
+    animation-delay: 2s;
     left: -10px;
     top: 10px;
-    animation: pulse3 1.5s infinite ease-in-out;
+    animation: pulse3 5s infinite ease-in-out;
 }
 
 @keyframes pulse1 {
@@ -297,7 +300,7 @@ button:active::before, button:focus::before {
         opacity: 0.5;
     }
     50% {
-        transform: translateY(-5px) scale(1);
+        transform: translateY(-10px) scale(1);
         opacity: 1;
     }
 }
@@ -308,7 +311,7 @@ button:active::before, button:focus::before {
         opacity: 0.5;
     }
     50% {
-        transform: translateX(5px) scale(1);
+        transform: translateX(10px) scale(1);
         opacity: 1;
     }
 }
@@ -319,7 +322,7 @@ button:active::before, button:focus::before {
         opacity: 0.5;
     }
     50% {
-        transform: translateY(5px) scale(1);
+        transform: translateY(10px) scale(1);
         opacity: 1;
     }
 }
