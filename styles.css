@@ -1,227 +1,238 @@
+:root {
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --primary-color: #0070C9;  /* 类似于 Apple 的蓝色 */
+  --secondary-color: #00539F;
+  --background-color: #F5F5F7;  /* 浅灰色背景 */
+  --text-color: #171717;  /* 深一些的文本颜色 */
+  --container-border-radius: 12px;  /* 统一容器的圆角 */
+  --button-border-radius: 8px;  /* 按钮的圆角 */
+  --input-border-radius: 8px;  /* 输入框的圆角 */
+  --transition-duration: 0.3s;  /* 统一过渡时间 */
+}
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background: repeating-linear-gradient(45deg, #f0f0f0, #f0f0f0 10px, #ddd 10px, #ddd 20px);
-    color: #1c1c1e;
-    line-height: 1.6;
-    min-height: 100vh;
-    background-attachment: fixed;
-    -webkit-font-smoothing: antialiased;
+  font-family: var(--font-family);
+  background: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  min-height: 100vh;
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
-    text-decoration: none;
-    color: #007aff;
-    transition: color 0.3s ease;
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color var(--transition-duration) ease;
 }
 
 a:hover {
-    color: #0056b3;
+  color: var(--secondary-color);
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #c6c6c8;
-    border-radius: 4px;
+  background: #C6C6C8;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 /* 页面容器样式 */
 .container {
-    width: 90%;
-    max-width: 800px;
-    margin: 60px auto;
-    padding: 40px;
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 80%;  /* 调整宽度 */
+  max-width: 1200px;  /* 增大最大宽度 */
+  margin: 80px auto;  /* 增加上下边距 */
+  padding: 40px;
+  background: #FFFFFF;
+  border-radius: var(--container-border-radius);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
 }
 
 .container:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+  transform: translateY(-10px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
 }
 
 /* 标题样式 */
 h1 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #1c1c1e;
-    text-align: center;
-    margin-bottom: 40px;
-    letter-spacing: 0.8px;
+  font-size: 3rem;  /* 增大标题字体 */
+  font-weight: 600;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 60px;  /* 增加底部边距 */
+  letter-spacing: 1px;  /* 增加字母间距 */
 }
 
 /* 分隔线 */
 .divider {
-    height: 1px;
-    background: #e0e0e0;
-    margin: 40px 0;
+  height: 1px;
+  background: #E0E0E0;
+  margin: 60px 0;  /* 增加上下边距 */
 }
 
 /* 输入框样式 */
 input[type="text"],
 input[type="password"] {
-    width: 100%;
-    padding: 15px;
-    margin: 15px 0;
-    border: 1px solid #d1d1d6;
-    border-radius: 8px;
-    font-size: 1rem;
-    background: #f9f9f9;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  padding: 18px;  /* 增加内边距 */
+  margin: 20px 0;  /* 增加上下边距 */
+  border: 1px solid #D1D1D6;
+  border-radius: var(--input-border-radius);
+  font-size: 1.1rem;  /* 增大字体 */
+  background: #F9F9F9;
+  transition: border-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-    border-color: #007aff;
-    box-shadow: 0 0 8px rgba(0, 122, 255, 0.2);
-    outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 8px rgba(0, 122, 255, 0.2);
+  outline: none;
 }
 
 /* 按钮样式 */
 button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    margin: 20px 0;
-    background: linear-gradient(90deg, #007aff, #0056b3);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+  display: block;
+  width: 100%;
+  padding: 20px;  /* 增加内边距 */
+  margin: 30px 0;  /* 增加上下边距 */
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  border-radius: var(--button-border-radius);
+  font-size: 1.3rem;  /* 增大字体 */
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-duration) ease-in-out;
 }
 
 button:hover {
-    background: linear-gradient(90deg, #0056b3, #003a75);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 90, 200, 0.2);
+  background: linear-gradient(90deg, var(--secondary-color), #003A75);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 90, 200, 0.2);
 }
 
 button:active {
-    transform: translateY(1px);
+  transform: translateY(1px);
 }
 
 button.copied {
-    background-color: #28a745 !important;
+  background-color: #28A745!important;
 }
 
 /* 代码块样式 */
 pre {
-    background: #f4f4f5;
-    padding: 20px;
-    border-radius: 12px;
-    font-family: "Courier New", monospace;
-    font-size: 1rem;
-    overflow-x: auto;
-    border: 1px solid #e0e0e0;
-    transition: background-color 0.3s ease;
+  background: #F4F4F5;
+  padding: 30px;  /* 增加内边距 */
+  border-radius: var(--container-border-radius);
+  font-family: "Courier New", monospace;
+  font-size: 1.1rem;  /* 增大字体 */
+  overflow-x: auto;
+  border: 1px solid #E0E0E0;
+  transition: background-color var(--transition-duration) ease;
 }
 
 pre:hover {
-    background: #ebeff5;
+  background: #EBEFF5;
 }
 
 /* 加载动画 */
 .loader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;  /* 增加间距 */
 }
 
 .loader span {
-    width: 10px;
-    height: 10px;
-    background: #007aff;
-    border-radius: 50%;
-    animation: loader-animation 1.5s infinite ease-in-out;
+  width: 12px;  /* 增大尺寸 */
+  height: 12px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  animation: loader-animation 1.5s infinite ease-in-out;
 }
 
 .loader span:nth-child(2) {
-    animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 
 .loader span:nth-child(3) {
-    animation-delay: 0.6s;
+  animation-delay: 0.6s;
 }
 
 @keyframes loader-animation {
-    0%, 80%, 100% {
-        transform: scale(0);
-    }
-    40% {
-        transform: scale(1);
-    }
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
 }
 
 /* 响应式布局 */
 @media (max-width: 768px) {
-    .container {
-        width: 95%;
-        padding: 20px;
-    }
+.container {
+    width: 90%;
+    padding: 30px;  /* 增加内边距 */
+  }
 
-    h1 {
-        font-size: 2rem;
-    }
+  h1 {
+    font-size: 2.5rem;
+  }
 
-    button {
-        font-size: 1rem;
-    }
+  button {
+    font-size: 1.2rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .container {
-        width: 90%;
-        padding: 15px;
-    }
+ .container {
+    width: 95%;
+    padding: 20px;
+  }
 
-    h1 {
-        font-size: 1.8rem;
-    }
+  h1 {
+    font-size: 2rem;
+  }
 
-    button {
-        font-size: 1rem;
-        padding: 12px;
-    }
+  button {
+    font-size: 1rem;
+    padding: 15px;  /* 调整内边距 */
+  }
 }
 
 /* 深色模式支持 */
 @media (prefers-color-scheme: dark) {
-    body {
-        background: #1a1a1a;
-        color: #e0e0e0;
-    }
+  body {
+    background: #121212;  /* 深黑色背景 */
+    color: #E0E0E0;
+  }
 
-    .container {
-        background: #333;
-    }
+.container {
+    background: #222;
+  }
 
-    button {
-        background: linear-gradient(90deg, #0056b3, #003a75);
-    }
+  button {
+    background: linear-gradient(90deg, #0056B3, #003A75);
+  }
 
-    pre {
-        background: #222;
-        color: #e0e0e0;
-    }
+  pre {
+    background: #1D1D1D;  /* 深色代码块背景 */
+    color: #E0E0E0;
+  }
 }
