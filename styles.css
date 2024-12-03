@@ -1,3 +1,4 @@
+参考我的css做出最顶尖顶级的ui
 /* 通用样式 */
 * {
     margin: 0;
@@ -33,13 +34,6 @@ body {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
-.container:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    transform: translateY(-10px);
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 /* 标题样式 */
 h1 {
     font-size: 3rem;
@@ -50,7 +44,6 @@ h1 {
     text-transform: uppercase;
     letter-spacing: 1.2px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: 'Montserrat Bold', sans-serif;
 }
 
 /* 宣传语样式 */
@@ -58,7 +51,6 @@ h1 {
     font-size: 1.2rem;
     color: #555555;
     margin-bottom: 20px;
-    line-height: 1.8;
 }
 
 /* 订阅块样式 */
@@ -80,7 +72,6 @@ pre {
     word-wrap: normal;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.05);
-    color: #333333;
 }
 
 pre:hover {
@@ -129,7 +120,7 @@ button:hover {
 }
 
 button:active {
-    transform: translateY(1px) scale(0.98);
+    transform: translateY(1px);
 }
 
 /* 错误消息样式 */
@@ -138,30 +129,9 @@ button:active {
     margin-top: 10px;
 }
 
-/* 输入框样式 */
-.container input {
-    display: block;
-    width: 70%;
-    margin: 0 auto 20px;
-    padding: 12px 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-family: 'Arial, Helvetica, sans-serif';
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-.container input:focus {
-    border-color: #007BFF;
-}
-
-.container input::placeholder {
-    color: #888;
-}
-
 /* 响应式布局 */
 @media (max-width: 768px) {
-   .container {
+  .container {
         width: 95%;
         margin: 20px auto;
         padding: 20px;
@@ -178,14 +148,6 @@ button:active {
     button {
         font-size: 1rem;
     }
-}
-
-@media (max-width: 480px) {
-    /* 在此处添加480px及以下设备的样式调整 */
-}
-
-@media (max-width: 1024px) {
-    /* 在此处添加1024px及以下设备的样式调整 */
 }
 
 footer {
