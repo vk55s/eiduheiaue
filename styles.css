@@ -1,30 +1,30 @@
 :root {
-    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --primary-color: #0070C9;
-    --secondary-color: #00539F;
-    --background-color-light: #F5F5F7;
-    --text-color-light: #171717;
-    --dark-background-color: #121212;
-    --dark-text-color: #E0E0E0;
-    --container-border-radius: 16px;
-    --button-border-radius: 12px;
-    --input-border-radius: 8px;
-    --transition-duration: 0.3s;
-    --hover-color: #00A0FF;
-    --gradient-light: linear-gradient(135deg, #EDEEF3 0%, #FFFFFF 100%);
-    --gradient-dark: linear-gradient(135deg, #1C1C1E 0%, #2C2C2E 100%);
-    --noise-opacity: 0.03;
-    --shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.2);
-    --shadow-focus: 0 0 12px rgba(0, 122, 255, 0.5);
-    --disabled-opacity: 0.6;
+    --font - family: - apple - system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans - serif;
+    --primary - color: #0066CC;
+    --secondary - color: #004D99;
+    --background - color - light: #F5F5F7;
+    --text - color - light: #171717;
+    --dark - background - color: #121212;
+    --dark - text - color: #E0E0E0;
+    --container - border - radius: 20px;
+    --button - border - radius: 14px;
+    --input - border - radius: 8px;
+    --transition - duration: 0.3s;
+    --hover - color: #0099FF;
+    --gradient - light: linear - gradient(135deg, #EDEEF3 0%, #FFFFFF 100%);
+    --gradient - dark: linear - gradient(135deg, #1C1C1E 0%, #2C2C2E 100%);
+    --noise - opacity: 0.03;
+    --shadow - hover: 0 8px 16px rgba(0, 0, 0, 0.15);
+    --shadow - focus: 0 0 8px rgba(0, 102, 204, 0.5);
+    --disabled - opacity: 0.6;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers - color - scheme: dark) {
     :root {
-        --background-color-light: var(--dark-background-color);
-        --text-color-light: var(--dark-text-color);
-        --gradient-light: var(--gradient-dark);
-        --hover-color: #1A91FF;
+        --background - color - light: var(--dark - background - color);
+        --text - color - light: var(--dark - text - color);
+        --gradient - light: var(--gradient - dark);
+        --hover - color: #1A91FF;
     }
 }
 
@@ -32,16 +32,16 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box - sizing: border - box;
 }
 
 body {
-    font-family: var(--font-family);
-    line-height: 1.6;
-    min-height: 100vh;
-    color: var(--text-color-light);
-    background: var(--gradient-light);
-    background-attachment: fixed;
+    font - family: var(--font - family);
+    line - height: 1.6;
+    min - height: 100vh;
+    color: var(--text - color - light);
+    background: var(--gradient - light);
+    background - attachment: fixed;
     position: relative;
 }
 
@@ -52,40 +52,40 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('https://source.unsplash.com/random/1920x1080/?texture,abstract') center/cover no-repeat;
-    mix-blend-mode: overlay;
-    opacity: var(--noise-opacity);
-    pointer-events: none;
-    z-index: -1;
+    background: url('https://source.unsplash.com/random/1920x1080/?texture,abstract') center/cover no - repeat;
+    mix - blend - mode: overlay;
+    opacity: var(--noise - opacity);
+    pointer - events: none;
+    z - index: - 1;
 }
 
 /* Text and Links */
 a {
-    text-decoration: none;
-    color: var(--primary-color);
-    transition: color var(--transition-duration) ease;
+    text - decoration: none;
+    color: var(--primary - color);
+    transition: color var(--transition - duration) ease;
 }
 
 a:hover {
-    color: var(--hover-color);
+    color: var(--hover - color);
 }
 
 /* Containers */
 .container {
     width: 70%;
-    max-width: 1000px;
+    max - width: 1000px;
     margin: 50px auto;
     padding: 30px;
     background: rgba(255, 255, 255, 0.9);
-    border-radius: var(--container-border-radius);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
-    backdrop-filter: blur(10px);
+    border - radius: var(--container - border - radius);
+    box - shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition - duration) ease, box - shadow var(--transition - duration) ease;
+    backdrop - filter: blur(10px);
 }
 
 .container:hover {
     transform: translateY(-8px);
-    box-shadow: var(--shadow-hover);
+    box - shadow: var(--shadow - hover);
 }
 
 /* Inputs */
@@ -94,18 +94,19 @@ input[type="password"] {
     width: 100%;
     padding: 16px;
     margin: 18px 0;
-    border: 1px solid #D1D1D6;
-    border-radius: var(--input-border-radius);
+    border: none;
+    border - bottom: 1px solid #D1D1D6;
+    border - radius: 0;
     background: #F9F9F9;
-    transition: border-color var(--transition-duration), box-shadow var(--transition-duration);
+    transition: border - color var(--transition - duration), box - shadow var(--transition - duration);
 
     &::placeholder {
         color: #A0A0A0;
     }
 
     &:focus {
-        border-color: var(--primary-color);
-        box-shadow: var(--shadow-focus);
+        border - bottom: 2px solid #0066CC;
+        box - shadow: var(--shadow - focus);
     }
 }
 
@@ -115,44 +116,44 @@ button {
     width: 100%;
     padding: 18px;
     margin: 25px 0;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    background: linear - gradient(90deg, #0066CC, #004D99);
     color: white;
     border: none;
-    border-radius: var(--button-border-radius);
-    font-size: 1.2rem;
+    border - radius: var(--button - border - radius);
+    font - size: 1.2rem;
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    transition: transform var(--transition-duration), box-shadow var(--transition-duration);
+    transition: transform var(--transition - duration), box - shadow var(--transition - duration);
 }
 
 button:hover {
-    background: linear-gradient(90deg, var(--secondary-color), var(--hover-color));
+    background: linear - gradient(90deg, #004D99, #0099FF);
     transform: translateY(-1px);
-    box-shadow: var(--shadow-hover);
+    box - shadow: var(--shadow - hover);
 }
 
 /* Dropdowns */
 .dropdown {
     position: relative;
-    display: inline-block;
+    display: inline - block;
 }
 
-.dropdown-content {
+.dropdown - content {
     display: none;
     position: absolute;
     background: #fff;
-    border-radius: var(--input-border-radius);
-    box-shadow: var(--shadow-hover);
-    min-width: 200px;
+    border - radius: var(--input - border - radius);
+    box - shadow: var(--shadow - hover);
+    min - width: 200px;
     padding: 10px 0;
-    z-index: 10;
+    z - index: 10;
     opacity: 0;
     transform: translateY(-10px);
-    transition: opacity var(--transition-duration), transform var(--transition-duration);
+    transition: opacity var(--transition - duration), transform var(--transition - duration);
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown:hover.dropdown - content {
     display: block;
     opacity: 1;
     transform: translateY(0);
@@ -161,47 +162,47 @@ button:hover {
 /* Tooltips */
 .tooltip {
     position: relative;
-    display: inline-block;
+    display: inline - block;
 }
 
-.tooltip .tooltiptext {
+.tooltip.tooltiptext {
     visibility: hidden;
     width: 120px;
-    background: var(--background-color-light);
-    color: var(--text-color-light);
-    text-align: center;
-    border-radius: var(--button-border-radius);
+    background: var(--background - color - light);
+    color: var(--text - color - light);
+    text - align: center;
+    border - radius: var(--button - border - radius);
     padding: 5px 0;
     position: absolute;
     bottom: 125%;
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
-    transition: opacity var(--transition-duration);
+    transition: opacity var(--transition - duration);
 }
 
-.tooltip:hover .tooltiptext {
+.tooltip:hover.tooltiptext {
     visibility: visible;
     opacity: 1;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-    .container {
+@media (max - width: 768px) {
+   .container {
         width: 85%;
         padding: 25px;
     }
     button {
-        font-size: 1.1rem;
+        font - size: 1.1rem;
     }
 }
 
-@media (max-width: 480px) {
-    .container {
+@media (max - width: 480px) {
+   .container {
         width: 90%;
         padding: 20px;
     }
     button {
-        font-size: 1rem;
+        font - size: 1rem;
     }
 }
