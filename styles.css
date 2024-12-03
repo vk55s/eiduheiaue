@@ -3,269 +3,133 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-font-smoothing: antialiased; /* 让字体在WebKit浏览器中显示更平滑 */
-    -moz-osx-font-smoothing: grayscale; /* 让字体在Firefox浏览器中显示更平滑 */
 }
 
 body {
     font-family: 'Arial, Helvetica, sans-serif';
-    background-color: #f0f0f0; /* 淡雅且富有质感的浅灰色背景 */
+    background-color: #f0f0f0;
     color: #333;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* 隐藏水平滚动条，保持页面整洁 */
-    perspective: 1000px; /* 为整个页面添加透视效果，增强立体感 */
 }
 
 /* 容器 */
 .container {
     width: 90%;
-    max-width: 800px; /* 统一最大宽度 */
-    margin: 60px auto; /* 页面居中 */
+    max-width: 800px;
+    margin: 60px auto;
     padding: 30px;
     background-color: #ffffff;
-    border-radius: 12px; /* 精致圆润的边角处理 */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* 细腻且富有层次感的阴影效果 */
-    overflow: hidden; /* 防止内容溢出 */
-    text-align: center; /* 居中对齐内容 */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* 丰富的过渡效果 */
-    position: relative; /* 为后续添加装饰元素定位做准备 */
-    transform-style: preserve-3d; /* 启用3D变换效果 */
-    z-index: 1; /* 确保容器在页面层级中相对靠前 */
-}
-
-.container:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     border-radius: 12px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05); /* 容器内部的微妙阴影，增加立体感 */
-    z-index: -1; /* 置于容器内容下方 */
-    filter: blur(2px); /* 为容器添加轻微模糊效果，增强层次感和高级感 */
-    transform: translateZ(-1px); /* 沿Z轴向后移动，营造深度感 */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .container:focus-within {
-    transform: translateY(-10px) rotateX(2deg); /* 聚焦时添加独特的3D变换效果 */
+    transform: translateY(-10px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    background-color: #f7f7f7; /* 容器聚焦时背景色微变，增加交互反馈 */
+}
+
+.container:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* 标题样式 */
 h1 {
-    font-size: 3rem; /* 醒目且大气的字体大小 */
+    font-size: 3rem;
     text-align: center;
-    margin-bottom: 50px; /* 合理的标题间距 */
-    color: #000000; /* 经典的黑色标题，简洁有力 */
+    margin-bottom: 50px;
+    color: #000000;
     font-weight: bold;
-    text-transform: uppercase; /* 全大写，突出重点 */
-    letter-spacing: 1.2px; /* 恰到好处的字母间距，增加现代感 */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 细腻的文字阴影，强化立体效果 */
-    position: relative; /* 为添加装饰元素定位 */
-    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1)); /* 为标题添加额外的投影效果，更显立体高级 */
-    transform: translateZ(20px); /* 将标题沿Z轴向前移动，突出显示 */
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Montserrat Bold', sans-serif;
 }
 
-h1:after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 3px;
-    background-color: #000000; /* 标题下方的装饰线，增加层次感 */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* 装饰线的阴影效果，更显精致 */
-    transform: translateZ(10px); /* 将装饰线沿Z轴向前移动，使其更立体 */
-}
-
-/* 分隔线 */
-.divider {
-    height: 1px;
-    background-color: #e0e0e0;
-    margin: 40px 0;
-    transform: translateZ(5px); /* 沿Z轴向前移动，使其在页面中有一定层次感 */
-}
-
-/* 模块标题（备注文字） */
-.code-header {
-    font-size: 1.4rem;
-    font-weight: bold;
+/* 宣传语样式 */
+.slogan {
+    font-size: 1.2rem;
     color: #555555;
-    margin-bottom: 15px; /* 适当的标题与内容间距 */
-    text-align: left;
-    word-wrap: break-word; /* 自动换行 */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* 轻微的文字阴影，提升质感 */
-    position: relative; /* 为添加装饰元素定位 */
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05)); /* 为模块标题添加投影效果，更显立体 */
-    transform: translateZ(10px); /* 将模块标题沿Z轴向前移动，突出显示 */
+    margin-bottom: 20px;
+    line-height: 1.8;
 }
 
-.code-header:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -10px;
-    width: 5px;
-    height: 100%;
-    background-color: #000000; /* 模块标题左侧的装饰条，突出显示 */
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); /* 装饰条的阴影效果，更显精致 */
-    transform: translateZ(5px); /* 将装饰条沿Z轴向前移动，使其更立体 */
+/* 订阅块样式 */
+.subscription-block {
+    margin-bottom: 30px;
 }
 
-/* 密钥内容（代码块样式） */
+/* 代码块样式 */
 pre {
-    background: #f5f5f5; /* 淡雅且高级的淡灰色背景 */
-    padding: 20px; /* 舒适的内边距设置 */
+    background: #f5f5f5;
+    padding: 20px;
     border-radius: 10px;
     font-size: 1.1rem;
     font-family: 'Courier New', Courier, monospace;
-    white-space: nowrap; /* 单行显示 */
-    overflow-x: auto; /* 水平滚动 */
+    white-space: nowrap;
+    overflow-x: auto;
     border: 1px solid #e5e5e5;
-    margin-bottom: 40px; /* 合理的模块间距 */
-    word-wrap: normal; /* 禁止文字换行 */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; /* 丰富的过渡效果 */
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.05); /* 内部微妙阴影，增添精致感 */
-    position: relative; /* 为添加装饰元素定位 */
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05)); /* 为代码块添加投影效果，更显立体 */
-    transform: translateZ(5px); /* 将代码块沿Z轴向前移动，使其在页面中有一定层次感 */
+    margin-bottom: 40px;
+    word-wrap: normal;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.05);
+    color: #333333;
 }
 
 pre:hover {
-    background-color: #ededed; /* 鼠标悬停时背景变浅 */
+    background-color: #ededed;
     box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
-    opacity: 0.95; /* 鼠标悬停时增加透明度变化，增强交互感 */
-    transform: translateZ(10px); /* 悬停时沿Z轴向前移动，突出显示 */
-}
-
-pre:after {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    right: 0;
-    width: 50px;
-    height: 3px;
-    background-color: #000000; /* 代码块下方的装饰线，增加细节 */
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); /* 装饰线的阴影效果，更显精致 */
-    transform: translateZ(5px); /* 将装饰线沿Z轴向前移动，使其更立体 */
 }
 
 /* 滚动条样式 */
 pre::-webkit-scrollbar {
-    height: 8px; /* 合适的滚动条高度 */
+    height: 8px;
 }
+
 pre::-webkit-scrollbar-thumb {
-    background: #000000; /* 经典的黑色滚动条，与整体协调 */
-    border-radius: 4px; /* 精致的圆角处理 */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* 滚动条的阴影效果，增强立体感 */
-    transform: translateZ(2px); /* 将滚动条沿Z轴向前移动，使其更立体 */
+    background: #000000;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
+
 pre::-webkit-scrollbar-track {
     background: #e0e0e0;
-    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05); /* 轨道的内部阴影，提升质感 */
-    transform: translateZ(1px); /* 将轨道沿Z轴向前移动，使其更立体 */
-}
-
-/* 输入框样式 */
-input[type="password"] {
-    width: 100%;
-    padding: 15px;
-    margin: 15px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1.1rem;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* 丰富的过渡效果 */
-    position: relative; /* 为添加装饰元素定位 */
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05); /* 为输入框添加投影效果，更显立体 */
-    transform: translateZ(5px); /* 将输入框沿Z轴向前移动，使其在页面中有一定层次感 */
-}
-
-input[type="password"]:focus {
-    border-color: #000000; /* 聚焦时边框变黑，突出焦点 */
-    outline: none; /* 移除默认的聚焦边框 */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* 聚焦时的阴影效果，增加立体感 */
-    background-color: #f2f2f2; /* 聚焦时背景色微变，增加交互反馈 */
-    transform: translateZ(10px); /* 聚焦时沿Z轴向前移动，突出显示 */
-}
-
-input[type="password"]:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05); /* 输入框内部的微妙阴影，提升质感 */
-    z-index: -1; /* 置于输入框内容下方 */
-    transform: translateZ(-1px); /* 沿Z轴向后移动，营造深度感 */
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
 }
 
 /* 按钮样式 */
 button {
     display: block;
-    background: linear-gradient(90deg, #000000, #333333); /* 经典的黑到深灰渐变，稳重且大气 */
+    background: linear-gradient(90deg, #000000, #333333);
     color: white;
     padding: 15px;
-    border-radius: 10px; /* 精致的圆角处理 */
+    border-radius: 10px;
     border: none;
     cursor: pointer;
     font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
-    width: 100%; /* 占满模块宽度 */
-    margin-bottom: 20px; /* 合理的块与按钮间距 */
+    width: 100%;
+    margin-bottom: 20px;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    position: relative;
-    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1); /* 为按钮添加投影效果，更显立体 */
-    transform: translateZ(10px); /* 将按钮沿Z轴向前移动，突出显示 */
 }
 
-button[type="submit"]:hover,
 button:hover {
-    background: linear-gradient(90deg, #333333, #666666); /* 悬停时渐变变化，增加交互感 */
-    transform: translateY(-2px) translateZ(15px); /* 鼠标悬停微微上升并沿Z轴向前移动 */
+    background: linear-gradient(90deg, #333333, #666666);
+    transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-    opacity: 0.95; /* 鼠标悬停时增加透明度变化，增强交互感 */
 }
 
-button[type="submit"]:active,
 button:active {
-    transform: translateY(1px) translateZ(5px); /* 点击时压下效果并沿Z轴移动 */
-    background-color: #222222; /* 点击时背景色微变，增加交互反馈 */
-}
-
-button:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05); /* 按钮内部的微妙阴影，增加立体感 */
-    z-index: -1; /* 置于按钮内容下方 */
-    transform: translateZ(-1px); /* 沿Z轴向后移动，营造深度感 */
-}
-
-button:after {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 3px;
-    background-color: #000000; /* 按钮下方的装饰线，增加细节 */
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* 装饰线的阴影效果，更显精致 */
-    transform: translateZ(5px); /* 将装饰线沿Z轴向前移动，使其更立体 */
+    transform: translateY(1px) scale(0.98);
 }
 
 /* 错误消息样式 */
@@ -274,69 +138,38 @@ button:after {
     margin-top: 10px;
 }
 
-.shake {
-    animation: shake 0.3s;
-}
-
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-}
-
 /* 响应式布局 */
 @media (max-width: 768px) {
-   .container {
+ .container {
         width: 95%;
         margin: 20px auto;
         padding: 20px;
     }
 
     h1 {
-        font-size: 2.4rem; /* 小屏适配标题 */
+        font-size: 2.4rem;
     }
 
     pre {
-        font-size: 0.9rem; /* 缩小字体防止溢出 */
+        font-size: 0.9rem;
     }
 
     button {
-        font-size: 1rem; /* 按钮文字适配小屏 */
+        font-size: 1rem;
     }
 }
 
-.loader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px auto;
+@media (max-width: 480px) {
+    /* 在此处添加480px及以下设备的样式调整 */
 }
 
-.loader span {
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    margin: 0 5px;
-    background: #000000;
-    border-radius: 50%;
-    animation: loader-animation 1.5s infinite ease-in-out;
+@media (max-width: 1024px) {
+    /* 在此处添加1024px及以下设备的样式调整 */
 }
 
-loader span:nth-child(2) {
-    animation-delay: 0.3s;
-}
-
-loader span:nth-child(3) {
-    animation-delay: 0.6s;
-}
-
-@keyframes loader-animation {
-    0%, 80%, 100% {
-        transform: scale(0);
-    }
-    40% {
-        transform: scale(1);
-    }
+footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #888888;
+    font-size: 0.9rem;
 }
