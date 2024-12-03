@@ -4,23 +4,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessage = document.getElementById('error-message');
     const container = document.querySelector('.container');
 
-    const correctPassword = '4586'; // 提升安全性，建议将此密码存储在环境变量或通过服务器端验证
+    const CORRECT_PASSWORD = '4586';
+
+    // 限制只能输入数字
+    passwordInput.addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/[^\d]/g, '').slice(0, 4);
+    });
 
     passwordForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const enteredPassword = passwordInput.value.trim();
 
-        if (enteredPassword === correctPassword) {
+        if (enteredPassword === CORRECT_PASSWORD) {
             window.location.href = 'miyao.html';
         } else {
             errorMessage.style.display = 'block';
-            container.classList.add('shake');
-
+            container.style.animation = 'shake 0.5s';
+            
             setTimeout(() => {
                 errorMessage.style.display = 'none';
-                container.classList.remove('shake');
+                container.style.animation = 'none';
+                passwordInput.value = '';
+                passwordInput.focus();
             }, 1500);
         }
     });
+
+    // 添加抖动动画
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+    `;
+    document.head.appendChild(style);
 });
