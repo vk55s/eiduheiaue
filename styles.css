@@ -42,12 +42,19 @@ body {
     padding: 6vh 5vw;
     background: white;
     border-radius: var(--border-radius-large);
-    box-shadow: var(--shadow-medium);
+    box-shadow: 
+        0 2px 5px rgba(0, 0, 0, 0.05),
+        0 4px 10px rgba(0, 0, 0, 0.1),
+        0 8px 20px rgba(0, 0, 0, 0.15);
     position: relative;
     overflow: hidden;
     transition: 
         transform var(--transition-smooth),
         box-shadow var(--transition-quick);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .container::before {
@@ -62,8 +69,13 @@ body {
 }
 
 .container:hover {
-    transform: translateY(-12px);
+    transform: translateY(-12px) rotate(1deg);
     box-shadow: var(--shadow-bold);
+    transition: all var(--transition-smooth);
+}
+
+.container:hover * {
+    transition: all var(--transition-smooth);
 }
 
 h1 {
@@ -83,25 +95,34 @@ h1 {
 h1::after {
     content: '';
     position: absolute;
-    bottom: -10px; /* 分割线距离标题的距离 */
+    bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 0; /* 初始宽度为0 */
-    height: 2px; /* 调整高度为较细的线条 */
+    width: 0;
+    height: 2px;
     background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary-light));
-    border-radius: 1px; /* 圆角效果 */
-    animation: expand-line 0.6s ease-out forwards; /* 动画 */
+    border-radius: 1px;
+    animation: expand-line 0.6s ease-out forwards, underlineBlink 1.5s 0.6s ease-in-out;
 }
 
 @keyframes expand-line {
     0% {
-        width: 0; /* 初始时宽度为0 */
+        width: 0;
     }
     50% {
-        width: 60px; /* 中间部分的宽度，视为初步展开 */
+        width: 60px;
     }
     100% {
-        width: 120px; /* 最终展开的宽度 */
+        width: 120px;
+    }
+}
+
+@keyframes underlineBlink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
     }
 }
 
@@ -121,9 +142,9 @@ pre {
     border-radius: var(--border-radius-medium);
     font-family: 'Fira Code', 'JetBrains Mono', monospace;
     font-size: 0.95rem;
-    white-space: nowrap; /* 强制不换行 */
+    white-space: nowrap;
     word-wrap: normal;
-    overflow-x: auto; /* 添加水平滚动条 */
+    overflow-x: auto;
     border: 2px solid var(--color-primary-dark);
     margin-bottom: 30px;
     transition: 
@@ -174,29 +195,55 @@ button {
     overflow: hidden;
 }
 
-button::before {
+button:active, button:focus {
+    transform: translateY(2px);
+    box-shadow: var(--shadow-subtle);
+}
+
+button:active::after, button:focus::after {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: all var(--transition-smooth);
+    background: linear-gradient(-90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    animation: buttonLongPressFlow 1s infinite linear;
 }
 
-button:hover::before {
-    left: 100%;
+button:active::before, button:focus::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    animation: buttonLongPressShadow 1s infinite linear;
 }
 
-button:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-bold);
+@keyframes buttonLongPressFlow {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
 }
 
-button:active {
-    transform: translateY(2px);
-    box-shadow: var(--shadow-subtle);
+@keyframes buttonLongPressShadow {
+    0% {
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+    100% {
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
 }
 
 .error-message {
@@ -220,25 +267,65 @@ button:active {
     margin: 0 8px;
     background: var(--color-primary-dark);
     border-radius: 50%;
-    animation: pulse 1.5s infinite ease-in-out;
+    position: relative;
 }
 
-.loader span:nth-child(2) { animation-delay: 0.3s; }
-.loader span:nth-child(3) { animation-delay: 0.6s; }
+.loader span:nth-child(1) {
+    animation-delay: 0s;
+    left: 0;
+    top: 0;
+    animation: pulse1 1.5s infinite ease-in-out;
+}
 
-@keyframes pulse {
-    0%, 100% { 
-        transform: scale(0.6); 
-        opacity: 0.5; 
+.loader span:nth-child(2) {
+    animation-delay: 0.3s;
+    left: 10px;
+    top: -10px;
+    animation: pulse2 1.5s infinite ease-in-out;
+}
+
+.loader span:nth-child(3) {
+    animation-delay: 0.6s;
+    left: -10px;
+    top: 10px;
+    animation: pulse3 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse1 {
+    0%, 100% {
+        transform: translateY(0) scale(0.6);
+        opacity: 0.5;
     }
-    50% { 
-        transform: scale(1); 
-        opacity: 1; 
+    50% {
+        transform: translateY(-5px) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse2 {
+    0%, 100% {
+        transform: translateX(0) scale(0.6);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translateX(5px) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse3 {
+    0%, 100% {
+        transform: translateY(0) scale(0.6);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translateY(5px) scale(1);
+        opacity: 1;
     }
 }
 
 @media (max-width: 768px) {
-    .container {
+   .container {
         width: 96%;
         margin: 3vh auto;
         padding: 4vh 4vw;
@@ -258,9 +345,59 @@ button:active {
     }
 }
 
+@media (min-width: 1920px) {
+   .container {
+        max-width: 1400px;
+        padding: 8vh 8vw;
+    }
+
+    h1 {
+        font-size: 4rem;
+    }
+
+   .code-header {
+        font-size: 1.8rem;
+    }
+
+    pre {
+        font-size: 1.2rem;
+        padding: 30px;
+    }
+
+    button {
+        font-size: 1.6rem;
+        padding: 22px;
+    }
+}
+
+@media (max-width: 480px) and (orientation: portrait) {
+   .container {
+        margin: 2vh auto;
+        padding: 3vh 3vw;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+   .code-header {
+        font-size: 1.2rem;
+    }
+
+    pre {
+        font-size: 0.8rem;
+        padding: 15px;
+    }
+
+    button {
+        font-size: 1.1rem;
+        padding: 15px;
+    }
+}
+
 @supports (backdrop-filter: blur(10px)) {
-    .container {
+   .container {
         background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(15px);
+        backdrop-filter: blur(15px) contrast(1.2) hue-rotate(5deg);
     }
 }
