@@ -83,13 +83,26 @@ h1 {
 h1::after {
     content: '';
     position: absolute;
-    bottom: -15px;
+    bottom: -10px; /* 分割线距离标题的距离 */
     left: 50%;
     transform: translateX(-50%);
-    width: 180px; /* 调整分割线宽度 */
-    height: 3px; /* 调整高度为更细的线条 */
+    width: 0; /* 初始宽度为0 */
+    height: 2px; /* 调整高度为较细的线条 */
     background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary-light));
-    border-radius: 2px; /* 添加圆角 */
+    border-radius: 1px; /* 圆角效果 */
+    animation: expand-line 0.6s ease-out forwards; /* 动画 */
+}
+
+@keyframes expand-line {
+    0% {
+        width: 0; /* 初始时宽度为0 */
+    }
+    50% {
+        width: 60px; /* 中间部分的宽度，视为初步展开 */
+    }
+    100% {
+        width: 120px; /* 最终展开的宽度 */
+    }
 }
 
 .code-header {
