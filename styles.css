@@ -66,80 +66,24 @@ body {
     box-shadow: var(--shadow-bold);
 }
 
-h1 {
-    font-size: 3rem;
-    font-weight: 900;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 5vh;
-    background: linear-gradient(45deg, var(--color-primary-dark), var(--color-primary-light));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    position: relative;
-    transition: all var(--transition-quick);
+.download-info {
+    border-bottom: 2px solid var(--color-primary-dark);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
 }
 
-h1::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 130px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary-light));
+.download-info p,
+.download-details p {
+    margin-bottom: 8px;
 }
 
-.code-header {
-    font-size: 1.3rem;
-    font-weight: 800;
+.download-link {
     color: var(--color-primary-dark);
-    margin-bottom: 20px;
-    padding-left: 15px;
-    border-left: 5px solid var(--color-primary-dark);
-    transition: all var(--transition-quick);
+    text-decoration: none;
+    word-break: break-all;
 }
 
-pre {
-    background: var(--color-accent);
-    padding: 25px;
-    border-radius: var(--border-radius-medium);
-    font-family: 'Fira Code', 'JetBrains Mono', monospace;
-    font-size: 0.95rem;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    overflow-x: auto;
-    border: 2px solid var(--color-primary-dark);
-    margin-bottom: 30px;
-    transition: 
-        transform var(--transition-quick),
-        box-shadow var(--transition-quick);
-}
-
-pre:hover {
-    transform: scale(1.02);
-    box-shadow: var(--shadow-subtle);
-}
-
-input[type="password"] {
-    width: 100%;
-    padding: 16px;
-    margin: 20px 0;
-    border: 2px solid var(--color-text-secondary);
-    border-radius: var(--border-radius-small);
-    font-size: 1.1rem;
-    transition: all var(--transition-quick);
-    background-color: transparent;
-}
-
-input[type="password"]:focus {
-    border-color: var(--color-primary-dark);
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
-    outline: none;
-}
-
-button {
+.download-button {
     display: block;
     background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary-light));
     color: white;
@@ -160,7 +104,7 @@ button {
     overflow: hidden;
 }
 
-button::before {
+.download-button::before {
     content: '';
     position: absolute;
     top: 0;
@@ -171,82 +115,16 @@ button::before {
     transition: all var(--transition-smooth);
 }
 
-button:hover::before {
+.download-button:hover::before {
     left: 100%;
 }
 
-button:hover {
+.download-button:hover {
     transform: translateY(-6px);
     box-shadow: var(--shadow-bold);
 }
 
-button:active {
+.download-button:active {
     transform: translateY(2px);
     box-shadow: var(--shadow-subtle);
-}
-
-.error-message {
-    color: var(--color-error);
-    margin-top: 15px;
-    font-weight: 700;
-    text-align: center;
-    transition: transform var(--transition-quick);
-}
-
-.loader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 25px auto;
-}
-
-.loader span {
-    width: 14px;
-    height: 14px;
-    margin: 0 8px;
-    background: var(--color-primary-dark);
-    border-radius: 50%;
-    animation: pulse 1.5s infinite ease-in-out;
-}
-
-.loader span:nth-child(2) { animation-delay: 0.3s; }
-.loader span:nth-child(3) { animation-delay: 0.6s; }
-
-@keyframes pulse {
-    0%, 100% { 
-        transform: scale(0.6); 
-        opacity: 0.5; 
-    }
-    50% { 
-        transform: scale(1); 
-        opacity: 1; 
-    }
-}
-
-@media (max-width: 768px) {
-    .container {
-        width: 96%;
-        margin: 3vh auto;
-        padding: 4vh 4vw;
-    }
-
-    h1 {
-        font-size: 2.5rem;
-    }
-
-    pre {
-        font-size: 0.85rem;
-        padding: 20px;
-    }
-
-    button {
-        font-size: 1.2rem;
-    }
-}
-
-@supports (backdrop-filter: blur(10px)) {
-    .container {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(15px);
-    }
 }
