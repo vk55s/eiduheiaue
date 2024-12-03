@@ -7,8 +7,10 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background: linear-gradient(135deg, #f2f3f5, #ffffff); /* 高级渐变背景 */
-    color: #1c1c1e; /* 深灰色，符合现代化风格 */
+    background: linear-gradient(135deg, rgba(242, 243, 245, 0.8), rgba(255, 255, 255, 0.8)),
+                url('your-image-url.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #1c1c1e;
     line-height: 1.6;
     min-height: 100vh;
     background-attachment: fixed;
@@ -17,12 +19,12 @@ body {
 
 a {
     text-decoration: none;
-    color: #007aff; /* Apple官网蓝色 */
+    color: #007aff;
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #0056b3; /* 悬停时的深蓝色 */
+    color: #0056b3;
 }
 
 ::-webkit-scrollbar {
@@ -30,7 +32,7 @@ a:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #c6c6c8; /* 柔和灰色滚动条 */
+    background: #c6c6c8;
     border-radius: 4px;
 }
 
@@ -41,29 +43,29 @@ a:hover {
 /* 页面容器样式 */
 .container {
     width: 90%;
-    max-width: 800px; /* 页面适配 */
+    max-width: 800px;
     margin: 60px auto;
     padding: 40px;
-    background: #ffffff; /* 高级白色背景 */
-    border-radius: 16px; /* 圆角更现代 */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); /* 柔和阴影 */
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .container:hover {
-    transform: translateY(-10px); /* 提升效果 */
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15); /* 悬停时阴影增强 */
+    transform: translateY(-10px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
 }
 
 /* 标题样式 */
 h1 {
     font-size: 2.5rem;
-    font-weight: 600; /* 半粗字体 */
-    color: #1c1c1e; /* 深灰色 */
+    font-weight: 600;
+    color: #1c1c1e;
     text-align: center;
     margin-bottom: 40px;
-    letter-spacing: 0.8px; /* 字间距优化 */
+    letter-spacing: 0.8px;
 }
 
 /* 分隔线 */
@@ -79,8 +81,8 @@ input[type="password"] {
     width: 100%;
     padding: 15px;
     margin: 15px 0;
-    border: 1px solid #d1d1d6; /* 柔和边框 */
-    border-radius: 8px; /* 圆角输入框 */
+    border: 1px solid #d1d1d6;
+    border-radius: 8px;
     font-size: 1rem;
     background: #f9f9f9;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -88,9 +90,10 @@ input[type="password"] {
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-    border-color: #007aff; /* 聚焦蓝色 */
-    box-shadow: 0 0 8px rgba(0, 122, 255, 0.2); /* 聚焦光效 */
+    border-color: #007aff;
+    box-shadow: 0 0 8px rgba(0, 122, 255, 0.2);
     outline: none;
+    transition: all 0.2s ease-in-out;
 }
 
 /* 按钮样式 */
@@ -99,7 +102,7 @@ button {
     width: 100%;
     padding: 15px;
     margin: 20px 0;
-    background: linear-gradient(90deg, #007aff, #0056b3); /* 按钮渐变 */
+    background: linear-gradient(90deg, #007aff, #0056b3);
     color: white;
     border: none;
     border-radius: 10px;
@@ -112,17 +115,17 @@ button {
 
 button:hover {
     background: linear-gradient(90deg, #0056b3, #003a75);
-    transform: translateY(-2px); /* 悬停上升 */
-    box-shadow: 0 8px 20px rgba(0, 90, 200, 0.2); /* 光影效果 */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 90, 200, 0.2);
 }
 
 button:active {
-    transform: translateY(1px); /* 点击下压效果 */
+    transform: translateY(1px);
 }
 
 /* 代码块样式 */
 pre {
-    background: #f4f4f5; /* 浅灰色背景 */
+    background: #f4f4f5;
     padding: 20px;
     border-radius: 12px;
     font-family: "Courier New", monospace;
@@ -182,5 +185,42 @@ pre:hover {
 
     button {
         font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 12px;
+    }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #333;
+        color: #f0f0f0;
+    }
+
+    .container {
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    button {
+        background: linear-gradient(90deg, #0056b3, #003a75);
+    }
+
+    pre {
+        background: #333;
+        color: #f0f0f0;
     }
 }
