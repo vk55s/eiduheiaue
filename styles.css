@@ -4,15 +4,14 @@
     --secondary-color: #00539F;
     --background-color-light: #F5F5F7;
     --text-color-light: #171717;
-    --text-color-dark: #FFFFFF;
-    --container-border-radius: 16px;
-    --button-border-radius: 12px;
-    --input-border-radius: 12px;
+    --container-border-radius: 12px;
+    --button-border-radius: 8px;
+    --input-border-radius: 8px;
     --transition-duration: 0.3s;
     --hover-color: #00A0FF;
     --background-gradient-opacity: 0.8;
-    --box-shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.2);
-    --box-shadow-active: 0 8px 16px rgba(0, 0, 0, 0.2);
+    --box-shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.05);
+    --box-shadow-active: 0 8px 16px rgba(0, 0, 0, 0.1);
     --input-focus-shadow: 0 0 8px rgba(0, 122, 255, 0.3);
     --dropdown-transition-duration: 0.2s;
     --tooltip-transition-duration: 0.2s;
@@ -21,8 +20,8 @@
     --loading-animation-duration: 1.5s;
     --loading-animation-delay-step: 0.3s;
     --ripple-color: rgba(255, 255, 255, 0.4);
-    --menu-item-height: 48px;
-    --menu-item-padding: 12px 20px;
+    --menu-item-height: 40px;
+    --menu-item-padding: 10px 15px;
     --menu-item-hover-bg-color: rgba(0, 0, 0, 0.05);
     --menu-item-active-bg-color: rgba(0, 0, 0, 0.1);
     --tooltip-arrow-size: 8px;
@@ -31,8 +30,25 @@
     --input-error-color: #FF5050;
     --input-error-border-color: #FF0000;
     --input-error-shadow-color: rgba(255, 0, 0, 0.2);
-    --button-hover-gradient-start: #6A8CFF;
-    --button-hover-gradient-end: #39B5E4;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --sidebar-width: 250px;
+    --card-border-radius: 16px;
+    --card-hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    --tooltip-arrow-color: rgba(0, 0, 0, 0.8);
+    --border-radius-lg: 16px;
+    --border-radius-sm: 6px;
+    --input-padding: 14px;
+    --input-error-border: 2px solid var(--input-error-border-color);
+    --header-height: 60px;
+    --footer-height: 50px;
+    --sidebar-bg-color: #1E1E1E;
+    --sidebar-text-color: #E0E0E0;
+    --primary-gradient: linear-gradient(90deg, #0070C9, #00539F);
+    --secondary-gradient: linear-gradient(90deg, #00539F, #003E6C);
+    --loading-spinner-color: #FF6A00;
+    --button-hover-bg-color: #00A0FF;
+    --button-active-bg-color: #0070C9;
+    --scrollbar-track-bg: rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -45,16 +61,12 @@ body {
     font-family: var(--font-family);
     line-height: 1.6;
     min-height: 100vh;
-    background-color: #FFFFFF;
-    color: var(--text-color-light);
     -webkit-font-smoothing: antialiased;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    padding: 20px;
+    color: var(--text-color-light);
+    background-color: var(--background-color-light);
 }
 
+/* Global Links */
 a {
     text-decoration: none;
     color: var(--primary-color);
@@ -65,11 +77,25 @@ a:hover {
     color: var(--hover-color);
 }
 
-/* 页面容器样式 */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #C6C6C8;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track-bg);
+}
+
+/* Container */
 .container {
-    width: 90%;
-    max-width: 700px;
-    padding: 40px;
+    width: 70%;
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 30px;
     background: #FFFFFF;
     border-radius: var(--container-border-radius);
     box-shadow: var(--box-shadow-hover);
@@ -82,198 +108,119 @@ a:hover {
     box-shadow: var(--box-shadow-active);
 }
 
-/* 标题样式 */
+/* Title */
 h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     font-weight: 600;
     color: var(--text-color-light);
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     letter-spacing: 0.8px;
 }
 
-/* 分隔线 */
+/* Divider */
 .divider {
     height: 1px;
     background: #E0E0E0;
-    margin: 30px 0;
+    margin: 50px 0;
 }
 
-/* 输入框样式 */
+/* Input Fields */
 input[type="text"],
 input[type="password"] {
     width: 100%;
-    padding: 18px;
-    margin: 15px 0;
+    padding: var(--input-padding);
+    margin: 18px 0;
     border: 1px solid #D1D1D6;
     border-radius: var(--input-border-radius);
     font-size: 1rem;
     background: #F9F9F9;
     transition: border-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
-
-    /* 输入框占位符样式 */
-    &::placeholder {
-        color: var(--input-placeholder-color);
-    }
-
-    /* 输入框错误提示样式 */
-    &.input-error {
-        border-color: var(--input-error-border-color);
-        box-shadow: 0 0 6px var(--input-error-shadow-color);
-        color: var(--input-error-color);
-    }
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 6px rgba(0, 122, 255, 0.2);
+    box-shadow: var(--input-focus-shadow);
     outline: none;
 }
 
-/* 按钮样式 */
+/* Button */
 button {
     display: block;
     width: 100%;
     padding: 18px;
     margin: 25px 0;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-gradient);
     color: white;
     border: none;
     border-radius: var(--button-border-radius);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
     cursor: pointer;
     position: relative;
     overflow: hidden;
     z-index: 1;
-
-    &:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background-color: var(--ripple-color);
-        transform: scale(0);
-        transition: all var(--transition-duration) ease-in-out;
-        z-index: -1;
-    }
-
-    &:active {
-        &:before {
-            width: 100%;
-            height: 100%;
-            transform: scale(1);
-        }
-    }
-
-    &:hover {
-        background: linear-gradient(90deg, var(--button-hover-gradient-start), var(--button-hover-gradient-end));
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0, 90, 200, 0.2);
-    }
-
-    &.copied {
-        background-color: #28A745!important;
-    }
 }
 
-/* 代码块样式 */
-pre {
-    background: #F4F4F5;
-    padding: 25px;
-    border-radius: var(--container-border-radius);
-    font-family: "Courier New", monospace;
-    font-size: 1rem;
-    overflow-x: auto;
-    border: 1px solid #E0E0E0;
-    transition: background-color var(--transition-duration) ease;
+button:active {
+    transform: translateY(2px);
 }
 
-pre:hover {
-    background: #EBEFF5;
+button:hover {
+    background: var(--button-hover-bg-color);
+    box-shadow: 0 6px 16px rgba(0, 90, 200, 0.2);
 }
 
-/* 加载动画 */
-.loader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
+/* Card Component */
+.card {
+    background: #FFF;
+    padding: 20px;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
+    transition: box-shadow var(--transition-duration) ease;
 }
 
-.loader span {
-    width: 12px;
-    height: 12px;
-    background: var(--primary-color);
-    border-radius: 50%;
-    animation: loader-animation 1.5s infinite ease-in-out;
+.card:hover {
+    box-shadow: var(--card-hover-shadow);
 }
 
-.loader span:nth-child(2) {
-    animation-delay: 0.3s;
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: var(--sidebar-bg-color);
+    padding: 20px;
+    color: var(--sidebar-text-color);
+    box-shadow: var(--box-shadow-hover);
+    z-index: 1000;
 }
 
-.loader span:nth-child(3) {
-    animation-delay: 0.6s;
+.sidebar ul {
+    list-style: none;
+    padding-left: 0;
 }
 
-@keyframes loader-animation {
-    0%, 80%, 100% {
-        transform: scale(0);
-    }
-    40% {
-        transform: scale(1);
-    }
-}
-
-/* 下拉菜单样式 */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-
-    transition: opacity var(--dropdown-transition-duration) ease, transform var(--dropdown-transition-duration) ease;
-    opacity: 0;
-    transform: translateY(-10px);
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.dropdown-content a {
-    display: block;
-    height: var(--menu-item-height);
+.sidebar ul li {
     padding: var(--menu-item-padding);
-    color: var(--text-color-light);
-    text-decoration: none;
-    transition: background-color var(--dropdown-transition-duration) ease;
+    font-size: 1.1rem;
+    color: var(--sidebar-text-color);
+    cursor: pointer;
 }
 
-.dropdown-content a:hover {
-    background-color: var(--menu-item-hover-bg-color);
+.sidebar ul li:hover {
+    background: var(--menu-item-hover-bg-color);
 }
 
-.dropdown-content a.active {
-    background-color: var(--menu-item-active-bg-color);
+.sidebar ul li.active {
+    background: var(--menu-item-active-bg-color);
 }
 
-/* 工具提示样式 */
+/* Tooltip */
 .tooltip {
     position: relative;
     display: inline-block;
@@ -281,20 +228,18 @@ pre:hover {
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 120px;
     background-color: var(--tooltip-bg-color);
     color: #fff;
     text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
+    border-radius: var(--tooltip-arrow-size);
+    padding: 5px 10px;
     position: absolute;
     z-index: 1;
-    bottom: 125%;
+    bottom: 125%; 
     left: 50%;
     margin-left: -60px;
     opacity: 0;
     transition: opacity var(--tooltip-transition-duration) ease-in-out;
-    pointer-events: none;
 }
 
 .tooltip:hover .tooltiptext {
@@ -302,8 +247,49 @@ pre:hover {
     opacity: 1;
 }
 
-/* 主页内容 */
-.main-content {
-    padding: 50px 20px;
-    text-align: center;
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--tooltip-bg-color) transparent transparent transparent;
+}
+
+/* Loading Animation */
+.loading-spinner {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 5px solid var(--loading-spinner-color);
+    border-top: 5px solid transparent;
+    animation: spin var(--loading-animation-duration) infinite linear;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Disabled Elements */
+button:disabled,
+input:disabled {
+    opacity: var(--disabled-opacity);
+    cursor: not-allowed;
+}
+
+/* Focus on Errors */
+input.error {
+    border-color: var(--input-error-border-color);
+    box-shadow: var(--input-error-shadow-color) 0 0 5px;
+}
+
+input.error:focus {
+    border-color: var(--input-error-border-color);
 }
