@@ -17,10 +17,12 @@ a {
     color: inherit;
 }
 
+/* 容器 */
 .container {
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
     max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 /* 错误提示 */
@@ -59,6 +61,7 @@ a {
     font-weight: bold;
     color: #333;
     margin-bottom: 40px;
+    text-align: center;
 }
 
 .subscription-block {
@@ -144,4 +147,28 @@ a {
 [data-aos="fade-up"].aos-animate {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .subscription-block {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .subscription-url {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 8px 16px;
+    }
+
+    .divider {
+        margin: 20px 0;
+    }
 }
