@@ -13,10 +13,12 @@
   --spacing-small: 8px;
   --spacing-medium: 16px;
   --spacing-large: 24px;
+  --spacing-xlarge: 32px;
 
   --font-size-large: 1.6rem;
   --font-size-medium: 1.4rem;
   --font-size-small: 1.2rem;
+  --font-size-xsmall: 1rem;
   --line-height: 1.5;
 
   --transition-duration: 0.3s;
@@ -90,8 +92,8 @@ input[type="password"] {
 }
 
 input:focus {
-  border-color: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-  box-shadow: 0 0 8px rgba(0, 122, 255, 0.2);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 6px rgba(0, 122, 255, 0.2);
   outline: none;
 }
 
@@ -107,18 +109,16 @@ button {
   font-size: var(--font-size-medium);
   font-weight: bold;
   cursor: pointer;
-  transition: transform var(--transition-duration), box-shadow var(--transition-duration), background var(--transition-duration), opacity 0.3s;
-  box-shadow: var(--shadow-global);
+  transition: transform var(--transition-duration), box-shadow var(--transition-duration), background var(--transition-duration);
 }
 
 button:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   box-shadow: var(--hover-shadow);
 }
 
 button:active {
   transform: translateY(0);
-  opacity: 0.9;
 }
 
 button.copied {
@@ -126,14 +126,13 @@ button.copied {
 }
 
 pre {
-  background: rgba(255, 255, 255, 0.3);
+  background: #F4F4F5;
   padding: var(--spacing-medium);
   border-radius: var(--border-radius-global);
   font-family: "Courier New", monospace;
   font-size: var(--font-size-small);
   overflow-x: auto;
   border: 1px solid #E0E0E0;
-  backdrop-filter: blur(10px);
 }
 
 .loader {
@@ -175,13 +174,12 @@ pre {
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.8);
+  background: #fff;
   border: 1px solid #E0E0E0;
   border-radius: var(--border-radius-global);
   box-shadow: var(--shadow-global);
   padding: var(--spacing-medium);
   transition: box-shadow var(--transition-duration);
-  backdrop-filter: blur(10px);
 }
 
 .card:hover {
@@ -265,4 +263,117 @@ pre {
   button {
     padding: var(--spacing-small);
   }
+}
+
+/* Modal style */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: var(--spacing-large);
+  border-radius: var(--border-radius-global);
+  box-shadow: var(--shadow-global);
+  width: 80%;
+  max-width: 400px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.modal.active {
+  display: block;
+  opacity: 1;
+}
+
+.modal-header {
+  font-size: var(--font-size-large);
+  margin-bottom: var(--spacing-medium);
+  font-weight: bold;
+}
+
+.modal-content {
+  font-size: var(--font-size-medium);
+  margin-bottom: var(--spacing-large);
+}
+
+.modal-footer {
+  text-align: right;
+}
+
+.modal-close {
+  background: var(--primary-color);
+  border: none;
+  color: #fff;
+  padding: var(--spacing-small) var(--spacing-medium);
+  border-radius: var(--border-radius-global);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-close:hover {
+  background-color: var(--secondary-color);
+}
+
+/* 3D按钮效果 */
+button {
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border: none;
+  color: white;
+  font-size: var(--font-size-medium);
+  font-weight: bold;
+  cursor: pointer;
+  padding: var(--spacing-medium);
+  border-radius: var(--border-radius-global);
+  box-shadow: var(--shadow-global);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: scale(1);
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 12px rgba(0, 122, 255, 0.6);
+}
+
+input {
+  font-family: var(--font-family);
+  padding: var(--spacing-small) var(--spacing-medium);
+  font-size: var(--font-size-medium);
+  border: 1px solid #D1D1D6;
+  border-radius: var(--border-radius-global);
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 8px rgba(0, 122, 255, 0.2);
+  outline: none;
+}
+
+textarea {
+  width: 100%;
+  padding: var(--spacing-medium);
+  font-size: var(--font-size-medium);
+  border: 1px solid #D1D1D6;
+  border-radius: var(--border-radius-global);
+  box-sizing: border-box;
+  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 8px rgba(0, 122, 255, 0.2);
+  outline: none;
 }
