@@ -45,7 +45,6 @@ body {
     box-shadow: var(--shadow-medium);
     position: relative;
     overflow: hidden;
-    transform-style: preserve-3d;
     transition: 
         transform var(--transition-smooth),
         box-shadow var(--transition-quick);
@@ -63,7 +62,7 @@ body {
 }
 
 .container:hover {
-    transform: translateY(-12px) rotate(0.5deg);
+    transform: translateY(-12px);
     box-shadow: var(--shadow-bold);
 }
 
@@ -108,7 +107,8 @@ pre {
     border-radius: var(--border-radius-medium);
     font-family: 'Fira Code', 'JetBrains Mono', monospace;
     font-size: 0.95rem;
-    white-space: nowrap;
+    white-space: pre-wrap;
+    word-wrap: break-word;
     overflow-x: auto;
     border: 2px solid var(--color-primary-dark);
     margin-bottom: 30px;
@@ -118,7 +118,7 @@ pre {
 }
 
 pre:hover {
-    transform: scale(1.03);
+    transform: scale(1.02);
     box-shadow: var(--shadow-subtle);
 }
 
@@ -136,6 +136,7 @@ input[type="password"] {
 input[type="password"]:focus {
     border-color: var(--color-primary-dark);
     box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+    outline: none;
 }
 
 button {
