@@ -1,16 +1,33 @@
+/* ============================= */
+/*           全局变量            */
+/* ============================= */
 :root {
-  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --primary-color: #0070C9;  
-  --secondary-color: #00539F;
-  --background-color: #FFFFFF;  
-  --text-color: #171717;  
-  --container-border-radius: 12px;  
-  --button-border-radius: 8px;  
-  --input-border-radius: 8px;  
-  --transition-duration: 0.3s;  
-  --hover-color: #00A0FF;  
+  /* 颜色变量 */
+  --color-primary: #0070C9;
+  --color-secondary: #00539F;
+  --color-background: #FFFFFF;
+  --color-text: #171717;
+  --color-border: #D1D1D6;
+  --color-hover: #00A0FF;
+  --color-success: #28A745;
+  --color-error: #FF4D4F;
+
+  /* 尺寸变量 */
+  --radius-container: 12px;
+  --radius-button: 8px;
+  --radius-input: 8px;
+  --spacing-large: 30px;
+  --spacing-medium: 20px;
+  --spacing-small: 10px;
+
+  /* 动画变量 */
+  --duration-transition: 0.3s;
+  --ease-animation: cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* ============================= */
+/*          通用样式             */
+/* ============================= */
 * {
   margin: 0;
   padding: 0;
@@ -18,26 +35,26 @@
 }
 
 body {
-  font-family: var(--font-family);
-  background: var(--background-color);
-  color: var(--text-color);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--color-background);
+  color: var(--color-text);
   line-height: 1.6;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: var(--spacing-medium);
+  min-height: 100vh;
 }
 
 a {
   text-decoration: none;
-  color: var(--primary-color);
-  transition: color var(--transition-duration) ease;
+  color: var(--color-primary);
+  transition: color var(--duration-transition) ease;
 }
 
 a:hover {
-  color: var(--hover-color);
+  color: var(--color-hover);
 }
 
 ::-webkit-scrollbar {
@@ -53,15 +70,18 @@ a:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
+/* ============================= */
+/*         核心组件样式          */
+/* ============================= */
 .container {
   width: 100%;
   max-width: 600px;
-  margin: 20px auto;
-  padding: 30px;
-  background: var(--background-color);
-  border-radius: var(--container-border-radius);
+  margin: var(--spacing-medium) auto;
+  padding: var(--spacing-large);
+  background: var(--color-background);
+  border-radius: var(--radius-container);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+  transition: transform var(--duration-transition) ease, box-shadow var(--duration-transition) ease;
 }
 
 .container:hover {
@@ -73,51 +93,60 @@ h1 {
   font-size: 2rem;
   font-weight: 600;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: var(--spacing-large);
 }
 
 .divider {
   height: 1px;
-  background: #E0E0E0;
-  margin: 30px 0;
+  background: var(--color-border);
+  margin: var(--spacing-large) 0;
 }
 
 input[type="text"],
 input[type="password"] {
   width: 100%;
-  padding: 14px;
-  margin: 15px 0;
-  border: 1px solid #D1D1D6;
-  border-radius: var(--input-border-radius);
+  padding: var(--spacing-medium);
+  margin: var(--spacing-medium) 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
   font-size: 1rem;
   background: #F9F9F9;
-  transition: border-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+  transition: border-color var(--duration-transition) ease, box-shadow var(--duration-transition) ease;
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-  border-color: var(--primary-color);
+  border-color: var(--color-primary);
   box-shadow: 0 0 6px rgba(0, 122, 255, 0.2);
   outline: none;
+}
+
+/* 验证状态 */
+input.valid {
+  border-color: var(--color-success);
+}
+
+input.invalid {
+  border-color: var(--color-error);
 }
 
 button {
   display: block;
   width: 100%;
-  padding: 14px;
-  margin: 20px 0;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  padding: var(--spacing-medium);
+  margin: var(--spacing-large) 0;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
   color: white;
   border: none;
-  border-radius: var(--button-border-radius);
+  border-radius: var(--radius-button);
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: background var(--transition-duration) ease, transform var(--transition-duration) ease;
+  transition: background var(--duration-transition) ease, transform var(--duration-transition) ease;
 }
 
 button:hover {
-  background: linear-gradient(90deg, var(--secondary-color), var(--hover-color));
+  background: linear-gradient(90deg, var(--color-secondary), var(--color-hover));
   transform: translateY(-1px);
   box-shadow: 0 6px 12px rgba(0, 90, 200, 0.2);
 }
@@ -126,34 +155,23 @@ button:active {
   transform: translateY(0);
 }
 
-pre {
-  background: #F4F4F5;
-  padding: 20px;
-  border-radius: var(--container-border-radius);
-  font-family: "Courier New", monospace;
-  font-size: 1rem;
-  overflow-x: auto;
-  border: 1px solid #E0E0E0;
-  transition: background-color var(--transition-duration) ease;
-}
-
-pre:hover {
-  background: #EBEFF5;
-}
-
+/* ============================= */
+/*         新增模块样式          */
+/* ============================= */
+/* 加载动画 */
 .loader {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: var(--spacing-small);
 }
 
 .loader span {
-  width: 10px;
-  height: 10px;
-  background: var(--primary-color);
+  width: 12px;
+  height: 12px;
+  background: var(--color-primary);
   border-radius: 50%;
-  animation: loader-animation 1.5s infinite ease-in-out;
+  animation: loader-animation 1.5s infinite var(--ease-animation);
 }
 
 .loader span:nth-child(2) {
@@ -173,44 +191,50 @@ pre:hover {
   }
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
+/* 进度条 */
+.progress-bar {
+  width: 100%;
+  background: #E0E0E0;
+  border-radius: var(--radius-container);
+  overflow: hidden;
+  height: 10px;
+  margin: var(--spacing-medium) 0;
 }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #fff;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown:hover .dropdown-content {
+.progress-bar span {
   display: block;
+  height: 100%;
+  background: var(--color-primary);
+  width: 0;
+  transition: width var(--duration-transition) ease;
 }
 
+.progress-bar span.completed {
+  width: 100%;
+}
+
+/* 工具提示 */
 .tooltip {
   position: relative;
   display: inline-block;
+  cursor: pointer;
 }
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
-  background-color: black;
+  width: 140px;
+  background-color: var(--color-primary);
   color: #fff;
   text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
+  border-radius: var(--radius-container);
+  padding: var(--spacing-small);
   position: absolute;
   z-index: 1;
   bottom: 125%;
   left: 50%;
-  margin-left: -60px;
+  transform: translateX(-50%);
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity var(--duration-transition) ease;
 }
 
 .tooltip:hover .tooltiptext {
@@ -218,9 +242,12 @@ pre:hover {
   opacity: 1;
 }
 
+/* ============================= */
+/*          响应式设计           */
+/* ============================= */
 @media (max-width: 768px) {
   .container {
-    padding: 20px;
+    padding: var(--spacing-medium);
   }
 
   button {
@@ -230,11 +257,15 @@ pre:hover {
 
 @media (max-width: 480px) {
   .container {
-    padding: 15px;
+    padding: var(--spacing-small);
+  }
+
+  h1 {
+    font-size: 1.5rem;
   }
 
   button {
     font-size: 0.9rem;
-    padding: 12px;
+    padding: var(--spacing-small);
   }
 }
