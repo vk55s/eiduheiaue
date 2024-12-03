@@ -138,9 +138,30 @@ button:active {
     margin-top: 10px;
 }
 
+/* 输入框样式 */
+.container input {
+    display: block;
+    width: 70%;
+    margin: 0 auto 20px;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: 'Arial, Helvetica, sans-serif';
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.container input:focus {
+    border-color: #007BFF;
+}
+
+.container input::placeholder {
+    color: #888;
+}
+
 /* 响应式布局 */
 @media (max-width: 768px) {
-.container {
+   .container {
         width: 95%;
         margin: 20px auto;
         padding: 20px;
