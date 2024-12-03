@@ -29,27 +29,14 @@
 
 body {
     font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background-color: black; /* 先设置黑色背景作为基础，用于星空背景效果 */
+    background: linear-gradient(135deg, var(--color-accent), #ffffff);
     color: var(--color-text-primary);
     line-height: 1.6;
     text-rendering: optimizeLegibility;
-    overflow-x: hidden;
-    animation: starrySky 20s infinite linear; /* 添加动画让背景持续变化，模拟星空闪烁背景 */
-}
-
-@keyframes starrySky {
-    0% {
-        background-image: radial-gradient(white 1px, transparent 0);
-        background-size: 100px 100px;
-    }
-    50% {
-        background-image: radial-gradient(white 2px, transparent 0);
-        background-size: 120px 120px;
-    }
-    100% {
-        background-image: radial-gradient(white 1px, transparent 0);
-        background-size: 100px 100px;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 让页面内容在垂直方向居中显示，优化整体布局 */
 }
 
 .container {
@@ -59,16 +46,15 @@ body {
     padding: 6vh 5vw;
     background: white;
     border-radius: var(--border-radius-large);
-    box-shadow: 
-        0 2px 5px rgba(0, 0, 0, 0.05),
-        0 4px 10px rgba(0, 0, 0, 0.1),
-        0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-medium);
     position: relative;
     overflow: hidden;
     transition: 
         transform var(--transition-smooth),
         box-shadow var(--transition-quick);
-    perspective: 1000px; /* 添加3D透视效果，用于卡片翻转 */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 让内部元素在水平方向居中对齐 */
 }
 
 .container::before {
@@ -83,32 +69,8 @@ body {
 }
 
 .container:hover {
-    transform: rotateY(180deg); /* 鼠标悬停时沿Y轴旋转180度实现翻转 */
+    transform: translateY(-12px);
     box-shadow: var(--shadow-bold);
-    transition: all var(--transition-smooth);
-}
-
-.container.front,
-.container.back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden; /* 隐藏背面元素，避免翻转时看到背面元素的“镜像”效果 */
-    transition: all var(--transition-smooth);
-}
-
-.container.front {
-    z-index: 2;
-}
-
-.container.back {
-    transform: rotateY(180deg); /* 初始让背面元素先翻转过去，处于不可见状态 */
-    background: var(--color-accent); /* 背面设置不同的背景色示例 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    color: var(--color-primary-dark);
 }
 
 h1 {
@@ -125,63 +87,28 @@ h1 {
     transition: all var(--transition-quick);
 }
 
-h1 span {
-    display: inline-block;
-    animation: floatWord 5s infinite ease-in-out; /* 每个字添加浮动动画 */
-}
-
-h1 span:nth-child(1) {
-    animation-delay: 0s;
-}
-
-h1 span:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-h1 span:nth-child(3) {
-    animation-delay: 0.4s;
-}
-/* 依次根据标题文字数量设置不同的延迟时间 */
-@keyframes floatWord {
-    0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-5px) rotate(3deg);
-    }
-}
-
 h1::after {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: -10px; /* 分割线距离标题的距离 */
     left: 50%;
     transform: translateX(-50%);
-    width: 0;
-    height: 2px;
+    width: 0; /* 初始宽度为0 */
+    height: 2px; /* 调整高度为较细的线条 */
     background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary-light));
-    border-radius: 1px;
-    animation: expand-line 0.6s ease-out forwards, underlineBlink 1.5s 0.6s ease-in-out;
+    border-radius: 1px; /* 圆角效果 */
+    animation: expand-line 0.6s ease-out forwards; /* 动画 */
 }
 
 @keyframes expand-line {
     0% {
-        width: 0;
+        width: 0; /* 初始时宽度为0 */
     }
     50% {
-        width: 60px;
+        width: 60px; /* 中间部分的宽度，视为初步展开 */
     }
     100% {
-        width: 120px;
-    }
-}
-
-@keyframes underlineBlink {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
+        width: 120px; /* 最终展开的宽度 */
     }
 }
 
@@ -201,14 +128,15 @@ pre {
     border-radius: var(--border-radius-medium);
     font-family: 'Fira Code', 'JetBrains Mono', monospace;
     font-size: 0.95rem;
-    white-space: nowrap;
+    white-space: nowrap; /* 强制不换行 */
     word-wrap: normal;
-    overflow-x: auto;
+    overflow-x: auto; /* 添加水平滚动条 */
     border: 2px solid var(--color-primary-dark);
     margin-bottom: 30px;
     transition: 
         transform var(--transition-quick),
         box-shadow var(--transition-quick);
+    width: 100%; /* 让代码块占满容器宽度，布局更规整 */
 }
 
 pre:hover {
@@ -262,16 +190,27 @@ button::before {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(-90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-    animation: buttonLongPressFlow 1s infinite linear;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all var(--transition-smooth);
 }
 
 button:hover::before {
     left: 100%;
-    animation: glowEffect 1s ease-in-out infinite alternate; /* 悬停时添加发光动画效果 */
 }
 
-@keyframes glowEffect {
+button:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-bold);
+    animation: glowButton 0.5s ease-in-out forwards; /* 悬停时添加发光动画效果 */
+}
+
+button:active {
+    transform: translateY(2px);
+    box-shadow: var(--shadow-subtle);
+    animation: none; /* 点击时移除发光动画，恢复默认状态 */
+}
+
+@keyframes glowButton {
     0% {
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
@@ -301,65 +240,30 @@ button:hover::before {
     margin: 0 8px;
     background: var(--color-primary-dark);
     border-radius: 50%;
-    position: relative;
-}
-
-.loader span:nth-child(1) {
-    animation-delay: 0s;
-    left: 0;
-    top: 0;
-    animation: pulse1 5s infinite ease-in-out;
+    animation: pulse 1.5s infinite ease-in-out;
 }
 
 .loader span:nth-child(2) {
-    animation-delay: 1s;
-    left: 10px;
-    top: -10px;
-    animation: pulse2 5s infinite ease-in-out;
+    animation-delay: 0.3s;
 }
 
 .loader span:nth-child(3) {
-    animation-delay: 2s;
-    left: -10px;
-    top: 10px;
-    animation: pulse3 5s infinite ease-in-out;
+    animation-delay: 0.6s;
 }
 
-@keyframes pulse1 {
-    0%, 100% {
-        transform: translateY(0) scale(0.6);
-        opacity: 0.5;
+@keyframes pulse {
+    0%, 100% { 
+        transform: scale(0.6); 
+        opacity: 0.5; 
     }
-    50% {
-        transform: translateY(-10px) scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes pulse2 {
-    0%, 100% {
-        transform: translateX(0) scale(0.6);
-        opacity: 0.5;
-    }
-    50% {
-        transform: translateX(10px) scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes pulse3 {
-    0%, 100% {
-        transform: translateY(0) scale(0.6);
-        opacity: 0.5;
-    }
-    50% {
-        transform: translateY(10px) scale(1);
-        opacity: 1;
+    50% { 
+        transform: scale(1); 
+        opacity: 1; 
     }
 }
 
 @media (max-width: 768px) {
-  .container {
+   .container {
         width: 96%;
         margin: 3vh auto;
         padding: 4vh 4vw;
@@ -379,59 +283,9 @@ button:hover::before {
     }
 }
 
-@media (min-width: 1920px) {
-  .container {
-        max-width: 1400px;
-        padding: 8vh 8vw;
-    }
-
-    h1 {
-        font-size: 4rem;
-    }
-
-  .code-header {
-        font-size: 1.8rem;
-    }
-
-    pre {
-        font-size: 1.2rem;
-        padding: 30px;
-    }
-
-    button {
-        font-size: 1.6rem;
-        padding: 22px;
-    }
-}
-
-@media (max-width: 480px) and (orientation: portrait) {
-  .container {
-        margin: 2vh auto;
-        padding: 3vh 3vw;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-  .code-header {
-        font-size: 1.2rem;
-    }
-
-    pre {
-        font-size: 0.8rem;
-        padding: 15px;
-    }
-
-    button {
-        font-size: 1.1rem;
-        padding: 15px;
-    }
-}
-
 @supports (backdrop-filter: blur(10px)) {
-  .container {
+   .container {
         background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(15px) contrast(1.2) hue-rotate(5deg);
+        backdrop-filter: blur(15px);
     }
 }
