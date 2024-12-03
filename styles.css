@@ -10,7 +10,7 @@
   --button-border-radius: 8px;  
   --input-border-radius: 8px;  
   --transition-duration: 0.3s;  
-  --hover-color: #00A0FF;  /* 新：添加悬停时的强调色 */
+  --hover-color: #00A0FF;  
 }
 
 * {
@@ -21,20 +21,22 @@
 
 body {
   font-family: var(--font-family);
-  background: 
+  background: var(--background-color);
+  background-image: 
     radial-gradient(circle at 50% 50%, transparent 20%, #f0f0f0 20%, #f0f0f0 80%, transparent 80%),
     linear-gradient(to bottom right, #ddd 0%, #ddd 50%, transparent 50%, transparent 100%);
   background-size: 50px 50px;
+  background-attachment: fixed;
   color: var(--text-color);
   line-height: 1.6;
   min-height: 100vh;
-  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    background: 
+    background: var(--dark-background-color);
+    background-image: 
       radial-gradient(circle at 50% 50%, transparent 20%, #222 20%, #222 80%, transparent 80%),
       linear-gradient(to bottom right, #333 0%, #333 50%, transparent 50%, transparent 100%);
     background-size: 50px 50px;
@@ -49,7 +51,7 @@ a {
 }
 
 a:hover {
-  color: var(--hover-color);  /* 使用新的悬停颜色 */
+  color: var(--hover-color);
 }
 
 ::-webkit-scrollbar {
@@ -65,7 +67,6 @@ a:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
-/* 页面容器样式 */
 .container {
   width: 70%;  
   max-width: 1000px;  
@@ -83,9 +84,8 @@ a:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15);
 }
 
-/* 标题样式 */
 h1 {
-  font-size: 2.8rem;  
+  font-size: clamp(1.8rem, 5vw, 2.8rem);  
   font-weight: 600;
   color: var(--text-color);
   text-align: center;
@@ -93,14 +93,12 @@ h1 {
   letter-spacing: 0.8px;  
 }
 
-/* 分隔线 */
 .divider {
   height: 1px;
   background: #E0E0E0;
   margin: 50px 0;  
 }
 
-/* 输入框样式 */
 input[type="text"],
 input[type="password"] {
   width: 100%;
@@ -120,7 +118,6 @@ input[type="password"]:focus {
   outline: none;
 }
 
-/* 按钮样式 */
 button {
   display: block;
   width: 100%;
@@ -134,11 +131,11 @@ button {
   font-weight: bold;
   text-align: center;
   cursor: pointer;
-  transition: all var(--transition-duration) ease-in-out;
+  transition: background var(--transition-duration) ease, transform var(--transition-duration) ease;
 }
 
 button:hover {
-  background: linear-gradient(90deg, var(--secondary-color), var(--hover-color));  /* 悬停时使用新颜色 */
+  background: linear-gradient(90deg, var(--secondary-color), var(--hover-color));  
   transform: translateY(-1px);  
   box-shadow: 0 6px 16px rgba(0, 90, 200, 0.2);
 }
@@ -151,7 +148,6 @@ button.copied {
   background-color: #28A745!important;
 }
 
-/* 代码块样式 */
 pre {
   background: #F4F4F5;
   padding: 25px;  
@@ -163,11 +159,18 @@ pre {
   transition: background-color var(--transition-duration) ease;
 }
 
+@media (prefers-color-scheme: dark) {
+  pre {
+    background: #2E2E2E;
+    color: #E0E0E0;
+    border-color: #444;
+  }
+}
+
 pre:hover {
   background: #EBEFF5;
 }
 
-/* 加载动画 */
 .loader {
   display: flex;
   justify-content: center;
@@ -200,39 +203,6 @@ pre:hover {
   }
 }
 
-/* 响应式布局 */
-@media (max-width: 768px) {
-.container {
-    width: 85%;
-    padding: 25px;  
-  }
-
-  h1 {
-    font-size: 2.2rem;
-  }
-
-  button {
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 480px) {
-.container {
-    width: 90%;
-    padding: 20px;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  button {
-    font-size: 1rem;
-    padding: 12px;  
-  }
-}
-
-/* 新：添加下拉菜单样式 */
 .dropdown {
   position: relative;
   display: inline-block;
@@ -247,17 +217,16 @@ pre:hover {
   z-index: 1;
 }
 
-.dropdown:hover.dropdown-content {
+.dropdown:hover .dropdown-content {
   display: block;
 }
 
-/* 新：添加工具提示样式 */
 .tooltip {
   position: relative;
   display: inline-block;
 }
 
-.tooltip.tooltiptext {
+.tooltip .tooltiptext {
   visibility: hidden;
   width: 120px;
   background-color: black;
@@ -274,7 +243,30 @@ pre:hover {
   transition: opacity 0.3s;
 }
 
-.tooltip:hover.tooltiptext {
+.tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 85%;
+    padding: 25px;  
+  }
+
+  button {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 12px;  
+  }
 }
