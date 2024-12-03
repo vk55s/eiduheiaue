@@ -29,7 +29,7 @@
 
 body {
     font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: linear-gradient(135deg, #f4f4f4, #e8e8e8);
+    background: linear-gradient(135deg, var(--color-accent), #ffffff);
     color: var(--color-text-primary);
     line-height: 1.6;
     text-rendering: optimizeLegibility;
@@ -40,18 +40,29 @@ body {
     max-width: 950px;
     margin: 5vh auto;
     padding: 6vh 5vw;
-    background: rgba(255, 255, 255, 0.85);
+    background: white;
     border-radius: var(--border-radius-large);
     box-shadow: var(--shadow-medium);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(15px);
-    overflow: hidden;
     position: relative;
-    transition: transform var(--transition-smooth), box-shadow var(--transition-quick);
+    overflow: hidden;
+    transition: 
+        transform var(--transition-smooth),
+        box-shadow var(--transition-quick);
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary-light));
+    z-index: 10;
 }
 
 .container:hover {
-    transform: translateY(-8px);
+    transform: translateY(-12px);
     box-shadow: var(--shadow-bold);
 }
 
@@ -66,32 +77,74 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     position: relative;
+    transition: all var(--transition-quick);
 }
 
 h1::after {
     content: '';
     position: absolute;
-    bottom: -12px;
+    bottom: -10px; /* 分割线距离标题的距离 */
     left: 50%;
     transform: translateX(-50%);
-    width: 120px;
-    height: 3px;
+    width: 0; /* 初始宽度为0 */
+    height: 2px; /* 调整高度为较细的线条 */
     background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary-light));
-    border-radius: 3px;
+    border-radius: 1px; /* 圆角效果 */
+    animation: expand-line 0.6s ease-out forwards; /* 动画 */
+}
+
+@keyframes expand-line {
+    0% {
+        width: 0; /* 初始时宽度为0 */
+    }
+    50% {
+        width: 60px; /* 中间部分的宽度，视为初步展开 */
+    }
+    100% {
+        width: 120px; /* 最终展开的宽度 */
+    }
+}
+
+.code-header {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--color-primary-dark);
+    margin-bottom: 20px;
+    padding-left: 15px;
+    border-left: 5px solid var(--color-primary-dark);
+    transition: all var(--transition-quick);
+}
+
+pre {
+    background: var(--color-accent);
+    padding: 25px;
+    border-radius: var(--border-radius-medium);
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    white-space: nowrap; /* 强制不换行 */
+    word-wrap: normal;
+    overflow-x: auto; /* 添加水平滚动条 */
+    border: 2px solid var(--color-primary-dark);
+    margin-bottom: 30px;
+    transition: 
+        transform var(--transition-quick),
+        box-shadow var(--transition-quick);
+}
+
+pre:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-subtle);
 }
 
 input[type="password"] {
     width: 100%;
-    padding: 16px 2rem;
+    padding: 16px;
     margin: 20px 0;
     border: 2px solid var(--color-text-secondary);
     border-radius: var(--border-radius-small);
     font-size: 1.1rem;
     transition: all var(--transition-quick);
-    background: rgba(255, 255, 255, 0.8);
-    background-image: url('icon-lock.svg'); /* 假设存在图标路径 */
-    background-repeat: no-repeat;
-    background-position: 10px center;
+    background-color: transparent;
 }
 
 input[type="password"]:focus {
@@ -102,7 +155,7 @@ input[type="password"]:focus {
 
 button {
     display: block;
-    background: linear-gradient(90deg, #000000, #333333);
+    background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary-light));
     color: white;
     padding: 18px;
     border-radius: 60px;
@@ -113,10 +166,12 @@ button {
     text-align: center;
     width: 100%;
     margin-bottom: 25px;
+    transition: 
+        transform var(--transition-quick),
+        box-shadow var(--transition-quick);
+    box-shadow: var(--shadow-medium);
     position: relative;
     overflow: hidden;
-    transition: transform var(--transition-quick), box-shadow var(--transition-quick);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
 button::before {
@@ -126,7 +181,7 @@ button::before {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
     transition: all var(--transition-smooth);
 }
 
@@ -136,12 +191,12 @@ button:hover::before {
 
 button:hover {
     transform: translateY(-6px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-bold);
 }
 
 button:active {
     transform: translateY(2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-subtle);
 }
 
 .error-message {
@@ -193,7 +248,19 @@ button:active {
         font-size: 2.5rem;
     }
 
+    pre {
+        font-size: 0.85rem;
+        padding: 20px;
+    }
+
     button {
         font-size: 1.2rem;
+    }
+}
+
+@supports (backdrop-filter: blur(10px)) {
+    .container {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(15px);
     }
 }
