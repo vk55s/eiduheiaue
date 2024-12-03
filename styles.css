@@ -1,193 +1,124 @@
-/* --------------------
-   全局变量定义
--------------------- */
+/* 全局变量 */
 :root {
-  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --primary-color: #4A90E2; /* 主色调 - 蓝色 */
-  --secondary-color: #345BEB; /* 辅助色调 - 深蓝色 */
-  --background-color: #F8FAFC; /* 页面背景色 */
-  --text-color: #333333; /* 默认文字颜色 */
-  --error-color: #FF6B6B; /* 错误提示颜色 */
-  --success-color: #28C76F; /* 成功提示颜色 */
-  --warning-color: #FFA800; /* 警告提示颜色 */
-  --accent-color: #FF9F43; /* 突出显示的强调色 */
-
-  --border-radius-global: 16px; /* 全局圆角大小 */
-  --shadow-global: 0 4px 12px rgba(0, 0, 0, 0.1); /* 全局阴影 */
-  --hover-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* 鼠标悬停时的阴影 */
-
-  --spacing-small: 8px;
-  --spacing-medium: 16px;
-  --spacing-large: 24px;
-  --spacing-xlarge: 32px;
-
-  --font-size-large: 1.8rem;
-  --font-size-medium: 1.4rem;
-  --font-size-small: 1.2rem;
-  --line-height: 1.6;
-
-  --transition-duration: 0.3s; /* 动画过渡时间 */
+    --font-family: 'Poppins', sans-serif;
+    --primary-color: #4A90E2;
+    --secondary-color: #50E3C2;
+    --background-color: #F5F7FA;
+    --text-color: #333333;
+    --error-color: #FF6B6B;
+    --border-radius: 10px;
+    --spacing: 16px;
+    --transition: 0.3s ease;
 }
 
-/* --------------------
-   全局样式重置
--------------------- */
+/* 全局样式 */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: var(--font-family);
-  background-color: var(--background-color);
-  color: var(--text-color);
-  line-height: var(--line-height);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--spacing);
 }
 
-/* --------------------
-   容器样式
--------------------- */
-.container {
-  max-width: 960px;
-  width: 90%;
-  margin: var(--spacing-large) auto;
-  padding: var(--spacing-large);
-  background: #fff;
-  border-radius: var(--border-radius-global);
-  box-shadow: var(--shadow-global);
-  transition: transform var(--transition-duration), box-shadow var(--transition-duration);
-
-  /* 增强外观 */
-  border: 2px solid #E0E0E0;
+/* 通用元素样式 */
+h1, h2, h3, h4, h5, h6 {
+    margin: var(--spacing) 0;
+    font-weight: 600;
+    color: var(--primary-color);
 }
 
-.container:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--hover-shadow);
-}
-
-/* --------------------
-   标题样式
--------------------- */
-h1 {
-  font-size: var(--font-size-large);
-  font-weight: bold;
-  text-align: center;
-  color: var(--primary-color);
-  margin-bottom: var(--spacing-large);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-/* --------------------
-   输入框样式
--------------------- */
-input[type="text"],
-input[type="password"] {
-  width: 100%;
-  padding: var(--spacing-medium);
-  margin: var(--spacing-medium) 0;
-  border: 1px solid #D1D1D6;
-  border-radius: var(--border-radius-global);
-  font-size: var(--font-size-medium);
-  background: #fff;
-  transition: border-color var(--transition-duration), box-shadow var(--transition-duration);
-}
-
-input:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 6px rgba(0, 122, 255, 0.2);
-  outline: none;
-}
-
-/* --------------------
-   按钮样式
--------------------- */
-button {
-  display: block;
-  width: 100%;
-  padding: var(--spacing-medium);
-  margin: var(--spacing-medium) 0;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-  color: white;
-  border: none;
-  border-radius: var(--border-radius-global);
-  font-size: var(--font-size-medium);
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform var(--transition-duration), box-shadow var(--transition-duration);
-
-  /* 添加现代化3D效果 */
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-button:hover {
-  transform: scale(1.02);
-  box-shadow: var(--hover-shadow);
-}
-
-button:active {
-  transform: scale(1);
-}
-
-/* --------------------
-   模态框样式
--------------------- */
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  color: var(--text-color);
-  padding: var(--spacing-large);
-  border-radius: var(--border-radius-global);
-  box-shadow: var(--shadow-global);
-  width: 80%;
-  max-width: 400px;
-  display: none;
-  opacity: 0;
-  transition: opacity var(--transition-duration), transform var(--transition-duration);
-}
-
-.modal.active {
-  display: block;
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.modal-close {
-  background: var(--error-color);
-  border: none;
-  color: white;
-  padding: var(--spacing-small) var(--spacing-medium);
-  border-radius: var(--border-radius-global);
-  cursor: pointer;
-  transition: background var(--transition-duration);
-}
-
-.modal-close:hover {
-  background-color: #E53935;
-}
-
-/* --------------------
-   响应式设计
--------------------- */
-@media (max-width: 768px) {
-  .container {
-    padding: var(--spacing-medium);
-  }
-
-  h1 {
-    font-size: var(--font-size-medium);
-  }
-
-  button {
+p {
+    margin: var(--spacing) 0;
+    color: var(--text-color);
     font-size: 1rem;
-  }
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+/* 按钮样式 */
+.btn {
+    display: inline-block;
+    padding: var(--spacing);
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--primary-color);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    transition: background var(--transition);
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* 容器样式 */
+.container {
+    background: #fff;
+    padding: calc(var(--spacing) * 2);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* 分隔线 */
+.divider {
+    margin: var(--spacing) auto;
+    width: 80%;
+    border: 0.5px solid #ddd;
+}
+
+/* 错误提示 */
+.error-title {
+    color: var(--error-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.return-link {
+    color: var(--primary-color);
+    text-decoration: underline;
+    transition: color var(--transition);
+}
+
+.return-link:hover {
+    color: var(--secondary-color);
+}
+
+/* 响应式样式 */
+@media (max-width: 768px) {
+    body {
+        padding: calc(var(--spacing) / 2);
+    }
+
+    .container {
+        padding: var(--spacing);
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
 }
