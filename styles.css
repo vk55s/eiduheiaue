@@ -1,4 +1,3 @@
-参考我的css做出最顶尖顶级的ui
 /* 通用样式 */
 * {
     margin: 0;
@@ -7,10 +6,10 @@
 }
 
 body {
-    font-family: 'Arial, Helvetica, sans-serif';
-    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif; /* 更改字体为更简洁通用的Arial */
+    background: linear-gradient(135deg, #EAEFF6, #FFFFFF); /* 调整背景渐变，更具层次感 */
     color: #333;
-    line-height: 1.6;
+    line-height: 1.8; /* 增大行高，让文字排版更舒朗 */
     margin: 0;
     padding: 0;
 }
@@ -18,141 +17,203 @@ body {
 /* 容器 */
 .container {
     width: 90%;
-    max-width: 800px;
-    margin: 60px auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    overflow: hidden;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 1200px; /* 适当增大最大宽度，更适合活动页面展示内容 */
+    margin: 80px auto; /* 增加上下边距，使页面更居中协调 */
+    padding: 40px;
+    background-color: #FFFFFF;
+    border-radius: 20px; /* 增大圆角半径，更显现代感 */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* 增强阴影效果，更立体 */
+    overflow: hidden; /* 防止内容溢出 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 添加过渡效果 */
+    text-align: center; /* 居中对齐内容 */
 }
 
+/* 当表单被聚焦时，容器添加一个浮动效果 */
 .container:focus-within {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    transform: translateY(-15px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
 }
 
 /* 标题样式 */
 h1 {
-    font-size: 3rem;
+    font-size: 3.5rem; /* 增大标题字体大小 */
     text-align: center;
-    margin-bottom: 50px;
-    color: #000000;
+    margin-bottom: 60px; /* 增大标题间距 */
+    color: #0052A5; /* 采用类似Nike的经典蓝色作为主色调 */
     font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase; /* 全大写 */
+    letter-spacing: 1.5px; /* 增加字母间距 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 添加文字阴影，增强立体感 */
+    -webkit-text-stroke: 1px #FFFFFF; /* 添加白色描边效果，更醒目 */
 }
 
-/* 宣传语样式 */
-.slogan {
-    font-size: 1.2rem;
-    color: #555555;
-    margin-bottom: 20px;
+/* 分隔线 */
+.divider {
+    height: 2px; /* 增加分隔线高度 */
+    background-color: #D3D3D3; /* 调整分隔线颜色，更协调 */
+    margin: 50px 0;
 }
 
-/* 订阅块样式 */
-.subscription-block {
-    margin-bottom: 30px;
+/* 模块标题（备注文字） */
+.code-header {
+    font-size: 1.5rem; /* 增大模块标题字体大小 */
+    font-weight: bold;
+    color: #555; /* 稍暗的灰色，突出主次 */
+    margin-bottom: 15px; /* 增加标题与内容的间距 */
+    text-align: left;
+    word-wrap: break-word; /* 自动换行 */
 }
 
-/* 代码块样式 */
+/* 密钥内容（代码块样式） */
 pre {
-    background: #f5f5f5;
+    background: #F2F5FA; /* 调整代码块背景色，更柔和 */
     padding: 20px;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    font-family: 'Courier New', Courier, monospace;
-    white-space: nowrap;
-    overflow-x: auto;
-    border: 1px solid #e5e5e5;
-    margin-bottom: 40px;
-    word-wrap: normal;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.05);
+    border-radius: 10px; /* 增大代码块圆角半径 */
+    font-size: 1.1rem; /* 增大代码块字体大小 */
+    font-family: 'Source Code Pro', monospace; /* 更换为更具科技感的等宽字体 */
+    white-space: nowrap; /* 单行显示 */
+    overflow-x: auto; /* 水平滚动 */
+    border: 1px solid #E0E0E0;
+    margin-bottom: 40px; /* 增加模块间距 */
+    word-wrap: normal; /* 禁止文字换行 */
+    transition: background-color 0.3s ease;
 }
 
 pre:hover {
-    background-color: #ededed;
-    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
+    background-color: #E9F1FF; /* 鼠标悬停时背景变浅 */
+    box-shadow: inset 0 0 8px rgba(0, 82, 165, 0.2); /* 增强悬停效果阴影 */
 }
 
 /* 滚动条样式 */
 pre::-webkit-scrollbar {
     height: 8px;
 }
-
 pre::-webkit-scrollbar-thumb {
-    background: #000000;
+    background: #0052A5;
     border-radius: 4px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+pre::-webkit-scrollbar-track {
+    background: #E0E0E0;
 }
 
-pre::-webkit-scrollbar-track {
-    background: #e0e0e0;
-    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
+/* 输入框样式 */
+input[type="password"] {
+    width: 100%;
+    padding: 20px; /* 增大内边距 */
+    margin: 20px 0; /* 输入框与其他元素的间距 */
+    border: 1px solid #CCC;
+    border-radius: 8px; /* 增大输入框圆角半径 */
+    font-size: 1.1rem; /* 增大字体大小 */
+    box-sizing: border-box;
+    transition: border-color 0.3s ease; /* 添加过渡效果 */
+}
+
+input[type="password"]:focus {
+    border-color: #0052A5; /* 聚焦时的边框颜色 */
+    outline: none; /* 移除默认的聚焦边框 */
 }
 
 /* 按钮样式 */
 button {
     display: block;
-    background: linear-gradient(90deg, #000000, #333333);
+    background: linear-gradient(90deg, #0052A5, #0066CC); /* 调整按钮渐变颜色，更具活力 */
     color: white;
-    padding: 15px;
-    border-radius: 10px;
+    padding: 20px; /* 增大按钮内边距 */
+    border-radius: 12px; /* 增大按钮圆角半径 */
     border: none;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.4rem; /* 增大字体大小 */
     font-weight: bold;
     text-align: center;
-    width: 100%;
-    margin-bottom: 20px;
+    width: 100%; /* 占满模块宽度 */
+    margin-bottom: 30px; /* 增加块与按钮之间的间距 */
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* 增强按钮阴影效果 */
 }
 
+button[type="submit"]:hover,
 button:hover {
-    background: linear-gradient(90deg, #333333, #666666);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(90deg, #0066CC, #0077DD);
+    transform: translateY(-3px); /* 鼠标悬停微微上升 */
+    box-shadow: 0 10px 30px rgba(0, 82, 165, 0.3);
 }
 
+button[type="submit"]:active,
 button:active {
-    transform: translateY(1px);
+    transform: translateY(2px); /* 点击时压下效果 */
 }
 
 /* 错误消息样式 */
 .error-message {
     color: red;
-    margin-top: 10px;
+    margin-top: 15px;
+}
+
+.shake {
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    50% { transform: translateX(8px); }
+    75% { transform: translateX(-8px); }
+    100% { transform: translateX(0); }
 }
 
 /* 响应式布局 */
 @media (max-width: 768px) {
-  .container {
+   .container {
         width: 95%;
-        margin: 20px auto;
-        padding: 20px;
+        margin: 30px auto;
+        padding: 30px;
     }
 
     h1 {
-        font-size: 2.4rem;
+        font-size: 2.8rem; /* 小屏适配标题 */
+        -webkit-text-stroke: none; /* 小屏去除描边效果 */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* 减弱阴影效果 */
     }
 
     pre {
-        font-size: 0.9rem;
+        font-size: 1rem; /* 缩小字体防止溢出 */
     }
 
     button {
-        font-size: 1rem;
+        font-size: 1.2rem; /* 按钮文字适配小屏 */
     }
 }
 
-footer {
-    margin-top: 30px;
-    text-align: center;
-    color: #888888;
-    font-size: 0.9rem;
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto;
+}
+
+.loader span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    background: #0052A5;
+    border-radius: 50%;
+    animation: loader-animation 1.5s infinite ease-in-out;
+}
+
+.loader span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.loader span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes loader-animation {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
 }
