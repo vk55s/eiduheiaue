@@ -11,8 +11,27 @@
     --input-border-radius: 8px;
     --transition-duration: 0.3s;
     --hover-color: #00A0FF;
-    /* 新增：用于调整背景渐变的透明度，可根据需要微调 */
     --background-gradient-opacity: 0.8;
+    --box-shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.2);
+    --box-shadow-active: 0 8px 16px rgba(0, 0, 0, 0.2);
+    --input-focus-shadow: 0 0 8px rgba(0, 122, 255, 0.3);
+    --dropdown-transition-duration: 0.2s;
+    --tooltip-transition-duration: 0.2s;
+    --disabled-opacity: 0.6;
+    --active-opacity: 0.8;
+    --loading-animation-duration: 1.5s;
+    --loading-animation-delay-step: 0.3s;
+    --ripple-color: rgba(255, 255, 255, 0.4); /* 新增：点击按钮时的水波纹颜色 */
+    --menu-item-height: 40px; /* 新增：下拉菜单菜单项高度 */
+    --menu-item-padding: 10px 15px; /* 新增：下拉菜单菜单项内边距 */
+    --menu-item-hover-bg-color: rgba(0, 0, 0, 0.05); /* 新增：下拉菜单菜单项悬停背景色 */
+    --menu-item-active-bg-color: rgba(0, 0, 0, 0.1); /* 新增：下拉菜单菜单项点击时背景色 */
+    --tooltip-arrow-size: 8px; /* 新增：工具提示箭头大小 */
+    --tooltip-bg-color: rgba(0, 0, 0, 0.8); /* 新增：工具提示背景色，加深以提高对比度 */
+    --input-placeholder-color: #A0A0A0; /* 新增：输入框占位符颜色 */
+    --input-error-color: #FF5050; /* 新增：输入框错误提示颜色 */
+    --input-error-border-color: #FF0000; /* 新增：输入框错误时边框颜色 */
+    --input-error-shadow-color: rgba(255, 0, 0, 0.2); /* 新增：输入框错误时阴影颜色 */
 }
 
 * {
@@ -28,7 +47,6 @@ body {
     background-attachment: fixed;
     -webkit-font-smoothing: antialiased;
 
-    /* 优化背景样式及性能 */
     background: 
         radial-gradient(circle at 50% 50%, rgba(240, 240, 240, var(--background-gradient-opacity)) 20%, rgba(240, 240, 240, var(--background-gradient-opacity)) 80%, transparent 80%),
         linear-gradient(to bottom right, rgba(221, 221, 221, var(--background-gradient-opacity)) 0%, rgba(221, 221, 221, var(--background-gradient-opacity)) 50%, transparent 50%, transparent 100%);
@@ -115,6 +133,18 @@ input[type="password"] {
     font-size: 1rem;
     background: #F9F9F9;
     transition: border-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+
+    /* 新增：输入框占位符样式 */
+    &::placeholder {
+        color: var(--input-placeholder-color);
+    }
+
+    /* 新增：输入框错误提示样式 */
+    &.input-error {
+        border-color: var(--input-error-border-color);
+        box-shadow: 0 0 6px var(--input-error-shadow-color);
+        color: var(--input-error-color);
+    }
 }
 
 input[type="text"]:focus,
@@ -138,21 +168,43 @@ button {
     font-weight: bold;
     text-align: center;
     cursor: pointer;
-    transition: all var(--transition-duration) ease-in-out;
-}
 
-button:hover {
-    background: linear-gradient(90deg, var(--secondary-color), var(--hover-color));
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(0, 90, 200, 0.2);
-}
+    /* 新增：按钮点击水波纹效果 */
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 
-button:active {
-    transform: translateY(0);
-}
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background-color: var(--ripple-color);
+        transform: scale(0);
+        transition: all var(--transition-duration) ease-in-out;
+        z-index: -1;
+    }
 
-button.copied {
-    background-color: #28A745!important;
+    &:active {
+        &:before {
+            width: 100%;
+            height: 100%;
+            transform: scale(1);
+        }
+    }
+
+    &:hover {
+        background: linear-gradient(90deg, var(--secondary-color), var(--hover-color));
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(0, 90, 200, 0.2);
+    }
+
+    &.copied {
+        background-color: #28A745!important;
+    }
 }
 
 /* 代码块样式 */
@@ -206,7 +258,7 @@ loader span:nth-child(3) {
 
 /* 响应式布局 */
 @media (max-width: 768px) {
-   .container {
+  .container {
         width: 85%;
         padding: 25px;
     }
@@ -221,7 +273,7 @@ loader span:nth-child(3) {
 }
 
 @media (max-width: 480px) {
-   .container {
+  .container {
         width: 90%;
         padding: 20px;
     }
@@ -236,7 +288,7 @@ loader span:nth-child(3) {
     }
 }
 
-/* 新增：下拉菜单样式优化 */
+/* 下拉菜单样式优化 */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -250,8 +302,7 @@ loader span:nth-child(3) {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 
-    /* 新增：过渡动画 */
-    transition: opacity var(--transition-duration) ease, transform var(--transition-duration) ease;
+    transition: opacity var(--dropdown-transition-duration) ease, transform var(--dropdown-transition-duration) ease;
     opacity: 0;
     transform: translateY(-10px);
 }
@@ -264,17 +315,22 @@ loader span:nth-child(3) {
 
 .dropdown-content a {
     display: block;
-    padding: 10px 15px;
+    height: var(--menu-item-height);
+    padding: var(--menu-item-padding);
     color: var(--text-color-light);
     text-decoration: none;
-    transition: background-color var(--transition-duration) ease;
+    transition: background-color var(--dropdown-transition-duration) ease;
+
+    &:hover {
+        background-color: var(--menu-item-hover-bg-color);
+    }
+
+    &.active {
+        background-color: var(--menu-item-active-bg-color);
+    }
 }
 
-.dropdown-content a:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-}
-
-/* 新增：工具提示样式优化 */
+/* 工具提示样式优化 */
 .tooltip {
     position: relative;
     display: inline-block;
@@ -283,7 +339,7 @@ loader span:nth-child(3) {
 .tooltip.tooltiptext {
     visibility: hidden;
     width: 120px;
-    background-color: black;
+    background-color: var(--tooltip-bg-color);
     color: #fff;
     text-align: center;
     border-radius: 6px;
@@ -294,20 +350,20 @@ loader span:nth-child(3) {
     left: 50%;
     margin-left: -60px;
 
-    /* 新增：箭头样式 */
+    /* 新增：箭头样式优化 */
     &::after {
         content: "";
         position: absolute;
         top: 100%;
         left: 50%;
-        margin-left: -5px;
-        border-width: 5px;
+        margin-left: -var(--tooltip-arrow-size) / 2;
+        border-width: var(--tooltip-arrow-size);
         border-style: solid;
-        border-color: black transparent transparent transparent;
+        border-color: var(--tooltip-bg-color) transparent transparent transparent;
     }
 
     opacity: 0;
-    transition: opacity var(--transition-duration) ease;
+    transition: opacity var(--tooltip-transition-duration) ease;
 }
 
 .tooltip:hover.tooltiptext {
