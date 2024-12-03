@@ -1,4 +1,4 @@
-/* 通用样式 */
+/* Reset.css - 重置基础样式 */
 * {
     margin: 0;
     padding: 0;
@@ -6,193 +6,148 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f4f7fd, #ffffff); /* 柔和渐变背景 */
-    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(135deg, #f2f3f5, #ffffff); /* 高级渐变背景 */
+    color: #1c1c1e; /* 深灰色，符合现代化风格 */
     line-height: 1.6;
-    margin: 0;
-    padding: 0;
+    min-height: 100vh;
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* 容器 */
+a {
+    text-decoration: none;
+    color: #007aff; /* Apple官网蓝色 */
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3; /* 悬停时的深蓝色 */
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c6c6c8; /* 柔和灰色滚动条 */
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* 页面容器样式 */
 .container {
     width: 90%;
-    max-width: 800px; /* 统一最大宽度 */
-    margin: 60px auto; /* 页面居中 */
-    padding: 30px;
-    background-color: #ffffff;
+    max-width: 800px; /* 页面适配 */
+    margin: 60px auto;
+    padding: 40px;
+    background: #ffffff; /* 高级白色背景 */
     border-radius: 16px; /* 圆角更现代 */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* 柔和的阴影 */
-    overflow: hidden; /* 防止内容溢出 */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 添加过渡效果 */
-    text-align: center; /* 居中对齐内容 */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); /* 柔和阴影 */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 当表单被聚焦时，容器添加一个浮动效果 */
-.container:focus-within {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+.container:hover {
+    transform: translateY(-10px); /* 提升效果 */
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15); /* 悬停时阴影增强 */
 }
 
 /* 标题样式 */
 h1 {
-    font-size: 2.8rem; /* 适中字体大小 */
+    font-size: 2.5rem;
+    font-weight: 600; /* 半粗字体 */
+    color: #1c1c1e; /* 深灰色 */
     text-align: center;
-    margin-bottom: 50px; /* 增大标题间距 */
-    color: #3a66db; /* 蓝色强调 */
-    font-weight: bold;
-    text-transform: uppercase; /* 全大写 */
-    letter-spacing: 1.2px; /* 增加字母间距 */
+    margin-bottom: 40px;
+    letter-spacing: 0.8px; /* 字间距优化 */
 }
 
 /* 分隔线 */
 .divider {
     height: 1px;
-    background-color: #e9ecef;
+    background: #e0e0e0;
     margin: 40px 0;
 }
 
-/* 模块标题（备注文字） */
-.code-header {
-    font-size: 1.3rem; /* 略大字体 */
-    font-weight: bold;
-    color: #4a4a4a;
-    margin-bottom: 10px; /* 标题与内容的间距 */
-    text-align: left;
-    word-wrap: break-word; /* 自动换行 */
-}
-
-/* 密钥内容（代码块样式） */
-pre {
-    background: #f7f9fc; /* 浅灰背景 */
-    padding: 15px;
-    border-radius: 8px;
-    font-size: 1rem; /* 适中字体大小 */
-    font-family: 'Courier New', Courier, monospace;
-    white-space: nowrap; /* 单行显示 */
-    overflow-x: auto; /* 水平滚动 */
-    border: 1px solid #dee2e6;
-    margin-bottom: 30px; /* 增加模块间距 */
-    word-wrap: normal; /* 禁止文字换行 */
-    transition: background-color 0.3s ease;
-}
-
-pre:hover {
-    background-color: #edf4ff; /* 鼠标悬停时背景变浅 */
-    box-shadow: inset 0 0 6px rgba(58, 102, 219, 0.2);
-}
-
-/* 滚动条样式 */
-pre::-webkit-scrollbar {
-    height: 6px;
-}
-pre::-webkit-scrollbar-thumb {
-    background: #3a66db;
-    border-radius: 3px;
-}
-pre::-webkit-scrollbar-track {
-    background: #e9ecef;
-}
-
 /* 输入框样式 */
+input[type="text"],
 input[type="password"] {
     width: 100%;
-    padding: 15px; /* 增大内边距 */
-    margin: 15px 0; /* 输入框与其他元素的间距 */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem; /* 适中字体大小 */
-    box-sizing: border-box;
-    transition: border-color 0.3s ease; /* 添加过渡效果 */
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px solid #d1d1d6; /* 柔和边框 */
+    border-radius: 8px; /* 圆角输入框 */
+    font-size: 1rem;
+    background: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+input[type="text"]:focus,
 input[type="password"]:focus {
-    border-color: #3a66db; /* 聚焦时的边框颜色 */
-    outline: none; /* 移除默认的聚焦边框 */
+    border-color: #007aff; /* 聚焦蓝色 */
+    box-shadow: 0 0 8px rgba(0, 122, 255, 0.2); /* 聚焦光效 */
+    outline: none;
 }
 
 /* 按钮样式 */
 button {
     display: block;
-    background: linear-gradient(90deg, #3a66db, #4a7eea); /* 按钮渐变 */
+    width: 100%;
+    padding: 15px;
+    margin: 20px 0;
+    background: linear-gradient(90deg, #007aff, #0056b3); /* 按钮渐变 */
     color: white;
-    padding: 15px; /* 增大按钮内边距 */
-    border-radius: 10px; /* 圆角按钮 */
     border: none;
-    cursor: pointer;
-    font-size: 1.2rem; /* 字体略大 */
+    border-radius: 10px;
+    font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
-    width: 100%; /* 占满模块宽度 */
-    margin-bottom: 20px; /* 块与按钮之间的间距 */
+    cursor: pointer;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-button[type="submit"]:hover,
 button:hover {
-    background: linear-gradient(90deg, #4a7eea, #5b92f5);
-    transform: translateY(-2px); /* 鼠标悬停微微上升 */
-    box-shadow: 0 6px 18px rgba(58, 102, 219, 0.25);
+    background: linear-gradient(90deg, #0056b3, #003a75);
+    transform: translateY(-2px); /* 悬停上升 */
+    box-shadow: 0 8px 20px rgba(0, 90, 200, 0.2); /* 光影效果 */
 }
 
-button[type="submit"]:active,
 button:active {
-    transform: translateY(1px); /* 点击时压下效果 */
+    transform: translateY(1px); /* 点击下压效果 */
 }
 
-/* 错误消息样式 */
-.error-message {
-    color: red;
-    margin-top: 10px;
+/* 代码块样式 */
+pre {
+    background: #f4f4f5; /* 浅灰色背景 */
+    padding: 20px;
+    border-radius: 12px;
+    font-family: "Courier New", monospace;
+    font-size: 1rem;
+    overflow-x: auto;
+    border: 1px solid #e0e0e0;
+    transition: background-color 0.3s ease;
 }
 
-.shake {
-    animation: shake 0.3s;
+pre:hover {
+    background: #ebeff5;
 }
 
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-}
-
-/* 响应式布局 */
-@media (max-width: 768px) {
-    .container {
-        width: 95%;
-        margin: 20px auto;
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 2.4rem; /* 小屏适配标题 */
-    }
-
-    pre {
-        font-size: 0.9rem; /* 缩小字体防止溢出 */
-    }
-
-    button {
-        font-size: 1rem; /* 按钮文字适配小屏 */
-    }
-}
-
+/* 加载动画 */
 .loader {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px auto;
+    gap: 10px;
 }
 
 .loader span {
-    display: inline-block;
     width: 10px;
     height: 10px;
-    margin: 0 5px;
-    background: #3a66db;
+    background: #007aff;
     border-radius: 50%;
     animation: loader-animation 1.5s infinite ease-in-out;
 }
@@ -211,5 +166,21 @@ button:active {
     }
     40% {
         transform: scale(1);
+    }
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    button {
+        font-size: 1rem;
     }
 }
