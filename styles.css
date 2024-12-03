@@ -1,27 +1,24 @@
 :root {
-    /* 简化后的变量名，保持一定的简洁性和表意性 */
-    --ff-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --c-primary: #0070C9;
-    --c-secondary: #00539F;
-    --c-bg-light: #F5F5F7;
-    --c-text-light: #171717;
-    --c-bg-dark: #121212;
-    --c-text-dark: #E0E0E0;
-    --br-container: 12px;
-    --br-button: 8px;
-    --br-input: 8px;
-    --td-duration: 0.3s;
-    --c-hover: #00A0FF;
-    --bg-gradient-opacity: 0.8;
-    --bs-hover: 0 12px 24px rgba(0, 0, 0, 0.2);
-    --bs-active: 0 8px 16px rgba(0, 0, 0, 0.2);
-    --is-focus-shadow: 0 0 8px rgba(0, 122, 255, 0.3);
-    --dd-duration: 0.2s;
-    --tt-duration: 0.2s;
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --primary-color: #0070C9;
+    --secondary-color: #00539F;
+    --background-color-light: #F5F5F7;
+    --text-color-light: #171717;
+    --container-border-radius: 12px;
+    --button-border-radius: 8px;
+    --input-border-radius: 8px;
+    --transition-duration: 0.3s;
+    --hover-color: #00A0FF;
+    --background-gradient-opacity: 0.8;
+    --box-shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.2);
+    --box-shadow-active: 0 8px 16px rgba(0, 0, 0, 0.2);
+    --input-focus-shadow: 0 0 8px rgba(0, 122, 255, 0.3);
+    --dropdown-transition-duration: 0.2s;
+    --tooltip-transition-duration: 0.2s;
     --disabled-opacity: 0.6;
     --active-opacity: 0.8;
-    --la-duration: 1.5s;
-    --la-delay-step: 0.3s;
+    --loading-animation-duration: 1.5s;
+    --loading-animation-delay-step: 0.3s;
     --ripple-color: rgba(255, 255, 255, 0.4);
     --menu-item-height: 40px;
     --menu-item-padding: 10px 15px;
@@ -42,45 +39,27 @@
 }
 
 body {
-    font-family: var(--ff-base);
+    font-family: var(--font-family);
     line-height: 1.6;
     min-height: 100vh;
     background-attachment: fixed;
     -webkit-font-smoothing: antialiased;
 
-    /* 使用更简洁的函数来设置背景渐变，类似Apple官网简洁清晰的风格 */
-    background: repeating-linear-gradient(45deg, rgba(240, 240, 240, var(--bg-gradient-opacity)), rgba(240, 240, 240, var(--bg-gradient-opacity)) 25px, transparent 25px, transparent 50px),
-                repeating-linear-gradient(-45deg, rgba(221, 221, 221, var(--bg-gradient-opacity)), rgba(221, 221, 221, var(--bg-gradient-opacity)) 25px, transparent 25px, transparent 50px);
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(240, 240, 240, var(--background-gradient-opacity)) 20%, rgba(240, 240, 240, var(--background-gradient-opacity)) 80%, transparent 80%),
+        linear-gradient(to bottom right, rgba(221, 221, 221, var(--background-gradient-opacity)) 0%, rgba(221, 221, 221, var(--background-gradient-opacity)) 50%, transparent 50%, transparent 100%);
     background-size: 50px 50px;
-    color: var(--c-text-light);
-
-    /* 添加过渡效果，使背景颜色切换更平滑，模拟Apple官网的流畅感 */
-    transition: background-color var(--td-duration) ease, color var(--td-duration) ease;
-}
-
-@media (prefers-color-scheme: dark) {
-    body {
-        background: repeating-linear-gradient(45deg, rgba(34, 34, 34, var(--bg-gradient-opacity)), rgba(34, 34, 34, var(--bg-gradient-opacity)) 25px, transparent 25px, transparent 50px),
-                    repeating-linear-gradient(-45deg, rgba(51, 51, 51, var(--bg-gradient-opacity)), rgba(51, 51, 51, var(--bg-gradient-opacity)) 25px, transparent 25px, transparent 50px);
-        background-size: 50px 50px;
-        color: var(--c-text-dark);
-
-        /* 同样添加过渡效果 */
-        transition: background-color var(--td-duration) ease, color var(--td-duration) ease;
-    }
+    color: var(--text-color-light);
 }
 
 a {
     text-decoration: none;
-    color: var(--c-primary);
-    /* 添加过渡效果，使链接颜色变化更平滑 */
-    transition: color var(--td-duration) ease, text-decoration var(--td-duration) ease;
+    color: var(--primary-color);
+    transition: color var(--transition-duration) ease;
+}
 
-    /* 添加交互动作：当鼠标悬停时，添加下划线效果，模拟Apple官网链接悬停效果 */
-    &:hover {
-        text-decoration: underline;
-        color: var(--c-hover);
-    }
+a:hover {
+    color: var(--hover-color);
 }
 
 ::-webkit-scrollbar {
@@ -96,11 +75,6 @@ a {
     background: rgba(0, 0, 0, 0.1);
 }
 
-/* 提取公共的过渡效果类，提高复用性 */
-.transition-effect {
-    transition: transform var(--td-duration) ease, box-shadow var(--td-duration) ease, background-color var(--td-duration) ease, color var(--td-duration) ease;
-}
-
 /* 页面容器样式 */
 .container {
     width: 70%;
@@ -108,37 +82,25 @@ a {
     margin: 50px auto;
     padding: 30px;
     background: #FFFFFF;
-    border-radius: var(--br-container);
+    border-radius: var(--container-border-radius);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+}
 
-    /* 添加公共过渡效果类 */
-    @extend.transition-effect;
-
-    /* 添加交互动作：当鼠标悬停时，容器有轻微上浮和阴影加深效果，类似Apple产品展示的悬浮感 */
-    &:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15);
-    }
+.container:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15);
 }
 
 /* 标题样式 */
 h1 {
     font-size: 2.8rem;
     font-weight: 600;
-    color: var(--c-text-light);
+    color: var(--text-color-light);
     text-align: center;
     margin-bottom: 50px;
     letter-spacing: 0.8px;
-
-    /* 添加过渡效果，使标题颜色在模式切换时有过渡 */
-    transition: color var(--td-duration) ease;
-}
-
-@media (prefers-color-scheme: dark) {
-    h1 {
-        color: var(--c-text-dark);
-    }
 }
 
 /* 分隔线 */
@@ -146,30 +108,19 @@ h1 {
     height: 1px;
     background: #E0E0E0;
     margin: 50px 0;
-
-    /* 添加过渡效果，使分隔线颜色在模式切换时有过渡 */
-    transition: background-color var(--td-duration) ease;
 }
 
-@media (prefers-color-scheme: dark) {
-   .divider {
-        background: rgba(255, 255, 255, 0.2);
-    }
-}
-
-/* 输入框样式，使用类名选择器替代元素类型选择器 */
-.input-text,
-.input-password {
+/* 输入框样式 */
+input[type="text"],
+input[type="password"] {
     width: 100%;
     padding: 16px;
     margin: 18px 0;
     border: 1px solid #D1D1D6;
-    border-radius: var(--br-input);
+    border-radius: var(--input-border-radius);
     font-size: 1rem;
     background: #F9F9F9;
-
-    /* 添加公共过渡效果类 */
-    @extend.transition-effect;
+    transition: border-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
 
     /* 输入框占位符样式 */
     &::placeholder {
@@ -182,35 +133,31 @@ h1 {
         box-shadow: 0 0 6px var(--input-error-shadow-color);
         color: var(--input-error-color);
     }
+}
 
-    /* 添加交互动作：当输入框获得焦点时，除了已有阴影效果，还可以添加一些其他视觉反馈，比如边框变粗等 */
-    &:focus {
-        border-width: 2px;
-        border-color: var(--c-primary);
-        box-shadow: 0 0 6px rgba(0, 122, 255, 0.2);
-        outline: none;
-    }
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 6px rgba(0, 122, 255, 0.2);
+    outline: none;
 }
 
 /* 按钮样式 */
-.button {
+button {
     display: block;
     width: 100%;
     padding: 18px;
     margin: 25px 0;
-    background: linear-gradient(90deg, var(--c-primary), var(--c-secondary));
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
     color: white;
     border: none;
-    border-radius: var(--br-button);
+    border-radius: var(--button-border-radius);
     font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
     cursor: pointer;
 
-    /* 添加公共过渡效果类 */
-    @extend.transition-effect;
-
-    /* 按钮点击水波纹效果及相关交互动作优化 */
+    /* 按钮点击水波纹效果 */
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -225,7 +172,7 @@ h1 {
         border-radius: 50%;
         background-color: var(--ripple-color);
         transform: scale(0);
-        transition: all var(--td-duration) ease-in-out;
+        transition: all var(--transition-duration) ease-in-out;
         z-index: -1;
     }
 
@@ -237,9 +184,8 @@ h1 {
         }
     }
 
-    /* 添加交互动作：当鼠标悬停时，按钮有更明显的上浮和阴影变化效果，类似Apple按钮的交互感 */
     &:hover {
-        background: linear-gradient(90deg, var(--c-secondary), var(--c-hover));
+        background: linear-gradient(90deg, var(--secondary-color), var(--hover-color));
         transform: translateY(-1px);
         box-shadow: 0 6px 16px rgba(0, 90, 200, 0.2);
     }
@@ -253,20 +199,16 @@ h1 {
 pre {
     background: #F4F4F5;
     padding: 25px;
-    border-radius: var(--br-container);
+    border-radius: var(--container-border-radius);
     font-family: "Courier New", monospace;
     font-size: 1rem;
     overflow-x: auto;
     border: 1px solid #E0E0E0;
+    transition: background-color var(--transition-duration) ease;
+}
 
-    /* 添加公共过渡效果类 */
-    @extend.transition-effect;
-
-    /* 添加交互动作：当鼠标悬停时，代码块背景颜色有更明显的变化，且添加一些轻微的阴影效果，提升视觉反馈 */
-    &:hover {
-        background: #EBEFF5;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+pre:hover {
+    background: #EBEFF5;
 }
 
 /* 加载动画 */
@@ -280,7 +222,7 @@ pre {
 .loader span {
     width: 10px;
     height: 10px;
-    background: var(--c-primary);
+    background: var(--primary-color);
     border-radius: 50%;
     animation: loader-animation 1.5s infinite ease-in-out;
 }
@@ -313,7 +255,7 @@ loader span:nth-child(3) {
         font-size: 2.2rem;
     }
 
-   .button {
+    button {
         font-size: 1.1rem;
     }
 }
@@ -328,7 +270,7 @@ loader span:nth-child(3) {
         font-size: 2rem;
     }
 
-   .button {
+    button {
         font-size: 1rem;
         padding: 12px;
     }
@@ -348,8 +290,7 @@ loader span:nth-child(3) {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 
-    /* 添加过渡效果，使下拉菜单显示和隐藏更平滑 */
-    transition: opacity var(--dd-duration) ease, transform var(--dd-duration) ease;
+    transition: opacity var(--dropdown-transition-duration) ease, transform var(--dropdown-transition-duration) ease;
     opacity: 0;
     transform: translateY(-10px);
 }
@@ -364,16 +305,12 @@ loader span:nth-child(3) {
     display: block;
     height: var(--menu-item-height);
     padding: var(--menu-item-padding);
-    color: var(--c-text-light);
+    color: var(--text-color-light);
     text-decoration: none;
+    transition: background-color var(--dropdown-transition-duration) ease;
 
-    /* 添加过渡效果，使菜单项背景颜色变化更平滑 */
-    transition: background-color var(--dd-duration) ease;
-
-    /* 添加交互动作：当菜单项悬停时，除了背景颜色变化，还可以添加一些字体颜色变化等效果，提升视觉反馈 */
     &:hover {
         background-color: var(--menu-item-hover-bg-color);
-        color: var(--c-primary);
     }
 
     &.active {
@@ -414,9 +351,8 @@ loader span:nth-child(3) {
     }
 
     opacity: 0;
-    transition: opacity var(--tt-duration) ease;
+    transition: opacity var(--tooltip-transition-duration) ease;
 
-    /* 添加交互动作：当鼠标悬停在带有工具提示的元素上时，除了显示提示信息，还可以添加一些元素自身的视觉变化，比如稍微放大等 */
     &:hover {
         visibility: visible;
         opacity: 1;
