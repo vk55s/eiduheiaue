@@ -4,9 +4,10 @@
     --secondary-color: #00539F;
     --background-color-light: #F5F5F7;
     --text-color-light: #171717;
-    --container-border-radius: 12px;
-    --button-border-radius: 8px;
-    --input-border-radius: 8px;
+    --text-color-dark: #FFFFFF;
+    --container-border-radius: 16px;
+    --button-border-radius: 12px;
+    --input-border-radius: 12px;
     --transition-duration: 0.3s;
     --hover-color: #00A0FF;
     --background-gradient-opacity: 0.8;
@@ -20,8 +21,8 @@
     --loading-animation-duration: 1.5s;
     --loading-animation-delay-step: 0.3s;
     --ripple-color: rgba(255, 255, 255, 0.4);
-    --menu-item-height: 40px;
-    --menu-item-padding: 10px 15px;
+    --menu-item-height: 48px;
+    --menu-item-padding: 12px 20px;
     --menu-item-hover-bg-color: rgba(0, 0, 0, 0.05);
     --menu-item-active-bg-color: rgba(0, 0, 0, 0.1);
     --tooltip-arrow-size: 8px;
@@ -30,6 +31,8 @@
     --input-error-color: #FF5050;
     --input-error-border-color: #FF0000;
     --input-error-shadow-color: rgba(255, 0, 0, 0.2);
+    --button-hover-gradient-start: #6A8CFF;
+    --button-hover-gradient-end: #39B5E4;
 }
 
 * {
@@ -42,14 +45,14 @@ body {
     font-family: var(--font-family);
     line-height: 1.6;
     min-height: 100vh;
-    background-attachment: fixed;
-    -webkit-font-smoothing: antialiased;
-
-    background: 
-        radial-gradient(circle at 50% 50%, rgba(240, 240, 240, var(--background-gradient-opacity)) 20%, rgba(240, 240, 240, var(--background-gradient-opacity)) 80%, transparent 80%),
-        linear-gradient(to bottom right, rgba(221, 221, 221, var(--background-gradient-opacity)) 0%, rgba(221, 221, 221, var(--background-gradient-opacity)) 50%, transparent 50%, transparent 100%);
-    background-size: 50px 50px;
+    background-color: #FFFFFF;
     color: var(--text-color-light);
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 20px;
 }
 
 a {
@@ -62,44 +65,30 @@ a:hover {
     color: var(--hover-color);
 }
 
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #C6C6C8;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1);
-}
-
 /* 页面容器样式 */
 .container {
-    width: 70%;
-    max-width: 1000px;
-    margin: 50px auto;
-    padding: 30px;
+    width: 90%;
+    max-width: 700px;
+    padding: 40px;
     background: #FFFFFF;
     border-radius: var(--container-border-radius);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow-hover);
     overflow: hidden;
     transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
 }
 
 .container:hover {
     transform: translateY(-8px);
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--box-shadow-active);
 }
 
 /* 标题样式 */
 h1 {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     font-weight: 600;
     color: var(--text-color-light);
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     letter-spacing: 0.8px;
 }
 
@@ -107,15 +96,15 @@ h1 {
 .divider {
     height: 1px;
     background: #E0E0E0;
-    margin: 50px 0;
+    margin: 30px 0;
 }
 
 /* 输入框样式 */
 input[type="text"],
 input[type="password"] {
     width: 100%;
-    padding: 16px;
-    margin: 18px 0;
+    padding: 18px;
+    margin: 15px 0;
     border: 1px solid #D1D1D6;
     border-radius: var(--input-border-radius);
     font-size: 1rem;
@@ -152,12 +141,10 @@ button {
     color: white;
     border: none;
     border-radius: var(--button-border-radius);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
     text-align: center;
     cursor: pointer;
-
-    /* 按钮点击水波纹效果 */
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -185,9 +172,9 @@ button {
     }
 
     &:hover {
-        background: linear-gradient(90deg, var(--secondary-color), var(--hover-color));
-        transform: translateY(-1px);
-        box-shadow: 0 6px 16px rgba(0, 90, 200, 0.2);
+        background: linear-gradient(90deg, var(--button-hover-gradient-start), var(--button-hover-gradient-end));
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 90, 200, 0.2);
     }
 
     &.copied {
@@ -220,18 +207,18 @@ pre:hover {
 }
 
 .loader span {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     background: var(--primary-color);
     border-radius: 50%;
     animation: loader-animation 1.5s infinite ease-in-out;
 }
 
-loader span:nth-child(2) {
+.loader span:nth-child(2) {
     animation-delay: 0.3s;
 }
 
-loader span:nth-child(3) {
+.loader span:nth-child(3) {
     animation-delay: 0.6s;
 }
 
@@ -244,39 +231,7 @@ loader span:nth-child(3) {
     }
 }
 
-/* 响应式布局 */
-@media (max-width: 768px) {
- .container {
-        width: 85%;
-        padding: 25px;
-    }
-
-    h1 {
-        font-size: 2.2rem;
-    }
-
-    button {
-        font-size: 1.1rem;
-    }
-}
-
-@media (max-width: 480px) {
- .container {
-        width: 90%;
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    button {
-        font-size: 1rem;
-        padding: 12px;
-    }
-}
-
-/* 下拉菜单样式优化 */
+/* 下拉菜单样式 */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -286,7 +241,7 @@ loader span:nth-child(3) {
     display: none;
     position: absolute;
     background-color: #fff;
-    min-width: 160px;
+    min-width: 200px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 
@@ -295,7 +250,7 @@ loader span:nth-child(3) {
     transform: translateY(-10px);
 }
 
-.dropdown:hover.dropdown-content {
+.dropdown:hover .dropdown-content {
     display: block;
     opacity: 1;
     transform: translateY(0);
@@ -308,23 +263,23 @@ loader span:nth-child(3) {
     color: var(--text-color-light);
     text-decoration: none;
     transition: background-color var(--dropdown-transition-duration) ease;
-
-    &:hover {
-        background-color: var(--menu-item-hover-bg-color);
-    }
-
-    &.active {
-        background-color: var(--menu-item-active-bg-color);
-    }
 }
 
-/* 工具提示样式优化 */
+.dropdown-content a:hover {
+    background-color: var(--menu-item-hover-bg-color);
+}
+
+.dropdown-content a.active {
+    background-color: var(--menu-item-active-bg-color);
+}
+
+/* 工具提示样式 */
 .tooltip {
     position: relative;
     display: inline-block;
 }
 
-.tooltip.tooltiptext {
+.tooltip .tooltiptext {
     visibility: hidden;
     width: 120px;
     background-color: var(--tooltip-bg-color);
@@ -337,24 +292,18 @@ loader span:nth-child(3) {
     bottom: 125%;
     left: 50%;
     margin-left: -60px;
-
-    /* 箭头样式优化 */
-    &::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -var(--tooltip-arrow-size) / 2;
-        border-width: var(--tooltip-arrow-size);
-        border-style: solid;
-        border-color: var(--tooltip-bg-color) transparent transparent transparent;
-    }
-
     opacity: 0;
-    transition: opacity var(--tooltip-transition-duration) ease;
+    transition: opacity var(--tooltip-transition-duration) ease-in-out;
+    pointer-events: none;
+}
 
-    &:hover {
-        visibility: visible;
-        opacity: 1;
-    }
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 主页内容 */
+.main-content {
+    padding: 50px 20px;
+    text-align: center;
 }
