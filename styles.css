@@ -4,8 +4,6 @@
   --secondary-color: #00539F;
   --background-color: #FFFFFF;  
   --text-color: #171717;  
-  --dark-background-color: #121212;  
-  --dark-text-color: #E0E0E0;  
   --container-border-radius: 12px;  
   --button-border-radius: 8px;  
   --input-border-radius: 8px;  
@@ -29,15 +27,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  -webkit-font-smoothing: antialiased;
   padding: 20px;
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background: var(--dark-background-color);
-    color: var(--dark-text-color);
-  }
 }
 
 a {
@@ -64,8 +54,8 @@ a:hover {
 }
 
 .container {
-  width: 90%;
-  max-width: 800px;
+  width: 100%;
+  max-width: 600px;
   margin: 20px auto;
   padding: 30px;
   background: var(--background-color);
@@ -80,7 +70,7 @@ a:hover {
 }
 
 h1 {
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-size: 2rem;
   font-weight: 600;
   text-align: center;
   margin-bottom: 20px;
@@ -114,13 +104,13 @@ input[type="password"]:focus {
 button {
   display: block;
   width: 100%;
-  padding: 16px;
+  padding: 14px;
   margin: 20px 0;
   background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
   color: white;
   border: none;
   border-radius: var(--button-border-radius);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: background var(--transition-duration) ease, transform var(--transition-duration) ease;
@@ -136,10 +126,6 @@ button:active {
   transform: translateY(0);
 }
 
-button.copied {
-  background-color: #28A745 !important;
-}
-
 pre {
   background: #F4F4F5;
   padding: 20px;
@@ -149,14 +135,6 @@ pre {
   overflow-x: auto;
   border: 1px solid #E0E0E0;
   transition: background-color var(--transition-duration) ease;
-}
-
-@media (prefers-color-scheme: dark) {
-  pre {
-    background: #2E2E2E;
-    color: #E0E0E0;
-    border-color: #444;
-  }
 }
 
 pre:hover {
@@ -205,7 +183,7 @@ pre:hover {
   position: absolute;
   background-color: #fff;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
