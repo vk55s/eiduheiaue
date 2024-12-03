@@ -29,18 +29,33 @@
 
 body {
     font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: linear-gradient(135deg, var(--color-accent), #ffffff);
+    background-color: black; /* 先设置黑色背景作为基础，用于星空背景效果 */
     color: var(--color-text-primary);
     line-height: 1.6;
     text-rendering: optimizeLegibility;
-    overflow-x: hidden; /* 隐藏水平方向滚动条，防止整体页面出现横向溢出 */
+    overflow-x: hidden;
+    animation: starrySky 20s infinite linear; /* 添加动画让背景持续变化，模拟星空闪烁背景 */
+}
+
+@keyframes starrySky {
+    0% {
+        background-image: radial-gradient(white 1px, transparent 0);
+        background-size: 100px 100px;
+    }
+    50% {
+        background-image: radial-gradient(white 2px, transparent 0);
+        background-size: 120px 120px;
+    }
+    100% {
+        background-image: radial-gradient(white 1px, transparent 0);
+        background-size: 100px 100px;
+    }
 }
 
 .container {
     width: 100%;
-    max-width: 100%; /* 根据实际情况可调整最大宽度值，确保不会过宽 */
-    margin: 0 auto; /* 水平居中 */
-    box-sizing: border-box; /* 让宽度计算包含边框和内边距 */
+    max-width: 950px;
+    margin: 5vh auto;
     padding: 6vh 5vw;
     background: white;
     border-radius: var(--border-radius-large);
@@ -49,15 +64,11 @@ body {
         0 4px 10px rgba(0, 0, 0, 0.1),
         0 8px 20px rgba(0, 0, 0, 0.15);
     position: relative;
-    overflow-y: auto; /* 如果容器内部内容在垂直方向可能超出，出现垂直滚动条 */
-    overflow-x: hidden; /* 隐藏水平方向滚动条，防止内部内容横向溢出 */
+    overflow: hidden;
     transition: 
         transform var(--transition-smooth),
         box-shadow var(--transition-quick);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    perspective: 1000px; /* 添加3D透视效果，用于卡片翻转 */
 }
 
 .container::before {
@@ -72,13 +83,32 @@ body {
 }
 
 .container:hover {
-    transform: translateY(-12px) rotate(1deg);
+    transform: rotateY(180deg); /* 鼠标悬停时沿Y轴旋转180度实现翻转 */
     box-shadow: var(--shadow-bold);
     transition: all var(--transition-smooth);
 }
 
-.container:hover * {
+.container.front,
+.container.back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* 隐藏背面元素，避免翻转时看到背面元素的“镜像”效果 */
     transition: all var(--transition-smooth);
+}
+
+.container.front {
+    z-index: 2;
+}
+
+.container.back {
+    transform: rotateY(180deg); /* 初始让背面元素先翻转过去，处于不可见状态 */
+    background: var(--color-accent); /* 背面设置不同的背景色示例 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: var(--color-primary-dark);
 }
 
 h1 {
@@ -93,6 +123,32 @@ h1 {
     -webkit-text-fill-color: transparent;
     position: relative;
     transition: all var(--transition-quick);
+}
+
+h1 span {
+    display: inline-block;
+    animation: floatWord 5s infinite ease-in-out; /* 每个字添加浮动动画 */
+}
+
+h1 span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+h1 span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+h1 span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+/* 依次根据标题文字数量设置不同的延迟时间 */
+@keyframes floatWord {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(3deg);
+    }
 }
 
 h1::after {
@@ -192,18 +248,14 @@ button {
     margin-bottom: 25px;
     transition: 
         transform var(--transition-quick),
+        box-shadow var(--transition-quick),
         box-shadow var(--transition-quick);
     box-shadow: var(--shadow-medium);
     position: relative;
     overflow: hidden;
 }
 
-button:active, button:focus {
-    transform: translateY(2px);
-    box-shadow: var(--shadow-subtle);
-}
-
-button:active::after, button:focus::after {
+button::before {
     content: '';
     position: absolute;
     top: 0;
@@ -214,38 +266,17 @@ button:active::after, button:focus::after {
     animation: buttonLongPressFlow 1s infinite linear;
 }
 
-button:active::before, button:focus::before {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    height: 10px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    animation: buttonLongPressShadow 1s infinite linear;
+button:hover::before {
+    left: 100%;
+    animation: glowEffect 1s ease-in-out infinite alternate; /* 悬停时添加发光动画效果 */
 }
 
-@keyframes buttonLongPressFlow {
+@keyframes glowEffect {
     0% {
-        left: -100%;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
     100% {
-        left: 100%;
-    }
-}
-
-@keyframes buttonLongPressShadow {
-    0% {
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    }
-    50% {
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
-    }
-    100% {
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
     }
 }
 
@@ -328,7 +359,7 @@ button:active::before, button:focus::before {
 }
 
 @media (max-width: 768px) {
-   .container {
+  .container {
         width: 96%;
         margin: 3vh auto;
         padding: 4vh 4vw;
@@ -349,7 +380,7 @@ button:active::before, button:focus::before {
 }
 
 @media (min-width: 1920px) {
-   .container {
+  .container {
         max-width: 1400px;
         padding: 8vh 8vw;
     }
@@ -358,7 +389,7 @@ button:active::before, button:focus::before {
         font-size: 4rem;
     }
 
-   .code-header {
+  .code-header {
         font-size: 1.8rem;
     }
 
@@ -374,7 +405,7 @@ button:active::before, button:focus::before {
 }
 
 @media (max-width: 480px) and (orientation: portrait) {
-   .container {
+  .container {
         margin: 2vh auto;
         padding: 3vh 3vw;
     }
@@ -383,7 +414,7 @@ button:active::before, button:focus::before {
         font-size: 2rem;
     }
 
-   .code-header {
+  .code-header {
         font-size: 1.2rem;
     }
 
@@ -399,7 +430,7 @@ button:active::before, button:focus::before {
 }
 
 @supports (backdrop-filter: blur(10px)) {
-   .container {
+  .container {
         background: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(15px) contrast(1.2) hue-rotate(5deg);
     }
