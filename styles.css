@@ -22,6 +22,16 @@
   --line-height: 1.5;
 
   --transition-duration: 0.3s;
+
+  /* 新增一些自定义属性用于更多样式变化 */
+  --accent-color: #FFA500; /* 新增的强调色 */
+  --disabled-color: #D1D1D6; /* 用于表示禁用状态的颜色 */
+  --success-color: #28A745; /* 新增的成功提示颜色 */
+  --warning-color: #FFC107; /* 新增的警告颜色 */
+  --input-padding-small: 4px 8px; /* 输入框更小的内边距 */
+  --input-padding-large: 12px 16px; /* 输入框更大的内边距 */
+  --heading-line-height: 1.2; /* 标题行高单独设置 */
+  --body-line-height: 1.8; /* 正文行高单独设置 */
 }
 
 * {
@@ -50,6 +60,10 @@ body {
   border-radius: var(--border-radius-global);
   box-shadow: var(--shadow-global);
   transition: transform var(--transition-duration), box-shadow var(--transition-duration);
+
+  /* 新增容器的一些样式变化 */
+  border: 2px solid var(--disabled-color); /* 新增边框样式 */
+  position: relative; /* 相对定位用于后续可能的元素定位调整 */
 }
 
 .container:hover {
@@ -62,11 +76,22 @@ h1 {
   font-weight: bold;
   text-align: center;
   margin-bottom: var(--spacing-large);
+  line-height: var(--heading-line-height); /* 使用单独设置的标题行高 */
+  color: var(--accent-color); /* 标题颜色改为强调色 */
+
+  /* 新增标题的一些样式变化 */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* 文字阴影效果 */
+  letter-spacing: 1px; /* 字符间距调整 */
 }
 
 p {
   font-size: var(--font-size-medium);
   margin-bottom: var(--spacing-medium);
+  line-height: var(--body-line-height); /* 使用单独设置的正文行高 */
+
+  /* 新增段落的一些样式变化 */
+  text-indent: 20px; /* 首行缩进 */
+  word-spacing: 2px; /* 单词间距调整 */
 }
 
 a {
@@ -89,6 +114,10 @@ input[type="password"] {
   font-size: var(--font-size-medium);
   background: #fff;
   transition: border-color var(--transition-duration), box-shadow var(--transition-duration);
+
+  /* 新增输入框的一些样式变化 */
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05); /* 内阴影效果 */
+  caret-color: var(--accent-color); /* 光标颜色改为强调色 */
 }
 
 input:focus {
@@ -110,6 +139,11 @@ button {
   font-weight: bold;
   cursor: pointer;
   transition: transform var(--transition-duration), box-shadow var(--transition-duration), background var(--transition-duration);
+
+  /* 新增按钮的一些样式变化 */
+  text-transform: uppercase; /* 文字转为大写 */
+  letter-spacing: 2px; /* 字符间距调整 */
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05); /* 内阴影效果 */
 }
 
 button:hover {
@@ -133,6 +167,11 @@ pre {
   font-size: var(--font-size-small);
   overflow-x: auto;
   border: 1px solid #E0E0E0;
+
+  /* 新增pre标签的一些样式变化 */
+  white-space: pre-wrap; /* 允许换行 */
+  tab-size: 2; /* tab键的空格数设置 */
+  line-height: var(--body-line-height); /* 使用正文行高 */
 }
 
 .loader {
@@ -140,6 +179,11 @@ pre {
   justify-content: center;
   align-items: center;
   gap: var(--spacing-small);
+
+  /* 新增加载器的一些样式变化 */
+  background-color: rgba(255, 255, 255, 0.5); /* 半透明背景 */
+  border-radius: var(--border-radius-global);
+  padding: var(--spacing-medium);
 }
 
 .loader span {
@@ -171,6 +215,12 @@ pre {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--spacing-medium);
+
+  /* 新增网格容器的一些样式变化 */
+  grid-auto-rows: minmax(150px, auto); /* 自动行高设置 */
+  background-color: var(--background-color); /* 背景色设置 */
+  border: 1px solid var(--disabled-color); /* 边框样式 */
+  padding: var(--spacing-large); /* 内边距设置 */
 }
 
 .card {
@@ -180,6 +230,13 @@ pre {
   box-shadow: var(--shadow-global);
   padding: var(--spacing-medium);
   transition: box-shadow var(--transition-duration);
+
+  /* 新增卡片的一些样式变化 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 内部元素垂直分布 */
+  height: 200px; /* 固定高度设置 */
+  overflow: hidden; /* 超出隐藏 */
 }
 
 .card:hover {
@@ -192,7 +249,7 @@ pre {
   cursor: pointer;
 }
 
-.tooltip .tooltip-text {
+.tooltip.tooltip-text {
   visibility: hidden;
   position: absolute;
   bottom: 100%;
@@ -205,9 +262,13 @@ pre {
   white-space: nowrap;
   opacity: 0;
   transition: opacity var(--transition-duration), visibility var(--transition-duration);
+
+  /* 新增提示工具的一些样式变化 */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* 文字阴影效果 */
+  max-width: 200px; /* 最大宽度限制 */
 }
 
-.tooltip:hover .tooltip-text {
+.tooltip:hover.tooltip-text {
   visibility: visible;
   opacity: 1;
 }
@@ -223,6 +284,12 @@ pre {
   border-radius: var(--border-radius-global);
   box-shadow: var(--hover-shadow);
   animation: slide-down 0.3s ease-out;
+
+  /* 新增通知的一些样式变化 */
+  z-index: 1000; /* 提高层级确保在最上层显示 */
+  text-align: center; /* 文字居中 */
+  font-size: var(--font-size-medium);
+  font-weight: bold;
 }
 
 @keyframes slide-down {
@@ -237,7 +304,7 @@ pre {
 }
 
 @media (max-width: 768px) {
-  .container {
+ .container {
     width: 90%;
     padding: var(--spacing-medium);
   }
@@ -252,7 +319,7 @@ pre {
 }
 
 @media (max-width: 480px) {
-  .container {
+ .container {
     padding: var(--spacing-small);
   }
 
@@ -281,6 +348,10 @@ pre {
   display: none;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
+
+  /* 新增模态框的一些样式变化 */
+  border: 2px solid var(--accent-color); /* 边框样式 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* 增强阴影效果 */
 }
 
 .modal.active {
@@ -329,6 +400,10 @@ button {
   border-radius: var(--border-radius-global);
   box-shadow: var(--shadow-global);
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+
+  /* 新增3D按钮的一些样式变化 */
+  perspective: 1000px; /* 透视效果 */
+  transform-style: preserve-3d; /* 保留3D效果 */
 }
 
 button:hover {
@@ -353,12 +428,19 @@ input {
   border-radius: var(--border-radius-global);
   box-sizing: border-box;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  /* 新增输入框的一些样式变化 */
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)); /* 渐变背景 */
+  background-size: 100% 200%; /* 背景大小设置 */
+  background-position: 0 0; /* 背景初始位置 */
+  transition: background-position 0.3s ease; /* 背景位置过渡效果 */
 }
 
 input:focus {
   border-color: var(--primary-color);
   box-shadow: 0 0 8px rgba(0, 122, 255, 0.2);
   outline: none;
+  background-position: 0 -100%; /* 聚焦时背景位置变化 */
 }
 
 textarea {
@@ -370,6 +452,12 @@ textarea {
   box-sizing: border-box;
   resize: vertical;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  /* 新增文本域的一些样式变化 */
+  overflow-y: auto; /* 垂直方向自动滚动 */
+  min-height: 100px; /* 最小高度设置 */
+  max-height: 300px; /* 最大高度设置 */
+  line-height: var(--body-line-height); /* 使用正文行高 */
 }
 
 textarea:focus {
@@ -377,3 +465,15 @@ textarea:focus {
   box-shadow: 0 0 8px rgba(0, 122, 255, 0.2);
   outline: none;
 }
+
+/* 新增一些其他元素的样式 */
+
+/* 导航栏样式 */
+nav {
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-medium);
+  border-radius: var(--border-radius-global);
