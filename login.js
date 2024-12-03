@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessage = document.getElementById('error-message');
     const container = document.querySelector('.container');
 
-    const CORRECT_PASSWORD = '4586';
+    const CORRECT_PASSWORD = '1862';
 
     // 限制只能输入数字
     passwordInput.addEventListener('input', (e) => {
-        e.target.value = e.target.value.replace(/[^\d]/g, '').slice(0, 4);
+        e.target.value = e.target.value.replace(/[^\d]/g, '').slice(0, 9);
     });
 
     passwordForm.addEventListener('submit', (e) => {
