@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +8,35 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
 </head>
+
 <body id="key-page">
+    <!-- 头部区域 -->
+    <header class="header">
+        <div class="logo">
+            <img src="hammer-icon.png" alt="锤子加速图标"> <!-- 这里假设存在一个锤子图标文件，实际需替换 -->
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="#">关于我们</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <!-- 非法访问提示 -->
     <div id="error" class="container" style="display: none;">
-<h1 style="color: red;">访问受限</h1>
-<p>请通过正确途径访问此页面，点击 <a href="login.html">这里</a> 返回登录。</p>
+        <h1 style="color: red;">哎呀，访问受限啦！</h1>
+        <p>请通过正确途径来访问这个超酷的页面哦，点击 <a href="login.html">这里</a> 返回登录。</p>
     </div>
 
     <!-- 密钥展示页面内容 -->
     <div id="content" class="container" style="display: none;">
         <h1>锤子加速</h1>
-            <p class="slogan">🌏“在网络赛道，拒绝卡顿龟速。”</p>
+        <p class="slogan">🌏“在网络的高速赛道上，拒绝龟速卡顿。”</p>
         <div class="subscription-block" data-aos="fade-up">
             <p>订阅地址:</p>
             <pre id="subscription">https://raw.githubusercontent.com/vk55s/subscribe/refs/heads/main/chui</pre>
-            <button id="copySubscription" class="btn">复制订阅</button>
+            <button id="copySubscription" class="btn" data-aos="fade-up" data-aos-delay="200">复制订阅</button>
         </div>
         <hr>
         <div id="codeList" class="code-list">正在加载密钥...</div>
@@ -31,4 +46,5 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="key.js"></script>
 </body>
+
 </html>
