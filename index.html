@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="3; url=login.html">
+    <meta name="description" content="正在跳转至登录页面，请稍等...">
+    <title>正在跳转</title>
+    <link rel="stylesheet" href="styles.css"> <!-- 引用你的CSS文件 -->
+</head>
+<body>
+    <div class="container">
+        <h1>正在跳转...</h1>
+        <p>页面将在 <span id="countdown" class="countdown">3</span> 秒后自动跳转。</p>
+        <p>如果没有跳转，请点击下面的链接：</p>
+        <p><a href="login.html">点击这里进入登录页面</a></p>
+    </div>
+
+    <script>
+        // 倒计时的初始值
+        let countdownValue = 3;
+
+        // 更新倒计时
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            countdownElement.textContent = countdownValue;
+            countdownValue--;
+            if (countdownValue < 0) {
+                clearInterval(countdownInterval);
+            }
+        }
+
+        // 每秒更新倒计时
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
