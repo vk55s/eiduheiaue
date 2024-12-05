@@ -28,9 +28,8 @@
 /* 背景设置 */
 body {
     font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: linear-gradient(135deg, var(--color-accent), #ffffff), 
-                url('IMG_0466.jpeg') no-repeat center center fixed;
-    background-size: cover;
+    background: linear-gradient(135deg, var(--color-accent), #ffffff); 
+    /* 先去掉原有背景图，若需要可根据实际情况添加合适的黑白灰背景图 */
     color: var(--color-text-primary);
     line-height: 1.6;
     text-rendering: optimizeLegibility;
@@ -51,22 +50,12 @@ body {
 /* 动态小方块样式 */
 .square {
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.4); /* 统一透明度 */
-    animation: move 5s infinite ease-in-out;
-    opacity: 0.6;
-}
-
-/* 小方块的动画效果 */
-@keyframes move {
-    0% {
-        transform: translateY(0) scale(0.5);
-    }
-    50% {
-        transform: translateY(-50vh) scale(1);
-    }
-    100% {
-        transform: translateY(0) scale(0.5);
-    }
+    /* 设置为黑白灰色调，这里随机分配，可根据实际调整比例 */
+    background-color: hsl(random(0, 360), 10%, 50%); 
+    /* 让透明度保持一致且在合适范围，避免过深或过浅，这里示例设为0.3左右，可按需改 */
+    opacity: 0.3; 
+    /* 去除原固定动画，后续用JavaScript动态控制动画相关属性 */
+    animation: none; 
 }
 
 /* 页面容器样式 */
