@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessage = document.getElementById('error-message');
     const container = document.querySelector('.container');
 
-    const CORRECT_PASSWORD = '66893';
+    const CORRECT_PASSWORD = '668936';
 
     // 限制只能输入数字
     passwordInput.addEventListener('input', (e) => {
